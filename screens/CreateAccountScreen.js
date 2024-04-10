@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
+
 import AppTextInput from '../components/AppTextInput';
+import SafeScreen from './SafeScreen';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -11,7 +13,7 @@ const validationSchema = Yup.object().shape({
 
 function CreateAccountScreen(props) {
     return (
-        <View style={styles.container}>
+        <SafeScreen style={styles.container}>
             <Formik
                 initialValues={{email: '', password: ''}}
                 onSubmit={values => console.log(values)}
@@ -44,7 +46,7 @@ function CreateAccountScreen(props) {
                     </>
                 )}
             </Formik>
-        </View>
+        </SafeScreen>
     );
 }
 
