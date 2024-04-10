@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
+import AppTextInput from '../components/AppTextInput';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -16,7 +17,32 @@ function CreateAccountScreen(props) {
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-
+                { ({setFieldTouched, handleChange, errors, touched}) => (
+                    <>
+                        <AppTextInput 
+                            onBlur={() => setFieldTouched("email")}
+                            onChangeText={handleChange("email")}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="email"
+                            keyboardType="email-address"
+                            name="email"
+                            placeholder="Email"
+                            textContentType="emailAdress"
+                        />
+                        <AppTextInput 
+                            onBlur={() => setFieldTouched("password")}
+                            onChangeText={handleChange("password")}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            icon="lock"
+                            name="password"
+                            placeholder="Password"
+                            secureTextEntry
+                            textContentType="emailAdress"
+                        />
+                    </>
+                )}
             </Formik>
         </View>
     );
