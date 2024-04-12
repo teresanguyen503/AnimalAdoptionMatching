@@ -1,11 +1,13 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 import SafeScreen from '../components/SafeScreen';
 import SubmitButton from '../components/SubmitButton';
 import AppFormField from '../components/AppFormField';
+import colors from '../config/colors';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -13,6 +15,11 @@ const validationSchema = Yup.object().shape({
 }); 
 
 function CreateAccountScreen(props) {
+    const [passwordVisible, setPasswordVisible] = useState(false); 
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible); 
+    }; 
     return (
         <SafeScreen style={styles.container}>
             <Formik
@@ -31,15 +38,26 @@ function CreateAccountScreen(props) {
                             placeholder="Email"
                             textContentType="emailAddress"
                         />
-                        <AppFormField
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="lock"
-                            name="password"
-                            placeholder="Password"
-                            secureTextEntry
-                            textContentType="password"
-                        />
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <View style={{flex: 1}}>
+                                <AppFormField 
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    icon="lock"
+                                    name="password"
+                                    placeholder="Password"
+                                    secureTextEntry={!passwordVisible}
+                                    textContentType="password"
+                                />
+                            </View>
+                            <TouchableOpacity onPress={togglePasswordVisibility}>
+                                <MaterialCommunityIcons
+                                name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
+                                size={20}
+                                color={colors.black}
+                                />
+                            </TouchableOpacity>
+                        </View>
                         <SubmitButton title="Create Account" />
                     </>
                 )}
