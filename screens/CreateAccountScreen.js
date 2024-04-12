@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup'; 
 
 import AppTextInput from '../components/AppTextInput';
+import ErrorMessage from '../components/ErrorMessage';
 import SafeScreen from '../components/SafeScreen';
 import SubmitButton from '../components/SubmitButton';
 
@@ -44,6 +45,9 @@ function CreateAccountScreen(props) {
                             secureTextEntry
                             textContentType="password"
                         />
+                        <ErrorMessage error={errors["email"]} visible={touched["email"]} />
+                        <ErrorMessage error={errors["password"]} visible={touched["password"]} />
+
                         <SubmitButton title="Create Account" />
 
                     </>
