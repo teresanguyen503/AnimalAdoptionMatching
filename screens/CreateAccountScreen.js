@@ -6,8 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 
 import SafeScreen from '../components/SafeScreen';
-import SubmitButton from '../components/SubmitButton';
-import AppFormField from '../components/AppFormField';
+import { AppFormField, SubmitButton} from '../components/forms'; 
 import colors from '../config/colors';
 
 const validationSchema = Yup.object().shape({
