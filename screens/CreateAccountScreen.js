@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 
 import SafeScreen from '../components/SafeScreen';
-import { AppFormField, SubmitButton} from '../components/forms'; 
+import { AppFormField, ErrorMessage, SubmitButton} from '../components/forms'; 
 import colors from '../config/colors';
 
 const validationSchema = Yup.object().shape({
@@ -25,11 +25,11 @@ function CreateAccountScreen(props) {
         <SafeScreen>
             <View style={styles.container}>
             <Formik
-                initialValues={{accountType: '', email: '', password: ''}}
+                initialValues={{accountType: 'admin', email: '', password: ''}}
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
-                {({ handleChange, values }) => (
+                {({ handleChange, values, errors, touched }) => (
                     <>
                         <Text style={styles.text}>Join the Pack:</Text>
                         <Text style={styles.text}>Choose Your Role, Rescue a Soul!</Text>
@@ -37,6 +37,7 @@ function CreateAccountScreen(props) {
                             <Picker.Item label="Admin" value="admin" />
                             <Picker.Item label="Public" value="public" /> 
                         </Picker>
+                        <ErrorMessage error={errors.accountType} visible={touched.accountType} />
                         <AppFormField 
                             autoCapitalize="none"
                             autoCorrect={false}
