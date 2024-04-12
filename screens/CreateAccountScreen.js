@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import AppTextInput from '../components/AppTextInput';
 import SafeScreen from '../components/SafeScreen';
+import AppButton from '../components/AppButton';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -43,6 +44,8 @@ function CreateAccountScreen(props) {
                             secureTextEntry
                             textContentType="password"
                         />
+                        <AppButton title="Create Account" onPress={console.log("Pressed button")} />
+
                     </>
                 )}
             </Formik>
