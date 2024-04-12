@@ -21,9 +21,10 @@ function CreateAccountScreen(props) {
         setPasswordVisible(!passwordVisible); 
     }; 
     return (
-        <SafeScreen style={styles.container}>
+        <SafeScreen>
+            <View style={styles.container}>
             <Formik
-                initialValues={{email: '', password: ''}}
+                initialValues={{accountType: '', email: '', password: ''}}
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
@@ -38,8 +39,8 @@ function CreateAccountScreen(props) {
                             placeholder="Email"
                             textContentType="emailAddress"
                         />
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <View style={{flex: 1}}>
+                        <View style={styles.passwordContainer}>
+                            <View style={styles.password}>
                                 <AppFormField 
                                     autoCapitalize="none"
                                     autoCorrect={false}
@@ -62,13 +63,22 @@ function CreateAccountScreen(props) {
                     </>
                 )}
             </Formik>
+            </View>
         </SafeScreen>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        
+        padding: 10
+    },
+    passwordContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center'
+    }, 
+    password: {
+        flex: 1, 
+        paddingRight: 5
     }
 })
 
