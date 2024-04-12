@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import AppTextInput from '../components/AppTextInput';
 import SafeScreen from '../components/SafeScreen';
-import AppButton from '../components/AppButton';
+import SubmitButton from '../components/SubmitButton';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -31,7 +31,7 @@ function CreateAccountScreen(props) {
                             keyboardType="email-address"
                             name="email"
                             placeholder="Email"
-                            textContentType="emailAdress"
+                            textContentType="emailAddress"
                         />
                         <AppTextInput 
                             onBlur={() => setFieldTouched("password")}
@@ -44,7 +44,7 @@ function CreateAccountScreen(props) {
                             secureTextEntry
                             textContentType="password"
                         />
-                        <AppButton title="Create Account" onPress={console.log("Pressed button")} />
+                        <SubmitButton title="Create Account" />
 
                     </>
                 )}
