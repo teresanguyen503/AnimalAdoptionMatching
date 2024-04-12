@@ -41,7 +41,7 @@ function CreateAccountScreen(props) {
                             name="password"
                             placeholder="Password"
                             secureTextEntry
-                            textContentType="emailAdress"
+                            textContentType="password"
                         />
                     </>
                 )}
