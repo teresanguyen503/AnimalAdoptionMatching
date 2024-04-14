@@ -6,6 +6,7 @@ import DatePicker from "react-native-modern-datepicker";
 import { getFormatedDate } from "react-native-modern-datepicker";
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
+import { Dropdown } from 'react-native-element-dropdown';
 
 export default function AddPet() {
     const [name, setName] = useState('');
@@ -54,6 +55,7 @@ export default function AddPet() {
         }
     }
 
+    {/* Species Button Function */}
     const handleButtonPress = (buttonId) => {
         setSelectedButton(buttonId);
     }
@@ -176,6 +178,14 @@ export default function AddPet() {
 
                 </View>
             </View>
+            {/* Select Breed Header */}
+            <View style={styles.container}>
+                <Text style={styles.breed}>Select Breed</Text>
+
+
+            </View>
+
+
 
             </View>
         </ScrollView>
@@ -290,7 +300,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignItems: 'flex-start',
-      marginBottom: 15,
+      marginBottom: 18,
     },
     /* Species Button Styling */
     button: {
@@ -305,5 +315,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
+    breed: {
+        paddingLeft: 22,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: -12,
+      },
 
 })
