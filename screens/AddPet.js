@@ -5,24 +5,38 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function AddPet() {
     const [name, setName] = useState('');
-    const [desc, setDesc] = useState('');
     const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
+    const [selectedStartDate, setSelectedStartDate] = useState("");
+
+    const handleOnPressStartDate = () => {
+        setOpenStartDatePicker(!openStartDatePicker);
+      };
 
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
-            <View style={styles.header}>
-            <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" />
-            <Text style={styles.heading}>Add Pet</Text>
-            </View>
+                <View style={styles.header}>
+                    <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" />
+                    <Text style={styles.heading}>Add Pet</Text>
+                </View>
             <View style={styles.contain}>
-            <Text style={styles.name}>Animal Name</Text>
-            <TextInput
+                <Text style={styles.name}>Animal Name</Text>
+                <TextInput
                 style={styles.textInput}
                 placeholder="Enter name"
                 onChangeText={setName}
                 value={name}
-            />
+                />
+            <View>
+                <Text style={styles.name}>Date Available</Text>
+                <TouchableOpacity
+                style={styles.textInput}
+                onPress={handleOnPressStartDate}
+                >
+                <Text>{selectedStartDate}</Text>
+                </TouchableOpacity>
+            </View>
+
             </View>
             </View>
         </ScrollView>
