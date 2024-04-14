@@ -4,6 +4,8 @@ import { ScrollView, StyleSheet, Text, TextInput, View, Image, Button, Touchable
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DatePicker from "react-native-modern-datepicker";
 import { getFormatedDate } from "react-native-modern-datepicker";
+import * as ImagePicker from 'expo-image-picker';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function AddPet() {
     const [name, setName] = useState('');
@@ -11,6 +13,10 @@ export default function AddPet() {
     const [selectedStartDate, setSelectedStartDate] = useState("");
     const [startedDate, setStartedDate] = useState("2024/04/14");
     const [desc, setDesc] = useState('');
+    const [image, setImage] = useState(null);
+    const[hasGalleryPermission, setHasGalleryPermission] = useState(null);
+
+    {/* Date Function */}
     const today = new Date();
     const startDate = getFormatedDate(
       today.setDate(today.getDate() + 1),
@@ -25,6 +31,27 @@ export default function AddPet() {
         setOpenStartDatePicker(!openStartDatePicker);
         setSelectedStartDate(startedDate);
       };
+
+    {/* Image Function */}
+    useEffect(() => {
+        (async () => {
+          const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          setHasGalleryPermission(galleryStatus.status === 'granted');
+        })();
+    }, []);
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+
+        if (!result.canceled) {
+          setImage(result.assets[0].uri);
+        }
+    }
 
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -103,6 +130,18 @@ export default function AddPet() {
             />
         </View>
 
+        {/* Image Upload */}
+        <View style={styles.containers}>
+            {image  && <Image source={{ uri: image }} style={{ width: 250, height: 200 }} />}
+                <View style={styles.uploadBtnContainer}>
+                    <TouchableOpacity onPress={pickImage} style={styles.uploadBtn} >
+                        <AntDesign name="camera" size={20} color="black" />
+                        <Text>{image ? 'Edit' : 'Upload'} Image</Text>
+                    </TouchableOpacity>
+                </View>
+        </View>
+
+
 
 
 
@@ -118,18 +157,16 @@ export default function AddPet() {
 const styles = StyleSheet.create({
     scrollViewContent: {
       flexGrow: 1,
-      // justifyContent: 'center',
-      // alignItems: 'center',
     },
     container: {
         flex: 1,
         backgroundColor: '#fff',
     },
     header: {
-        flexDirection: 'row', // Align items in a row
-        justifyContent: 'flex-start', // Align items to the start (left)
-        alignItems: 'center', // Center vertically
-        paddingHorizontal: 16, // Add padding for spacing
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingHorizontal: 16,
         paddingTop: 40,
         paddingLeft: 20,
     },
@@ -156,6 +193,7 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 10,
         width: '90%',
+        marginTop: -8,
     },
     contain: {
         paddingLeft: 20,
@@ -185,4 +223,29 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
       },
+    containers:{
+        marginTop: 12,
+        elevation:2,
+        height:200,
+        width:250,
+        left:65,
+        backgroundColor:'#efefef',
+        position:'relative',
+        overflow:'hidden',
+        marginLeft: -15,
+    },
+    uploadBtnContainer:{
+        opacity:0.7,
+        position:'absolute',
+        right:0,
+        bottom:0,
+        backgroundColor:'lightgrey',
+        width:'100%',
+        height:'25%',
+    },
+    uploadBtn:{
+        display:'flex',
+        alignItems:"center",
+        justifyContent:'center'
+    },
 })
