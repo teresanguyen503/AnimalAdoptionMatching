@@ -10,6 +10,7 @@ export default function AddPet() {
     const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
     const [selectedStartDate, setSelectedStartDate] = useState("");
     const [startedDate, setStartedDate] = useState("2024/04/14");
+    const [desc, setDesc] = useState('');
     const today = new Date();
     const startDate = getFormatedDate(
       today.setDate(today.getDate() + 1),
@@ -90,6 +91,17 @@ export default function AddPet() {
               </View>
             </View>
           </Modal>
+
+         {/* Description Placeholder */}
+        <View>
+            <Text style={styles.name}>Description</Text>
+            <TextInput
+            style={styles.textInput}
+            placeholder="Enter description"
+            onChangeText={setDesc}
+            value={desc}
+            />
+        </View>
 
 
 
