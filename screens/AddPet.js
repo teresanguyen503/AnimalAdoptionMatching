@@ -14,7 +14,8 @@ export default function AddPet() {
     const [startedDate, setStartedDate] = useState("2024/04/14");
     const [desc, setDesc] = useState('');
     const [image, setImage] = useState(null);
-    const[hasGalleryPermission, setHasGalleryPermission] = useState(null);
+    const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+    const [selectedButton, setSelectedButton] = useState(null);
 
     {/* Date Function */}
     const today = new Date();
@@ -51,6 +52,10 @@ export default function AddPet() {
         if (!result.canceled) {
           setImage(result.assets[0].uri);
         }
+    }
+
+    const handleButtonPress = (buttonId) => {
+        setSelectedButton(buttonId);
     }
 
     return (
@@ -140,12 +145,38 @@ export default function AddPet() {
                     </TouchableOpacity>
                 </View>
         </View>
-
-
-
-
-
+            {/* Species Header */}
+            <Text style={styles.name}>Species</Text>
             </View>
+            {/* Buttons for Dog, Cat and Other */}
+            <View style={styles.conta}>
+                <View style={styles.item}>
+                    <TouchableOpacity
+                    style={[styles.button, selectedButton ===1 && styles.selectedButton]}
+                    onPress={() => handleButtonPress(1)}
+                    >
+                        <Text style={styles.buttonText}>Dog</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.item}>
+                <TouchableOpacity
+                    style={[styles.button, selectedButton === 2 && styles.selectedButton]}
+                    onPress={() => handleButtonPress(2)}
+                    >
+                        <Text style={styles.buttonText}>Cat</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.item}>
+                <TouchableOpacity
+                    style={[styles.button, selectedButton === 3 && styles.selectedButton]}
+                    onPress={() => handleButtonPress(3)}
+                    >
+                        <Text style={styles.buttonText}>Other</Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+
             </View>
         </ScrollView>
 
@@ -248,4 +279,31 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:'center'
     },
+     /* Adjusting the item width to achieve a side-by-side layout */
+    item: {
+        width: '27%',
+        paddingHorizontal: 10,
+        paddingLeft: 15,
+    },
+     /* Container that controls the items */
+    conta: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      marginBottom: 15,
+    },
+    /* Species Button Styling */
+    button: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 8,
+    },
+    selectedButton: {
+        backgroundColor: 'black',
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
 })
