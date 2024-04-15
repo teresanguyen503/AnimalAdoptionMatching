@@ -7,6 +7,7 @@ import { getFormatedDate } from "react-native-modern-datepicker";
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
+import CheckBox from 'expo-checkbox';
 
 export default function AddPet() {
     const [name, setName] = useState('');
@@ -17,6 +18,12 @@ export default function AddPet() {
     const [image, setImage] = useState(null);
     const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
     const [selectedButton, setSelectedButton] = useState(null);
+    const initialState = {
+        checkbox1: false,
+        checkbox2: false,
+        checkbox3: false,
+    }
+    const [state, setState] = useState(initialState);
 
     {/* Date Function */}
     const today = new Date();
@@ -139,7 +146,7 @@ export default function AddPet() {
 
         {/* Image Upload */}
         <View style={styles.containers}>
-            {image  && <Image source={{ uri: image }} style={{ width: 250, height: 200 }} />}
+            {image  && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
                 <View style={styles.uploadBtnContainer}>
                     <TouchableOpacity onPress={pickImage} style={styles.uploadBtn} >
                         <AntDesign name="camera" size={20} color="black" />
@@ -147,6 +154,25 @@ export default function AddPet() {
                     </TouchableOpacity>
                 </View>
         </View>
+
+        {/* Disposition */}
+        <Text style={styles.name}>Disposition</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center',   flexWrap: 'wrap', }} >
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: -20, width: 90 }}>
+                <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox1} onValueChange={(value) => setState({...state, checkbox1:value})}  />
+                <Text style={styles.checkLabel1} >Good with other animals</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center',  width: 70, marginLeft: 50,}}>
+                <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox2} onValueChange={(value) => setState({...state, checkbox2:value})}  />
+                <Text style={styles.checkLabel2}>Good with children</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', width: 130, marginLeft: 30}}>
+                <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox3} onValueChange={(value) => setState({...state, checkbox3:value})}  />
+                <Text style={styles.checkLabel3}>Animal must be leashed at all times</Text>
+            </View>
+        </View>
+
+
             {/* Species Header */}
             <Text style={styles.name}>Species</Text>
             </View>
@@ -268,12 +294,12 @@ const styles = StyleSheet.create({
         marginTop: 12,
         elevation:2,
         height:200,
-        width:250,
+        width:200,
         left:65,
         backgroundColor:'#efefef',
         position:'relative',
         overflow:'hidden',
-        marginLeft: -15,
+        marginLeft: 5,
     },
     uploadBtnContainer:{
         opacity:0.7,
@@ -320,6 +346,28 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: -12,
+      },
+      checkLabel1: {
+        top: -15,
+        left: 5,
+        paddingHorizontal: 1,
+        fontSize: 14,
+      },
+      checkLabel2: {
+        left: 5,
+        paddingHorizontal: 1,
+        fontSize: 14,
+        top: -15,
+      },
+      checkLabel3: {
+        left: 5,
+        paddingHorizontal: 1,
+        fontSize: 14,
+        top: -15,
+      },
+
+      checkBox: {
+        top: -15,
       },
 
 })
