@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, Modal } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, Modal, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DatePicker from "react-native-modern-datepicker";
 import { getFormatedDate } from "react-native-modern-datepicker";
@@ -8,6 +8,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 import CheckBox from 'expo-checkbox';
+import { MaterialIcons } from '@expo/vector-icons';
+import dogData from '../breed-data/dog-breed.json';
+import catData from '../breed-data/cat-breed.json';
+import otherData from '../breed-data/other-breed.json';
 
 export default function AddPet() {
     const [name, setName] = useState('');
@@ -24,6 +28,11 @@ export default function AddPet() {
         checkbox3: false,
     }
     const [state, setState] = useState(initialState);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
 
     {/* Date Function */}
     const today = new Date();
@@ -67,8 +76,38 @@ export default function AddPet() {
         setSelectedButton(buttonId);
     }
 
+    {/* Dropdown Function */}
+    // Filtered data based on search query
+    const filteredDogData = dogData.filter(item =>
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const filteredCatData = catData.filter(item =>
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const renderItem = ({ item }) => (
+      <TouchableOpacity onPress={() => handleSelectedItem(item)}>
+        <Text>{item.label}</Text>
+      </TouchableOpacity>
+    );
+
+    const handleSelectedItem = (item) => {
+      setSelectedItem(item);
+      setIsOpen(false); // Close the dropdown after selecting an item
+    };
+
+     {/* Select Data for dropdown depending on selected species */}
+    let selectedData;
+    if (selectedButton === 1) {
+      selectedData = filteredDogData;
+    } else if (selectedButton === 2) {
+      selectedData = filteredCatData;
+    } else {
+      selectedData = otherData;
+    }
+
     return (
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+       //  <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" />
@@ -205,8 +244,49 @@ export default function AddPet() {
                 </View>
             </View>
             {/* Select Breed Header */}
-            <View style={styles.container}>
+            <View>
                 <Text style={styles.breed}>Select Breed</Text>
+            {/* Breed Dropdown */}
+            <View>
+                <TouchableOpacity onPress={() => setIsOpen(!isOpen)}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 0.5, borderRadius: 5, borderColor: 'black', padding: 5, paddingLeft: 0, marginLeft: 12, marginRight: 25,}}>
+                    <Text style={{ paddingLeft: 22}}>{selectedItem ? selectedItem.label : 'Select Breed'}</Text>
+                    <MaterialIcons name={isOpen ? 'arrow-drop-up' : 'arrow-drop-down'}  size={24} />
+                </View>
+                </TouchableOpacity>
+            {isOpen && (
+                <View style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}>
+                    <TextInput
+                    placeholder="Search..."
+                    onChangeText={setSearchQuery}
+                    value={searchQuery}
+                    />
+                    <FlatList
+                    data={selectedData}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    inputSearchStyle={styles.inputSearchStyle}
+                    iconStyle={styles.iconStyle}
+                    search
+                    labelField="label"
+                    valueField="value"
+                    placeholder={!isFocus ? 'Select Breed' : '...'}
+                    searchPlaceholder="Search..."
+                    value={value}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    onChange={item => {
+                    setValue(item);
+                    setIsFocus(false);
+                }}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.value.toString()}
+                    />
+                </View>
+            )}
+            </View>
+
+
 
 
             </View>
@@ -214,7 +294,7 @@ export default function AddPet() {
 
 
             </View>
-        </ScrollView>
+       // </ScrollView>
 
     );
 
@@ -234,8 +314,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 16,
-        paddingTop: 40,
-        paddingLeft: 20,
+        paddingTop: 30,
+        paddingLeft: 10,
     },
     heading: {
         fontSize: 30,
@@ -248,22 +328,22 @@ const styles = StyleSheet.create({
     name:{
         fontSize: 20,
         paddingTop: 0.6,
-        paddingLeft: 10,
+        paddingLeft: 5,
         paddingBottom: 10,
         fontWeight: 'bold',
         marginTop: 1,
-      },
+    },
     textInput: {
         borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 5,
-        padding: 10,
+        padding: 5,
         paddingLeft: 10,
         width: '90%',
-        marginTop: -8,
+        marginTop: -12,
     },
     contain: {
-        paddingLeft: 20,
+        paddingLeft: 15,
     },
     centeredView: {
         flex: 1,
@@ -289,7 +369,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-      },
+    },
     containers:{
         marginTop: 12,
         elevation:2,
@@ -326,7 +406,8 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignItems: 'flex-start',
-      marginBottom: 18,
+     marginBottom: 12,
+     marginTop: -7,
     },
     /* Species Button Styling */
     button: {
@@ -345,29 +426,54 @@ const styles = StyleSheet.create({
         paddingLeft: 22,
         fontSize: 20,
         fontWeight: 'bold',
-        marginTop: -12,
-      },
+        marginTop: -2,
+    },
+     /* Disposition Checkbox and Label Styling */
       checkLabel1: {
         top: -15,
         left: 5,
         paddingHorizontal: 1,
         fontSize: 14,
-      },
+    },
       checkLabel2: {
         left: 5,
         paddingHorizontal: 1,
         fontSize: 14,
         top: -15,
-      },
+    },
       checkLabel3: {
         left: 5,
         paddingHorizontal: 1,
         fontSize: 14,
         top: -15,
-      },
+    },
 
       checkBox: {
         top: -15,
-      },
+    },
+    /* Dropdown Styling */
+    dropdown: {
+        height: 50,
+        borderColor: 'gray',
+        borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+        marginLeft: 12,
+        marginRight: 24,
+    },
+    placeholderStyle: {
+        fontSize: 16,
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+    },
 
 })
