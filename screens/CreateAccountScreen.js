@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton} from '../components/forms'; 
@@ -21,12 +22,25 @@ function CreateAccountScreen(props) {
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible); 
     }; 
+
+    function handleSubmit() {
+        const userData = {
+            accountType: validationSchema.accountType, 
+            email: validationSchema.email, 
+            password: validationSchema.password
+        }; 
+
+        axios
+            .post('192.168.1.12:3000/register', userData)
+            .then(res => console.log(res.data))
+            .catch(e => console.log(e)); 
+    }
     return (
         <SafeScreen>
             <View style={styles.container}>
             <Formik
                 initialValues={{accountType: 'admin', email: '', password: ''}}
-                onSubmit={values => console.log(values)}
+                onSubmit={() => handleSubmit}
                 validationSchema={validationSchema}
             >
                 {({ handleChange, values, errors, touched }) => (
