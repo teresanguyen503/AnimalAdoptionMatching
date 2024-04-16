@@ -211,7 +211,6 @@ export default function AddPet() {
             </View>
         </View>
 
-
             {/* Species Header */}
             <Text style={styles.name}>Species</Text>
             </View>
@@ -285,15 +284,15 @@ export default function AddPet() {
                 </View>
             )}
             </View>
-
-
-
-
             </View>
 
+                {/* Add Profile Button */}
+                <View style={styles.addProfileButton}>
+                    <Button title="Add Profile"></Button>
+                </View>
 
+        </View>
 
-            </View>
        // </ScrollView>
 
     );
@@ -475,5 +474,12 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
+    // Add Profile Button Styling
+    addProfileButton: {
+        width: '90%',
+        paddingTop: 45,
+        marginLeft: 18,
+        marginTop: -20,
+     },
 
 })
