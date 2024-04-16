@@ -115,7 +115,7 @@ export default function AddPet() {
                 </View>
 
             {/* Name Placeholder */}
-            <View style={styles.contain}>
+            <View style={styles.outerContainer}>
                 <Text style={styles.name}>Animal Name</Text>
                 <TextInput
                 style={styles.textInput}
@@ -184,7 +184,7 @@ export default function AddPet() {
         </View>
 
         {/* Image Upload */}
-        <View style={styles.containers}>
+        <View style={styles.imageContainer}>
             {image  && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
                 <View style={styles.uploadBtnContainer}>
                     <TouchableOpacity onPress={pickImage} style={styles.uploadBtn} >
@@ -215,7 +215,7 @@ export default function AddPet() {
             <Text style={styles.name}>Species</Text>
             </View>
             {/* Buttons for Dog, Cat and Other */}
-            <View style={styles.conta}>
+            <View style={styles.speciesContainer}>
                 <View style={styles.item}>
                     <TouchableOpacity
                     style={[styles.button, selectedButton ===1 && styles.selectedButton]}
@@ -244,7 +244,7 @@ export default function AddPet() {
             </View>
             {/* Select Breed Header */}
             <View>
-                <Text style={styles.breed}>Select Breed</Text>
+                <Text style={styles.breedHeader}>Select Breed</Text>
             {/* Breed Dropdown */}
             <View>
                 <TouchableOpacity onPress={() => setIsOpen(!isOpen)}>
@@ -308,6 +308,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+
+     /* Main Heading */
     header: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -321,10 +323,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
-    icon:{
+    icon: {
         paddingLeft: 0.5,
     },
-    name:{
+
+     /* Subheading */
+    name: {
         fontSize: 20,
         paddingTop: 0.6,
         paddingLeft: 5,
@@ -341,15 +345,16 @@ const styles = StyleSheet.create({
         width: '90%',
         marginTop: -12,
     },
-    contain: {
+    outerContainer: {
         paddingLeft: 15,
     },
+
+    /* Date/Calendar Styling */
     centeredView: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         marginTop: 30,
-
     },
     modalView: {
         margin: 20,
@@ -369,7 +374,9 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    containers:{
+
+    /* Upload Image Styling */
+    imageContainer: {
         marginTop: 12,
         elevation:2,
         height:200,
@@ -380,7 +387,7 @@ const styles = StyleSheet.create({
         overflow:'hidden',
         marginLeft: 5,
     },
-    uploadBtnContainer:{
+    uploadBtnContainer: {
         opacity:0.7,
         position:'absolute',
         right:0,
@@ -389,24 +396,27 @@ const styles = StyleSheet.create({
         width:'100%',
         height:'25%',
     },
-    uploadBtn:{
+    uploadBtn: {
         display:'flex',
         alignItems:"center",
         justifyContent:'center'
     },
-     /* Adjusting the item width to achieve a side-by-side layout */
+
+    /* Species Styling */
+    /* Adjusting the species item width to achieve a side-by-side layout */
     item: {
         width: '27%',
         paddingHorizontal: 10,
         paddingLeft: 15,
     },
-     /* Container that controls the items */
-    conta: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'flex-start',
-     marginBottom: 12,
-     marginTop: -7,
+
+    /* Species Container that controls the items */
+    speciesContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        marginBottom: 12,
+        marginTop: -7,
     },
     /* Species Button Styling */
     button: {
@@ -421,35 +431,36 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
-    breed: {
+    breedHeader: {
         paddingLeft: 22,
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: -2,
     },
-     /* Disposition Checkbox and Label Styling */
-      checkLabel1: {
+
+    /* Disposition Checkbox and Label Styling */
+    checkLabel1: {
         top: -15,
         left: 5,
         paddingHorizontal: 1,
         fontSize: 14,
     },
-      checkLabel2: {
+    checkLabel2: {
         left: 5,
         paddingHorizontal: 1,
         fontSize: 14,
         top: -15,
     },
-      checkLabel3: {
+    checkLabel3: {
         left: 5,
         paddingHorizontal: 1,
         fontSize: 14,
+        top: -15,
+    },
+    checkBox: {
         top: -15,
     },
 
-      checkBox: {
-        top: -15,
-    },
     /* Dropdown Styling */
     dropdown: {
         height: 50,
@@ -474,7 +485,8 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
-    // Add Profile Button Styling
+
+    /* Add Profile Button Styling */
     addProfileButton: {
         width: '90%',
         paddingTop: 45,
