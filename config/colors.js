@@ -4,5 +4,6 @@ export default {
     error: '#ff0000',  
     iconTextInput: '#6495ed',
     inputBackground: '#d3d3d3',
-    white: '#fff' 
+    white: '#fff',
+    headings: '#000'
 }; 
