@@ -1,4 +1,4 @@
-import client from "./client"; 
+import apiClient from "./client"; 
 
 const endpoint = "/register"; 
 
@@ -8,7 +8,7 @@ const addUser = user => {
     data.append('email', user.email); 
     data.append('password', user.password); 
 
-    return client.post(endpoint, data); 
+    return apiClient.post(endpoint, data); 
 }
 
 export default {
