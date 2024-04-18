@@ -25,6 +25,7 @@
     "react-native": "0.73.6",
     "react-native-element-dropdown": "^2.10.4",
     "react-native-modern-datepicker": "^1.0.0-beta.91",
+    "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
     "react-navigation": "^5.0.0",
     "yup": "^1.4.0"
