@@ -24,52 +24,24 @@ function CreateAccountScreen(props) {
         setPasswordVisible(!passwordVisible); 
     }; 
 
-    // function handleSubmit(values) {
-        // const userData = {
-        //     accountType: values.accountType, 
-        //     email: values.email, 
-        //     password: values.password
-        // }; 
-    //     const userData = new FormData(); 
-    //     userData.append('accountType', values.accountType); 
-    //     userData.append('email', values.email); 
-    //     userData.append('password', values.password);
-
-    //     axios
-    //         .post('http://192.168.1.12:3000/register', userData)
-    //         .then(res => console.log(res.data))
-    //         .catch(e => console.log(e)); 
-    // }
-
-    // const formSubmit = async (user) => {
-    //     const result = await userAccounts.addUser(user); 
-    //     console.log(result.data); 
-    //     if (!result.ok) return alert('Could not register user. Try again'); 
-    //     alert('Success'); 
-    // }; 
-
-    // const handleSubmit = async (values) => {
-    //     try {
-    //     const data = new FormData(); 
-    //     data.append('accountType', values.accountType); 
-    //     data.append('email', values.email); 
-    //     data.append('password', values.password); 
-
-    const formSubmit = async (values) => {
+    const formSubmit = async (user) => {
         try {
-            const jsonData = JSON.stringify(values); 
-            const result = await axios.post("http://192.168.1.12:3000/register", jsonData, {
-                headers: {
-                    'Content-Type': 'application/json'
+            const result = await userAccounts.addUser(user); 
+            console.log(result.problem); 
+            if (!result.ok) {
+                if (result.problem === 'CLIENT_ERROR' && result.status === 409) {
+                    alert('Email already exists. Please use a different email');
+                } else {
+                    alert('Could not register user. Try again');
                 }
-            }); 
-        console.log(result.data); 
-        alert("Success"); 
+            } else {
+                alert('Success');
+            } 
         } catch (error) {
-            console.error("An error occured while submitting the form:", error); 
-            alert("An error occurred"); 
+            console.error('Error occurred: ', error); 
+            alert('An error occurred. Please try again later.'); 
         }
-    }
+    }; 
 
     return (
         <SafeScreen>
