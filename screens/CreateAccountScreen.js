@@ -24,10 +24,9 @@ function CreateAccountScreen(props) {
         setPasswordVisible(!passwordVisible); 
     }; 
 
-    const formSubmit = async (user) => {
+    const formSubmit = async (user, { resetForm }) => {
         try {
             const result = await userAccounts.addUser(user); 
-            console.log(result.problem); 
             if (!result.ok) {
                 if (result.problem === 'CLIENT_ERROR' && result.status === 409) {
                     alert('Email already exists. Please use a different email');
@@ -41,6 +40,8 @@ function CreateAccountScreen(props) {
             console.error('Error occurred: ', error); 
             alert('An error occurred. Please try again later.'); 
         }
+
+        resetForm(); 
     }; 
 
     return (
@@ -48,7 +49,7 @@ function CreateAccountScreen(props) {
             <View style={styles.container}>
             <Formik
                 initialValues={{accountType: 'admin', email: '', password: ''}}
-                onSubmit={values => formSubmit(values)}
+                onSubmit={formSubmit}
                 validationSchema={validationSchema}
             >
                 {({ handleChange, values, errors, touched }) => (
