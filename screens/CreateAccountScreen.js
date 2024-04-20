@@ -4,10 +4,12 @@ import { Formik } from 'formik';
 import * as Yup from 'yup'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton} from '../components/forms'; 
 import colors from '../config/colors';
+import userAccounts from '../api/userAccounts';
 
 const validationSchema = Yup.object().shape({
     accountType: Yup.string().required("Please select an account type"),
@@ -21,12 +23,33 @@ function CreateAccountScreen(props) {
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible); 
     }; 
+
+    const formSubmit = async (user, { resetForm }) => {
+        try {
+            const result = await userAccounts.addUser(user); 
+            if (!result.ok) {
+                if (result.problem === 'CLIENT_ERROR' && result.status === 409) {
+                    alert('Email already exists. Please use a different email');
+                } else {
+                    alert('Could not register user. Try again');
+                }
+            } else {
+                alert('Success');
+            } 
+        } catch (error) {
+            console.error('Error occurred: ', error); 
+            alert('An error occurred. Please try again later.'); 
+        }
+
+        resetForm(); 
+    }; 
+
     return (
         <SafeScreen>
             <View style={styles.container}>
             <Formik
                 initialValues={{accountType: 'admin', email: '', password: ''}}
-                onSubmit={values => console.log(values)}
+                onSubmit={formSubmit}
                 validationSchema={validationSchema}
             >
                 {({ handleChange, values, errors, touched }) => (
