@@ -108,7 +108,7 @@ export default function AddPet() {
     }
 
     const handleAddProfile = async () => {
-        if(!name || !desc || !isdate ||!image || !selectedItem){
+        if(!name || !desc || !isdate ||!image || !selectedItem || !disposition){
           alert('All fields are required')
           return;
         }
