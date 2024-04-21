@@ -5,5 +5,6 @@ export default {
     iconTextInput: '#6495ed',
     inputBackground: '#d3d3d3',
     white: '#fff',
-    headings: '#000'
+    headings: '#000',
+    lightgray: '#d3d3d3'
 }; 
