@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Button, 
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,8 +10,7 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import SafeScreen from "../components/SafeScreen";
-import { Button, View, Text } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 // import Topbar from "../components/TopBar";
 
 function HomeScreen() {
@@ -28,11 +28,12 @@ function HomeScreen() {
         /> */}
       <View style={styles.container}>
         {/* <TouchableOpacity onPress={onPressHandler}> */}
+        <TouchableOpacity>
         <Text>Make Account</Text>
-        {/* </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
       <View style={styles.newsContainer}>
-        <Text style={styles.text}>Recent News</Text>
+        <Text style={styles.titleText}>Recent News</Text>
         <Text style={styles.articleText}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -61,8 +62,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontSize: 15,
   },
-  text: {
+  titleText: {
     fontSize: 27,
+    color: "black",
     textAlign: "center",
   },
   articleText: {
