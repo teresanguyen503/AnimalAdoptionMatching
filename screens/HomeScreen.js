@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import {
   Dimensions,
-  Button,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Image,
-  Linking,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
