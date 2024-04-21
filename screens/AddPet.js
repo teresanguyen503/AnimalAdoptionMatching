@@ -98,18 +98,18 @@ export default function AddPet() {
     let selectedData;
     if (selectedButton === 1) {
       selectedData = filteredDogData;
-      specieName = "Dog";
+      speciesName = "Dog";
     } else if (selectedButton === 2) {
       selectedData = filteredCatData;
-      specieName = "Cat";
+      speciesName = "Cat";
     } else {
       selectedData = otherData;
-      specieName = "Other";
+      speciesName = "Other";
     }
 
     const handleAddProfile = async () => {
-        if(!name || !desc || !isdate ||!image || !selectedItem || !disposition){
-          alert('All fields are required')
+        if(!name || !desc || !isdate ||!image || !selectedItem ){
+          alert('Please check required fields.')
           return;
         }
         try{
