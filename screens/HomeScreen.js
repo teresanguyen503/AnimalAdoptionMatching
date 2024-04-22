@@ -18,6 +18,7 @@ function HomeScreen() {
 
   return (
     <SafeScreen>
+      <ScrollView>
       {/* <Topbar
             title="Animal Adoption Matching"
             rightButton={<Icon name="menu" />}
@@ -134,6 +135,7 @@ function HomeScreen() {
           </View>
         </View>
       </View>
+      </ScrollView>
     </SafeScreen>
   );
 }
