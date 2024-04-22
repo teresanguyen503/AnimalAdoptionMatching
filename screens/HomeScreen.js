@@ -40,6 +40,11 @@ function HomeScreen() {
           <TouchableOpacity style={styles.accountButton}>
             <Text>Sign In</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.accountButton}
+          onPress={() => navigation.navigate("AddPet")}
+          >
+            <Text>Add Pet</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.newsContainer}>
