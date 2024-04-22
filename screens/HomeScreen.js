@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
   icon: {
     paddingRight: 0.5,
     alignItems: "center",
+    alignItems: "center",
   },
 
   // Account Section
@@ -363,6 +364,11 @@ const styles = StyleSheet.create({
   petTextContainer: {
     alignItems: "center",
   },
+  petTextContainer: {
+    flexDirection: "column",
+    flex: 1,
+    margin: 5,
+  },
   petProfileBanner: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -381,6 +387,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     margin: 10,
+  },
+  petButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  petButton: {
+    flexDirection: "row",
+    borderWidth: 2,
+    fontSize: 45,
+    borderRadius: 10,
+    margin: 15,
+  },
+  petContainer: {
+    textAlign: "center",
+    flexWrap: "wrap",
+    margin: 15,
   },
 });
 
