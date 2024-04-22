@@ -1,9 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, Modal, FlatList } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import DatePicker from "react-native-modern-datepicker";
-import { getFormatedDate } from "react-native-modern-datepicker";
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -12,12 +10,12 @@ import { MaterialIcons } from '@expo/vector-icons';
 import dogData from '../breed-data/dog-breed.json';
 import catData from '../breed-data/cat-breed.json';
 import otherData from '../breed-data/other-breed.json';
+import DateModal from '../components/DateModal';
+import axios from 'axios'
 
 export default function AddPet() {
     const [name, setName] = useState('');
-    const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
-    const [selectedStartDate, setSelectedStartDate] = useState("");
-    const [startedDate, setStartedDate] = useState("2024/04/14");
+    const [isdate, setDate] = useState('');
     const [desc, setDesc] = useState('');
     const [image, setImage] = useState(null);
     const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
@@ -28,6 +26,17 @@ export default function AddPet() {
         checkbox3: false,
     }
     const [state, setState] = useState(initialState);
+    let disposition;
+    if(state.checkbox1 === true){
+      disposition = "Good with other animals"
+    }if(state.checkbox2 === true){
+      disposition = "Good with children"
+    } if(state.checkbox3 === true){
+      disposition = "Animal must be leashed at all times"
+    }  if(state.checkbox1 === true && state.checkbox2 === true){
+      disposition = "Good with other animals and good with children"
+
+    }
     const [selectedItem, setSelectedItem] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -35,19 +44,8 @@ export default function AddPet() {
     const [isFocus, setIsFocus] = useState(false);
 
     {/* Date Function */}
-    const today = new Date();
-    const startDate = getFormatedDate(
-      today.setDate(today.getDate() + 1),
-      "YYYY/MM/DD"
-    );
-
-    const onDoneDate = () => {
-        setOpenStartDatePicker(!openStartDatePicker);
-      };
-
-    const onCancelDate = () => {
-        setOpenStartDatePicker(!openStartDatePicker);
-        setSelectedStartDate(startedDate);
+    const handleDateSelect = (date) => {
+        setDate(date)
       };
 
     {/* Image Function */}
@@ -100,11 +98,40 @@ export default function AddPet() {
     let selectedData;
     if (selectedButton === 1) {
       selectedData = filteredDogData;
+      speciesName = "Dog";
     } else if (selectedButton === 2) {
       selectedData = filteredCatData;
+      speciesName = "Cat";
     } else {
       selectedData = otherData;
+      speciesName = "Other";
     }
+
+    const handleAddProfile = async () => {
+        if(!name || !desc || !isdate ||!image || !selectedItem ){
+          alert('Please check required fields.')
+          return;
+        }
+        try{
+        // android emulator:
+        // const {data} = await axios.post('http://10.0.2.2:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
+        // expo go:
+        const {data} = await axios.post('http://192.168.1.12:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
+          console.log("Profile created =>", data)
+          alert('New Profile successfully added')
+          // Clear input fields
+          setName('');
+          setDate('');
+          setDesc('');
+          setSelectedButton(null);
+          setSelectedItem({});
+          setHasGalleryPermission(null);
+          setImage(null);
+          setState(false);
+        } catch(err){
+          console.log(err);
+        }
+      }
 
     return (
        //  <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -126,51 +153,16 @@ export default function AddPet() {
 
             {/* Date Placeholder */}
             <View>
-                <Text style={styles.name}>Date Available</Text>
-                <TouchableOpacity
-                style={styles.textInput}
-                onPress={onDoneDate}
-                >
-                <Text>{selectedStartDate}</Text>
-                </TouchableOpacity>
+            <Text style={styles.name}>Date Available</Text>
+            <TouchableOpacity
+                style={styles.textInput}>
+            <Text >{isdate}</Text>
+            </TouchableOpacity>
+
             </View>
 
             {/* Date Picker Modal */}
-            <Modal
-            animationType="slide"
-            transparent={true}
-            visible={openStartDatePicker}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <DatePicker
-                  mode="calendar"
-                  minimumDate={startDate}
-                  selected={startedDate}
-                  onSelectedChange={(date) => setSelectedStartDate(date)}
-                  options={{
-                    backgroundColor: "#080516",
-                    textHeaderColor: "#469ab6",
-                    textDefaultColor: "#FFFFFF",
-                    selectedTextColor: "#FFF",
-                    mainColor: "#469ab6",
-                    textSecondaryColor: "#FFFFFF",
-                    borderColor: "rgba(122, 146, 165, 0.1)",
-                  }}
-                />
-                {/* Cancel Date */}
-                <TouchableOpacity onPress={onCancelDate}>
-                    <Text style={{ color: "white", marginRight: 150, }}>Cancel</Text>
-                </TouchableOpacity>
-
-                {/* Done Date */}
-                <TouchableOpacity onPress={onDoneDate}>
-                  <Text style={{ color: "white", marginLeft: 150, marginTop: -19,}}>Done</Text>
-                </TouchableOpacity>
-
-              </View>
-            </View>
-          </Modal>
+            <DateModal onDateSelect={handleDateSelect}/>
 
          {/* Description Placeholder */}
         <View>
@@ -181,34 +173,6 @@ export default function AddPet() {
             onChangeText={setDesc}
             value={desc}
             />
-        </View>
-
-        {/* Image Upload */}
-        <View style={styles.imageContainer}>
-            {image  && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-                <View style={styles.uploadBtnContainer}>
-                    <TouchableOpacity onPress={pickImage} style={styles.uploadBtn} >
-                        <AntDesign name="camera" size={20} color="black" />
-                        <Text>{image ? 'Edit' : 'Upload'} Image</Text>
-                    </TouchableOpacity>
-                </View>
-        </View>
-
-        {/* Disposition */}
-        <Text style={styles.name}>Disposition</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center',   flexWrap: 'wrap', }} >
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: -20, width: 90 }}>
-                <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox1} onValueChange={(value) => setState({...state, checkbox1:value})}  />
-                <Text style={styles.checkLabel1} >Good with other animals</Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center',  width: 70, marginLeft: 50,}}>
-                <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox2} onValueChange={(value) => setState({...state, checkbox2:value})}  />
-                <Text style={styles.checkLabel2}>Good with children</Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', width: 130, marginLeft: 30}}>
-                <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox3} onValueChange={(value) => setState({...state, checkbox3:value})}  />
-                <Text style={styles.checkLabel3}>Animal must be leashed at all times</Text>
-            </View>
         </View>
 
             {/* Species Header */}
@@ -286,9 +250,37 @@ export default function AddPet() {
             </View>
             </View>
 
+             {/* Image Upload */}
+            <View style={styles.imageContainer}>
+            {image  && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                <View style={styles.uploadBtnContainer}>
+                    <TouchableOpacity onPress={pickImage} style={styles.uploadBtn} >
+                        <AntDesign name="camera" size={20} color="black" />
+                        <Text>{image ? 'Edit' : 'Upload'} Image</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            {/* Disposition */}
+            <Text style={styles.dispositionHeader}>Disposition</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center',   flexWrap: 'wrap', }} >
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: -20, width: 90 }}>
+                    <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox1} onValueChange={(value) => setState({...state, checkbox1:value})}  />
+                    <Text style={styles.checkLabel1} >Good with other animals</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center',  width: 70, marginLeft: 50,}}>
+                    <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox2} onValueChange={(value) => setState({...state, checkbox2:value})}  />
+                    <Text style={styles.checkLabel2}>Good with children</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', width: 130, marginLeft: 30}}>
+                    <CheckBox style={styles.checkBox} disabled={false} value={state.checkbox3} onValueChange={(value) => setState({...state, checkbox3:value})}  />
+                    <Text style={styles.checkLabel3}>Animal must be leashed at all times</Text>
+                </View>
+            </View>
+
                 {/* Add Profile Button */}
                 <View style={styles.addProfileButton}>
-                    <Button title="Add Profile"></Button>
+                    <Button title="Add Profile"  onPress={handleAddProfile}></Button>
                 </View>
 
         </View>
@@ -439,31 +431,40 @@ const styles = StyleSheet.create({
     },
 
     /* Disposition Checkbox and Label Styling */
+    dispositionHeader: {
+        fontSize: 20,
+        paddingTop: 1.0,
+        paddingLeft: 29,
+        paddingBottom: 16,
+        fontWeight: 'bold', marginTop: 2,
+        top: 6,
+    },
     checkLabel1: {
-        top: -15,
-        left: 5,
+        top: -8,
+        left: 15,
         paddingHorizontal: 1,
         fontSize: 14,
     },
     checkLabel2: {
-        left: 5,
+        left: 15,
         paddingHorizontal: 1,
         fontSize: 14,
-        top: -15,
+        top: -8,
     },
     checkLabel3: {
-        left: 5,
+        left: 15,
         paddingHorizontal: 1,
         fontSize: 14,
-        top: -15,
+        top: -8,
     },
     checkBox: {
-        top: -15,
+        top: -8,
+        right: -12,
     },
 
     /* Dropdown Styling */
     dropdown: {
-        height: 50,
+        // height: 50,
         borderColor: 'gray',
         borderWidth: 0.5,
         borderRadius: 8,
@@ -491,7 +492,7 @@ const styles = StyleSheet.create({
         width: '90%',
         paddingTop: 45,
         marginLeft: 18,
-        marginTop: -20,
+        marginTop: -25,
      },
 
 })
