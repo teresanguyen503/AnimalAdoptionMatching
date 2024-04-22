@@ -89,8 +89,8 @@ function HomeScreen() {
           <View style={styles.petTitleContainer}>
             <Text style={styles.petTitleText}>Available Pets</Text>
             <View style={styles.petButtonContainer}>
-              <TouchableOpacity style={styles.articleButton}>
-                <Text style={styles.articleButtonText}>View All Pets</Text>
+              <TouchableOpacity style={styles.petButton}>
+                <Text style={styles.petButtonText}>View All Pets</Text>
                 <Icon
                   style={styles.icon}
                   name="keyboard-arrow-right"
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingRight: 0.5,
-    justifyContent: "right",
+    alignItems: "center",
   },
   accountButtonContainer: {
     flexDirection: "row",
@@ -187,14 +187,12 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 25,
-    color: "black",
     textAlign: "center",
     fontWeight: "bold",
   },
   articleTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "black",
     margin: 5,
   },
   articleText: {
@@ -226,12 +224,18 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     flex: 1,
     flexDirection: "row",
+    alignItems: "center",
   },
   newsContainer: {
     flex: 1,
     textAlign: "center",
     flexDirection: "column",
     flexWrap: "wrap",
+    marginVertical: 10,
+    marginBottom: 20, // new
+    marginHorizontal: 10,
+    maxHeight: 400,  // new
+    overflow: "scroll", // new
   },
   articleTextContainer: {
     flexDirection: "column",
@@ -250,20 +254,29 @@ const styles = StyleSheet.create({
   },
   petTitleText: {
     fontSize: 25,
-    color: "black",
     textAlign: "center",
     fontWeight: "bold",
   },
   petTitleContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginVertical: 5,
   },
   petImageContainer: {
     alignContent: "center",
     alignItems: "center",
   },
+  petTextContainer: {
+    flexDirection: "column",
+    flex: 1,
+    margin: 5,
+  },
   petProfileBanner: {
     flexDirection: "row",
+    marginVertical: 20,
+    marginHorizontal: 10,
+    marginTop: 20, // new
+    marginBottom: 20, // new
   },
   petProfileContainer: {
     flexDirection: "column",
@@ -278,8 +291,24 @@ const styles = StyleSheet.create({
   petName: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "black",
     margin: 5,
+  },
+  petButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  petButton: {
+    flexDirection: "row",
+    borderWidth: 2,
+    fontSize: 45,
+    borderRadius: 10,
+    margin: 15,
+  },
+  petContainer: {
+    textAlign: "center",
+    flexWrap: "wrap",
+    margin: 15,
   },
 });
 
