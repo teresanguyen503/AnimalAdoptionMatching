@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
+import { useNavigation } from "@react-navigation/native";
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton} from '../components/forms'; 
@@ -18,6 +19,8 @@ const validationSchema = Yup.object().shape({
 }); 
 
 function CreateAccountScreen(props) {
+    const navigation = useNavigation();
+
     const [passwordVisible, setPasswordVisible] = useState(false); 
 
     const togglePasswordVisibility = () => {
@@ -54,7 +57,7 @@ function CreateAccountScreen(props) {
             >
                 {({ handleChange, values, errors, touched }) => (
                     <>
-                        <Text style={styles.text}>Join the Pack:</Text>
+                        <Text Text style={styles.text}>Join the Pack:</Text>
                         <Text style={styles.text}>Choose Your Role, Rescue a Soul!</Text>
                         <Picker selectedValue={values.accountType} onValueChange={handleChange('accountType')}>
                             <Picker.Item label="Admin" value="admin" />

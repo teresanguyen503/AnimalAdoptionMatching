@@ -12,8 +12,10 @@ import catData from '../breed-data/cat-breed.json';
 import otherData from '../breed-data/other-breed.json';
 import DateModal from '../components/DateModal';
 import axios from 'axios'
+import { useNavigation } from "@react-navigation/native";
 
 export default function AddPet() {
+    const navigation = useNavigation();
     const [name, setName] = useState('');
     const [isdate, setDate] = useState('');
     const [desc, setDesc] = useState('');
@@ -137,7 +139,7 @@ export default function AddPet() {
        //  <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" />
+                    <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
                     <Text style={styles.heading}>Add Pet</Text>
                 </View>
 
