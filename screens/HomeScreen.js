@@ -6,10 +6,13 @@ import {
   TouchableOpacity,
   View,
   Image,
+  ScrollView
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
+
+import colors from '../config/colors'; 
 
 const { width } = Dimensions.get("window");
 
@@ -49,7 +52,8 @@ function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.newsContainer}>
+<View style={styles.newsContainer}>
+        <View >
           <View style={styles.newsTitleContainer}>
             <Text style={styles.titleText}>Recent News</Text>
             <View style={styles.newsButtonContainer}>
@@ -64,15 +68,18 @@ function HomeScreen() {
               </TouchableOpacity>
             </View>
           </View>
+  </View>
+
           <View style={styles.articleContainer}>
             <View style={styles.imageContainer}>
               <Image
                 source={require("../assets/thank-you-adoption.jpg")}
-                style={styles.imageContainer}
+                style={{width: 120, height: 120, resizeMode: "contain"}}
               />
             </View>
             <View style={styles.articleTextContainer}>
               <Text style={styles.articleTitle}>Sample Article</Text>
+              <ScrollView contentContainerStyle={{flexGrow: 1}}>
               <Text style={styles.articleText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -82,9 +89,12 @@ function HomeScreen() {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Text>
+              </ScrollView>
             </View>
           </View>
         </View>
+
+
         <View style={styles.petContainer}>
           <View style={styles.petTitleContainer}>
             <Text style={styles.petTitleText}>Available Pets</Text>
@@ -100,12 +110,15 @@ function HomeScreen() {
               </TouchableOpacity>
             </View>
           </View>
+        </View>
+
+
           <View style={styles.petProfileBanner}>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
                 <Image
                   source={require("../assets/pauline.jpg")}
-                  style={styles.imageContainer}
+                  style={styles.images}
                 />
               </View>
               <View style={styles.petTextContainer}>
@@ -120,7 +133,7 @@ function HomeScreen() {
               <View style={styles.petImageContainer}>
                 <Image
                   source={require("../assets/jeanie.jpg")}
-                  style={styles.imageContainer}
+                  style={styles.images}
                 />
               </View>
               <View style={styles.petTextContainer}>
@@ -132,7 +145,8 @@ function HomeScreen() {
               </View>
             </View>
           </View>
-        </View>
+
+
       </View>
     </SafeScreen>
   );
@@ -193,12 +207,14 @@ const styles = StyleSheet.create({
   articleTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    margin: 5,
+    margin: 10,
+    // flex: 1,
+    // flexWrap: 'wrap'
   },
   articleText: {
-    margin: 5,
-    fontSize: 14,
-    textAlign: "left",
+    // margin: 5,
+    fontSize: 16,
+    // textAlign: "left", 
   },
   articleButton: {
     flexDirection: "row",
@@ -209,13 +225,18 @@ const styles = StyleSheet.create({
   },
   articleButtonText: {},
   imageContainer: {
-    margin: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    resizeMode: "cover",
-    width: 250,
-    height: 300,
+    // margin: 5,
+    // justifyContent: "center",
+    // alignItems: "center",
+    // resizeMode: "cover",
+    // width: 150,
+    // height: 150,
+    width: '30%'
   },
+  images: {
+    width: 100, 
+    height: 100, 
+  }, 
   newsTitleContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -227,10 +248,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   newsContainer: {
-    flex: 1,
     textAlign: "center",
     flexDirection: "column",
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
     marginVertical: 10,
     marginBottom: 20, // new
     marginHorizontal: 10,
@@ -238,19 +258,25 @@ const styles = StyleSheet.create({
     overflow: "scroll", // new
   },
   articleTextContainer: {
-    flexDirection: "column",
-    flex: 1,
-    margin: 5,
+    // flexDirection: "column",
+    // margin: 5,
+    width: '65%',
+    maxHeight: 120
   },
   articleContainer: {
-    flexDirection: "row",
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "lightgray",
-    borderRadius: 10,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.2,
-    margin: 5,
+    // flexDirection: "row",
+    // borderWidth: 1,
+    // borderColor: "lightgray",
+    // borderRadius: 10,
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowOpacity: 0.2,
+    // margin: 5,
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'flex-start', 
+    width: '100%', 
+    paddingHorizontal: 10, 
+    marginTop: 20
   },
   petTitleText: {
     fontSize: 25,
@@ -264,35 +290,44 @@ const styles = StyleSheet.create({
   },
   petButtonText: {},
   petImageContainer: {
-    alignContent: "center",
+    // alignContent: "center",
     alignItems: "center",
   },
   petTextContainer: {
-    flexDirection: "column",
-    flex: 1,
-    margin: 5,
+    // flexDirection: "column",
+    // flex: 1,
+    // margin: 5,
+    alignItems: 'center'
   },
   petProfileBanner: {
     flexDirection: "row",
-    marginVertical: 20,
-    marginHorizontal: 10,
+    justifyContent: "space-between",
+    // marginVertical: 20,
+    // marginHorizontal: 10,
     marginTop: 20, // new
-    marginBottom: 20, // new
+    // marginBottom: 20, // new
+    paddingHorizontal: 10
   },
   petProfileContainer: {
-    flexDirection: "column",
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "lightgray",
-    borderRadius: 10,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.2,
-    margin: 5,
+    // flexDirection: "column",
+    // flex: 1,
+    // borderWidth: 1,
+    // borderColor: "lightgray",
+    // borderRadius: 10,
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowOpacity: 0.2,
+    // margin: 5,
+    width: '40%', 
+    borderWidth: 1, 
+    borderColor: colors.black, 
+    borderRadius: 5, 
+    padding: 10, 
+    marginBottom: 20
   },
   petName: {
     fontSize: 18,
     fontWeight: "bold",
-    margin: 5,
+    margin: 10,
   },
   petButtonContainer: {
     flexDirection: "row",
@@ -300,11 +335,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   petButton: {
-    flexDirection: "row",
-    borderWidth: 2,
-    fontSize: 45,
-    borderRadius: 10,
-    margin: 15,
+    // flexDirection: "row",
+    // borderWidth: 2,
+    fontSize: 16,
+    // borderRadius: 10,
+    // margin: 15,
+    marginTop: 5
   },
   petContainer: {
     textAlign: "center",
