@@ -357,6 +357,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   petButtonText: {},
+  petButtonText: {},
   petImageContainer: {
     alignItems: "center",
   },
