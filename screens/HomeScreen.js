@@ -262,6 +262,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
   },
+  petButtonText: {},
   petImageContainer: {
     alignContent: "center",
     alignItems: "center",
