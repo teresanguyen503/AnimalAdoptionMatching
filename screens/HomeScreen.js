@@ -7,11 +7,13 @@ import {
   View,
   Image,
   ScrollView,
+  ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
 
+import colors from "../config/colors";
 import colors from "../config/colors";
 
 const { width } = Dimensions.get("window");
@@ -45,50 +47,52 @@ function HomeScreen() {
           >
             <Text>Sign In</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.accountButton}
-          onPress={() => navigation.navigate("AddPet")}
+          <TouchableOpacity
+            style={styles.accountButton}
+            onPress={() => navigation.navigate("AddPet")}
           >
             <Text>Add Pet</Text>
           </TouchableOpacity>
         </View>
 
-<View style={styles.newsContainer}>
-        <View >
-          <View style={styles.newsTitleContainer}>
-            <Text style={styles.titleText}>Recent News</Text>
-            <View style={styles.newsButtonContainer}>
-              <TouchableOpacity style={styles.articleButton}>
-                <Text style={styles.articleButtonText}>View All News</Text>
-                <Icon
-                  style={styles.icon}
-                  name="keyboard-arrow-right"
-                  size={20}
-                  color="black"
-                />
-              </TouchableOpacity>
+        <View style={styles.newsContainer}>
+          <View>
+            <View style={styles.newsTitleContainer}>
+              <Text style={styles.titleText}>Recent News</Text>
+              <View style={styles.newsButtonContainer}>
+                <TouchableOpacity style={styles.viewAllButton}>
+                  <Text style={styles.articleButtonText}>View All News</Text>
+                  <Icon
+                    style={styles.icon}
+                    name="keyboard-arrow-right"
+                    size={20}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-  </View>
 
           <View style={styles.articleContainer}>
             <View style={styles.imageContainer}>
               <Image
                 source={require("../assets/thank-you-adoption.jpg")}
-                style={{width: 120, height: 120, resizeMode: "contain"}}
+                style={{ width: 120, height: 120, resizeMode: "contain" }}
               />
             </View>
             <View style={styles.articleTextContainer}>
               <Text style={styles.articleTitle}>Sample Article</Text>
-              <ScrollView contentContainerStyle={{flexGrow: 1}}>
-              <Text style={styles.articleText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </Text>
+              <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <Text style={styles.articleText}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </Text>
               </ScrollView>
             </View>
           </View>
@@ -145,40 +149,38 @@ function HomeScreen() {
             </View>
           </View>
 
-          <View style={styles.petProfileBanner}>
-            <View style={styles.petProfileContainer}>
-              <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/pauline.jpg")}
-                  style={styles.images}
-                />
-              </View>
-              <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Doggy</Text>
-                <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-              </View>
+        <View style={styles.petProfileBanner}>
+          <View style={styles.petProfileContainer}>
+            <View style={styles.petImageContainer}>
+              <Image
+                source={require("../assets/pauline.jpg")}
+                style={styles.images}
+              />
             </View>
-            <View style={styles.petProfileContainer}>
-              <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/jeanie.jpg")}
-                  style={styles.images}
-                />
-              </View>
-              <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Kitty</Text>
-                <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-              </View>
+            <View style={styles.petTextContainer}>
+              <Text style={styles.petName}>Doggy</Text>
+              <Text style={styles.petDescription}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </Text>
             </View>
           </View>
-
-
+          <View style={styles.petProfileContainer}>
+            <View style={styles.petImageContainer}>
+              <Image
+                source={require("../assets/jeanie.jpg")}
+                style={styles.images}
+              />
+            </View>
+            <View style={styles.petTextContainer}>
+              <Text style={styles.petName}>Kitty</Text>
+              <Text style={styles.petDescription}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
     </SafeScreen>
   );
@@ -213,6 +215,8 @@ const styles = StyleSheet.create({
   },
 
   // Account Section
+
+  // Account Section
   accountButtonContainer: {
     flexDirection: "row",
     alignItem: "center",
@@ -244,9 +248,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
   },
+
+  // News Section
+  newsContainer: {
+    textAlign: "center",
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    marginVertical: 10,
+    marginBottom: 20,
+    marginHorizontal: 10,
+    maxHeight: 400,
+    overflow: "scroll",
+    borderWidth: 1,
+    padding: 5,
+  },
   newsTitleContainer: {
     padding: 0,
     margin: 0,
+    flexDirection: "row",
+    alignItems: "center",
     flexDirection: "row",
     alignItems: "center",
   },
@@ -260,7 +280,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+  newsButtonContainer: {
+    paddingLeft: 50,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
   },
+  viewAllButton: {
   viewAllButton: {
     flexDirection: "row",
     borderWidth: 2,
@@ -276,7 +302,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     marginTop: 20,
   },
+  articleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    width: "100%",
+    paddingHorizontal: 5,
+    marginTop: 20,
+  },
   imageContainer: {
+    width: "30%",
     width: "30%",
   },
   images: {
@@ -295,37 +330,15 @@ const styles = StyleSheet.create({
   articleText: {
     fontSize: 14,
   },
-  articleButtonText: {
-    alignSelf: "center",
-    paddingLeft: 5,
-  },
+  articleButtonText: {},
 
-  // Adoption Application Status Section
-  adoptionApplicationStatusContainer: {
+  // Pet Section
+  petContainer: {
     textAlign: "center",
-    flexDirection: "wrap",
-    marginVertical: 10,
-    marginBottom: 20,
-    marginHorizontal: 10,
-    maxHeight: 400,
-    overflow: "scroll",
-    borderWidth: 1,
-    padding: 5,
-  },
-  adoptionStatusHeader: {
-    flexDirection: "row",
     flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "start",
-    padding: 5,
+    margin: 15,
   },
-  adoptionStatusTitle: {
-    fontSize: 25,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  statusContainer: {
-    paddingTop: 10,
+  petTitleContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "start",
@@ -373,10 +386,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   petTextContainer: {
-    // flexDirection: "column",
-    // flex: 1,
-    // margin: 5,
-    alignItems: 'center'
+    alignItems: "center",
   },
   petProfileBanner: {
     flexDirection: "row",
@@ -396,24 +406,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     margin: 10,
-  },
-  petButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  petButton: {
-    // flexDirection: "row",
-    // borderWidth: 2,
-    fontSize: 16,
-    // borderRadius: 10,
-    // margin: 15,
-    marginTop: 5
-  },
-  petContainer: {
-    textAlign: "center",
-    flexWrap: "wrap",
-    margin: 15,
   },
 });
 
