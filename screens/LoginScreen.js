@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 
@@ -14,38 +14,45 @@ const validationSchema = Yup.object().shape({
 function LoginScreen(props) {
     return (
         <SafeScreen>
-            <Formik 
-                initialValues={{ email: '', password: '' }}
-                onSubmit={values => console.log(values)}
-                validationSchema={validationSchema}
-            >
-                { () => (
-                    <>
-                        <AppFormField
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="email"
-                            keyboardType="email-address"
-                            name="email"
-                            placeholder="Email"
-                            textContentType="emailAddress" 
-                        />
-                        <AppFormField 
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            icon="lock"
-                            name="password"
-                            placeholder="Password"
-                            secureTextEntry
-                            textContentType="password" 
-                        />
-                        <SubmitButton title="Login" />
-                    </>
-                )}
-            </Formik>
-            
+            <View style={styles.container}>
+                <Formik 
+                    initialValues={{ email: '', password: '' }}
+                    onSubmit={values => console.log(values)}
+                    validationSchema={validationSchema}
+                >
+                    { () => (
+                        <>
+                            <AppFormField
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                icon="email"
+                                keyboardType="email-address"
+                                name="email"
+                                placeholder="Email"
+                                textContentType="emailAddress" 
+                            />
+                            <AppFormField 
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                icon="lock"
+                                name="password"
+                                placeholder="Password"
+                                secureTextEntry
+                                textContentType="password" 
+                            />
+                            <SubmitButton title="Login" />
+                        </>
+                    )}
+                </Formik>
+            </View>
         </SafeScreen>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 10, // this is not working 
+    }
+})
 
 export default LoginScreen; 
