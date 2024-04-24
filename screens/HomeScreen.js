@@ -52,7 +52,8 @@ function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.newsContainer}>
+<View style={styles.newsContainer}>
+        <View >
           <View style={styles.newsTitleContainer}>
             <Text style={styles.titleText}>Recent News</Text>
             <View style={styles.newsButtonContainer}>
@@ -67,15 +68,18 @@ function HomeScreen() {
               </TouchableOpacity>
             </View>
           </View>
+  </View>
+
           <View style={styles.articleContainer}>
             <View style={styles.imageContainer}>
               <Image
                 source={require("../assets/thank-you-adoption.jpg")}
-                style={styles.imageContainer}
+                style={{width: 120, height: 120, resizeMode: "contain"}}
               />
             </View>
             <View style={styles.articleTextContainer}>
               <Text style={styles.articleTitle}>Sample Article</Text>
+              <ScrollView contentContainerStyle={{flexGrow: 1}}>
               <Text style={styles.articleText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -85,10 +89,13 @@ function HomeScreen() {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Text>
+              </ScrollView>
             </View>
           </View>
 
-          <View style={styles.adoptionApplicationStatusContainer}>
+  
+
+        <View style={styles.adoptionApplicationStatusContainer}>
             <View style={styles.adoptionStatusHeader}>
               <Text style={styles.adoptionStatusTitle}>
                 Adoption Application Status
@@ -170,7 +177,8 @@ function HomeScreen() {
               </View>
             </View>
           </View>
-        </View>
+
+
       </View>
     </SafeScreen>
   );
@@ -365,9 +373,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   petTextContainer: {
-    flexDirection: "column",
-    flex: 1,
-    margin: 5,
+    // flexDirection: "column",
+    // flex: 1,
+    // margin: 5,
+    alignItems: 'center'
   },
   petProfileBanner: {
     flexDirection: "row",
@@ -394,11 +403,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   petButton: {
-    flexDirection: "row",
-    borderWidth: 2,
-    fontSize: 45,
-    borderRadius: 10,
-    margin: 15,
+    // flexDirection: "row",
+    // borderWidth: 2,
+    fontSize: 16,
+    // borderRadius: 10,
+    // margin: 15,
+    marginTop: 5
   },
   petContainer: {
     textAlign: "center",
