@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
@@ -12,6 +12,8 @@ const validationSchema = Yup.object().shape({
 }); 
 
 function LoginScreen(props) {
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+
     return (
         <SafeScreen>
             <View style={styles.container}>
@@ -51,7 +53,7 @@ function LoginScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10, // this is not working 
+        padding: 10, 
     }
 })
 
