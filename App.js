@@ -21,30 +21,34 @@ const styles = StyleSheet.create({
   },
 });
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <LoginScreen />
-    // <NavigationContainer>
-    //   <Stack.Navigator initialRouteName="Home">
-    //   <Stack.Screen
-    //     name="Home"
-    //     component={HomeScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="CreateAccount"
-    //     component={CreateAccountScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="AddPet"
-    //     component={AddPet}
-    //     options={{ headerShown: false }}
-    //   />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreateAccount"
+        component={CreateAccountScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddPet"
+        component={AddPet}
+        options={{ headerShown: false }}
+      />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
