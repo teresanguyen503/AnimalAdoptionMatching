@@ -18,7 +18,6 @@ function LoginScreen(props) {
     const handleSubmit = async (values) => {
         try {
             const response = await login.loginApi(values); 
-            setIsLoggedIn(true); 
 
             if (!response.ok) {
                 if (response.status === 404) {
@@ -27,6 +26,7 @@ function LoginScreen(props) {
                     alert('Invalid email or password. Try again.');
                 }
             } else {
+                setIsLoggedIn(true); 
                 alert('Success');
             } 
         } catch (error) {
