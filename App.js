@@ -8,6 +8,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CreateAccountScreen from "./screens/CreateAccountScreen";
 import AddPet from "./screens/AddPet";
 import LoginScreen from "./screens/LoginScreen"; 
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,30 +23,31 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateAccount"
-        component={CreateAccountScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddPet"
-        component={AddPet}
-        options={{ headerShown: false }}
-      />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ForgotPasswordScreen />
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName="Home">
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={HomeScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="CreateAccount"
+    //     component={CreateAccountScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="Login"
+    //     component={LoginScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="AddPet"
+    //     component={AddPet}
+    //     options={{ headerShown: false }}
+    //   />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
 
