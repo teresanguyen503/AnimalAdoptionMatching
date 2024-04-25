@@ -25,7 +25,7 @@ function LoginScreen(props) {
                 if (response.status === 404) {
                     alert('You need to register for an account to login');
                 } else {
-                    alert('Invalid email or password. Try again.');
+                    alert('Invalid password. Try again.');
                 }
             } else {
                 setIsLoggedIn(true); 
