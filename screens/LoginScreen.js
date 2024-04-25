@@ -19,6 +19,16 @@ function LoginScreen(props) {
         try {
             const response = await login.loginApi(values); 
             setIsLoggedIn(true); 
+
+            if (!response.ok) {
+                if (response.status === 404) {
+                    alert('You need to register for an account to login');
+                } else {
+                    alert('Invalid email or password. Try again.');
+                }
+            } else {
+                alert('Success');
+            } 
         } catch (error) {
             alert('Invalid email or password'); 
             console.log('Login error: ', error); 
