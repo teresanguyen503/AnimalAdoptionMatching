@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
+import { useNavigation } from "@react-navigation/native";
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
@@ -13,6 +14,7 @@ const validationSchema = Yup.object().shape({
 }); 
 
 function LoginScreen(props) {
+    const navigation = useNavigation();
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
     const handleSubmit = async (values) => {
@@ -28,6 +30,7 @@ function LoginScreen(props) {
             } else {
                 setIsLoggedIn(true); 
                 alert('Success');
+                navigation.navigate("Home")
             } 
         } catch (error) {
             alert('Invalid email or password'); 
