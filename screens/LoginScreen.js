@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useNavigation } from "@react-navigation/native";
@@ -66,6 +66,11 @@ function LoginScreen(props) {
                                 secureTextEntry
                                 textContentType="password" 
                             />
+                            <TouchableHighlight 
+                                onPress={() => navigation.navigate("ForgotPassword")}
+                            >
+                                <Text>Forgot Password?</Text>
+                            </TouchableHighlight>
                             <SubmitButton title="Login" />
                         </>
                     )}
