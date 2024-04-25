@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
+import login from '../api/login'
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -14,12 +15,22 @@ const validationSchema = Yup.object().shape({
 function LoginScreen(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
+    const handleSubmit = async (values) => {
+        try {
+            const response = await login.loginApi(values); 
+            setIsLoggedIn(true); 
+        } catch (error) {
+            alert('Invalid email or password'); 
+            console.log('Login error: ', error); 
+        }
+    }
+
     return (
         <SafeScreen>
             <View style={styles.container}>
                 <Formik 
                     initialValues={{ email: '', password: '' }}
-                    onSubmit={values => console.log(values)}
+                    onSubmit={handleSubmit}
                     validationSchema={validationSchema}
                 >
                     { () => (
