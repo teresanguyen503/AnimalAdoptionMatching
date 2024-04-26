@@ -23,6 +23,7 @@ function NewsPage() {
     <SafeScreen>
       <ScrollView>
       <View style={styles.header}>
+        <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
         <Text style={styles.heading}>Recent News</Text>
         <TouchableOpacity>
           <Icon style={styles.icon} name="menu" size={40} color="black" />
