@@ -106,7 +106,9 @@ function HomeScreen() {
               <Text style={styles.adoptionStatusTitle}>
                 Adoption Application Status
               </Text>
-              <TouchableOpacity style={styles.viewAllButton}>
+              <TouchableOpacity style={styles.viewAllButton}
+              onPress={() => navigation.navigate("PetProfile")}
+              >
                 <Text style={styles.articleButtonText}>
                   View All Applications
                 </Text>

@@ -8,6 +8,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CreateAccountScreen from "./screens/CreateAccountScreen";
 import AddPet from "./screens/AddPet";
 import AddNews from "./screens/AddNews";
+import PetProfile from "./screens/PetProfile";
 
 const styles = StyleSheet.create({
   container: {
@@ -44,6 +45,11 @@ function App() {
           component={AddNews}
           options={{ headerShown: false }}
         />
+       <Stack.Screen
+        name="PetProfile"
+        component={PetProfile}
+        options={{ headerShown: false }}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );
