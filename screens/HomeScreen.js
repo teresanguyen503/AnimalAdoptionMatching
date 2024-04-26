@@ -37,7 +37,9 @@ function HomeScreen() {
           >
             <Text>Sign Up</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.accountButton}>
+          <TouchableOpacity style={styles.accountButton}
+          onPress={() => navigation.navigate("Login")}
+          >
             <Text>Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.accountButton}
