@@ -99,25 +99,27 @@ function HomeScreen() {
             <Text style={styles.adoptionStatusTitle}>
               Adoption Application Status
             </Text>
-                <TouchableOpacity style={styles.viewAllButton}>
-                  <Text style={styles.articleButtonText}>View All Applications</Text>
-                  <Icon
-                    style={styles.icon}
-                    name="keyboard-arrow-right"
-                    size={20}
-                    color="black"
-                  />
-                </TouchableOpacity>
-                </View>
+            <TouchableOpacity style={styles.viewAllButton}>
+              <Text style={styles.articleButtonText}>
+                View All Applications
+              </Text>
+              <Icon
+                style={styles.icon}
+                name="keyboard-arrow-right"
+                size={20}
+                color="black"
+              />
+            </TouchableOpacity>
+          </View>
           <View style={styles.statusContainer}>
             <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/alvan.jpg")}
-                  style={styles.images}
-                />
+              <Image
+                source={require("../assets/alvan.jpg")}
+                style={styles.images}
+              />
             </View>
             <View style={styles.petStatusTextContainer}>
-              <Text style={styles.adoptionStatusPetName}>Avan</Text>
+              <Text style={styles.adoptionStatusPetName}>Alvan</Text>
               <Text style={styles.adoptionStatusText}>Under Review</Text>
             </View>
           </View>
