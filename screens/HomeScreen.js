@@ -26,80 +26,66 @@ function HomeScreen() {
             title="Animal Adoption Matching"
             rightButton={<Icon name="menu" />}
         /> */}
-        <View style={styles.container}>
-          {/* <TouchableOpacity onPress={onPressHandler}> */}
-          <View style={styles.header}>
-            <Text style={styles.heading}>Animal Adoption Matching App</Text>
-            <TouchableOpacity>
-              <Icon style={styles.icon} name="menu" size={40} color="black" />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.accountButtonContainer}>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("CreateAccount")}
-            >
-              <Text>Sign Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.accountButton}>
-              <Text>Sign In</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("AddPet")}
-            >
-              <Text>Add Pet</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("AddNews")}
-            >
-              <Text>Add News</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.newsContainer}>
-            <View>
-              <View style={styles.newsTitleContainer}>
-                <Text style={styles.titleText}>Recent News</Text>
-                <View style={styles.newsButtonContainer}>
-                  <TouchableOpacity
-                    style={styles.viewAllButton}
-                    onPress={() => navigation.navigate("NewsPage")}
-                  >
-                    <Text style={styles.articleButtonText}>View All News</Text>
-                    <Icon
-                      style={styles.icon}
-                      name="keyboard-arrow-right"
-                      size={20}
-                      color="black"
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
+      <View style={styles.container}>
+        {/* <TouchableOpacity onPress={onPressHandler}> */}
+        <View style={styles.header}>
+          <Text style={styles.heading}>Animal Adoption Matching App</Text>
+          <TouchableOpacity>
+            <Icon style={styles.icon} name="menu" size={40} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.accountButtonContainer}>
+          <TouchableOpacity
+            style={styles.accountButton}
+            onPress={() => navigation.navigate("CreateAccount")}
+          >
+            <Text>Sign Up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.accountButton}
+          onPress={() => navigation.navigate("Login")}
+          >
+            <Text>Sign In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.accountButton}
+          onPress={() => navigation.navigate("AddPet")}
+          >
+            <Text>Add Pet</Text>
+          </TouchableOpacity>
+        </View>
 
-            <View style={styles.articleContainer}>
-              <View style={styles.imageContainer}>
-                <Image
-                  source={require("../assets/thank-you-adoption.jpg")}
-                  style={{ width: 120, height: 120, resizeMode: "contain" }}
+        <View style={styles.newsContainer}>
+          <View style={styles.newsTitleContainer}>
+            <Text style={styles.titleText}>Recent News</Text>
+            <View style={styles.newsButtonContainer}>
+              <TouchableOpacity style={styles.articleButton}>
+                <Text style={styles.articleButtonText}>View All News</Text>
+                <Icon
+                  style={styles.icon}
+                  name="keyboard-arrow-right"
+                  size={20}
+                  color="black"
                 />
-              </View>
-              <View style={styles.articleTextContainer}>
-                <Text style={styles.articleTitle}>Sample Article</Text>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                  <Text style={styles.articleText}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Text>
-                </ScrollView>
-              </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.articleContainer}>
+            <View style={styles.imageContainer}>
+              <Image
+                source={require("../assets/thank-you-adoption.jpg")}
+                style={styles.imageContainer}
+              />
+            </View>
+            <View style={styles.articleTextContainer}>
+              <Text style={styles.articleTitle}>Sample Article</Text>
+              <Text style={styles.articleText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Text>
             </View>
           </View>
 
