@@ -8,6 +8,11 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function PetProfile() {
     const navigation = useNavigation();
+    const [searchText, setSearchText] = useState();
+
+    // Search function - empty for now
+    function handleSearch(){
+    }
 
 return(
     <View>
@@ -16,6 +21,21 @@ return(
             <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")} />
             <Text style={styles.heading}>Pet Match</Text>
         </View>
+
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+            <TextInput
+            style={{ flex: 1, padding: 5, marginRight: 10, marginLeft: 10, marginTop: 12 }}
+            placeholder="Find your perfect match..."
+            value={searchText}
+            onChangeText={setSearchText}
+            />
+            <AntDesign name="search1" size={20} color="black" />
+            <TouchableOpacity onPress={handleSearch}>
+            </TouchableOpacity>
+        </View>
+
+
 
 
 
@@ -44,6 +64,18 @@ const styles = StyleSheet.create({
     },
     icon:{
         paddingLeft: 0.5,
+    },
+    // Search Bar Styling
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 0.3,
+        borderRadius: 5,
+        padding: -1,
+        paddingHorizontal: 10,
+        marginRight: 20,
+        marginLeft: 20,
+        marginTop: 20,
     },
 
 
