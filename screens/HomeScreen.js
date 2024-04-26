@@ -96,20 +96,43 @@ function HomeScreen() {
               </ScrollView>
             </View>
           </View>
-
-  
+        </View>
 
         <View style={styles.adoptionApplicationStatusContainer}>
-            <View style={styles.adoptionStatusHeader}>
-              <Text style={styles.adoptionStatusTitle}>
-                Adoption Application Status
-              </Text>
-              <TouchableOpacity style={styles.viewAllButton}
-              onPress={() => navigation.navigate("PetProfile")}
-              >
-                <Text style={styles.articleButtonText}>
-                  View All Applications
-                </Text>
+          <View style={styles.adoptionStatusHeader}>
+            <Text style={styles.adoptionStatusTitle}>
+              Adoption Application Status
+            </Text>
+                <TouchableOpacity style={styles.viewAllButton}>
+                  <Text style={styles.articleButtonText}>View All Applications</Text>
+                  <Icon
+                    style={styles.icon}
+                    name="keyboard-arrow-right"
+                    size={20}
+                    color="black"
+                  />
+                </TouchableOpacity>
+                </View>
+          <View style={styles.statusContainer}>
+            <View style={styles.petImageContainer}>
+                <Image
+                  source={require("../assets/alvan.jpg")}
+                  style={styles.images}
+                />
+            </View>
+            <View style={styles.petStatusTextContainer}>
+              <Text style={styles.adoptionStatusPetName}>Avan</Text>
+              <Text style={styles.adoptionStatusText}>Under Review</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.petContainer}>
+          <View style={styles.petTitleContainer}>
+            <Text style={styles.petTitleText}>Available Pets</Text>
+            <View style={styles.petButtonContainer}>
+              <TouchableOpacity style={styles.viewAllButton}>
+                <Text style={styles.petButtonText}>View All Pets</Text>
                 <Icon
                   style={styles.icon}
                   name="keyboard-arrow-right"
@@ -118,36 +141,8 @@ function HomeScreen() {
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.statusContainer}>
-              <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/alvan.jpg")}
-                  style={styles.images}
-                />
-              </View>
-              <View style={styles.petStatusTextContainer}>
-                <Text style={styles.adoptionStatusPetName}>Alvan</Text>
-                <Text style={styles.adoptionStatusText}>Under Review</Text>
-              </View>
-            </View>
           </View>
-
-          <View style={styles.petContainer}>
-            <View style={styles.petTitleContainer}>
-              <Text style={styles.petTitleText}>Available Pets</Text>
-              <View style={styles.petButtonContainer}>
-                <TouchableOpacity style={styles.viewAllButton}>
-                  <Text style={styles.articleButtonText}>View All Pets</Text>
-                  <Icon
-                    style={styles.icon}
-                    name="keyboard-arrow-right"
-                    size={20}
-                    color="black"
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
+        </View>
 
         <View style={styles.petProfileBanner}>
           <View style={styles.petProfileContainer}>
@@ -332,13 +327,31 @@ const styles = StyleSheet.create({
   },
   articleButtonText: {},
 
-  // Pet Section
-  petContainer: {
+  // Adoption Application Status Section
+  adoptionApplicationStatusContainer: {
     textAlign: "center",
-    flexWrap: "wrap",
-    margin: 15,
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    marginVertical: 10,
+    marginBottom: 20,
+    marginHorizontal: 10,
+    maxHeight: 400,
+    overflow: "scroll",
+    borderWidth: 1,
+    padding: 5,
   },
-  petTitleContainer: {
+  adoptionStatusHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "start",
+  },
+  adoptionStatusTitle: {
+    fontSize: 25,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  statusContainer: {
+    paddingTop: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "start",
