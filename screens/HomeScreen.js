@@ -296,8 +296,7 @@ const styles = StyleSheet.create({
   // Adoption Application Status Section
   adoptionApplicationStatusContainer: {
     textAlign: "center",
-    flexDirection: "column",
-    flexWrap: "nowrap",
+    flexDirection: "wrap",
     marginVertical: 10,
     marginBottom: 20,
     marginHorizontal: 10,
@@ -308,8 +307,10 @@ const styles = StyleSheet.create({
   },
   adoptionStatusHeader: {
     flexDirection: "row",
+    flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "start",
+    padding: 5,
   },
   adoptionStatusTitle: {
     fontSize: 25,
