@@ -17,7 +17,7 @@ function ForgotPasswordScreen(props) {
             const response = resetPassword.resetPasswordApi(values); 
 
             if (!response.ok) {
-                alert('Failed to initiate password reset');
+                alert('Invalid email.');
             } else {
                 alert('Check your email to continue to reset your password.');
             } 
