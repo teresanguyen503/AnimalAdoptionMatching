@@ -38,19 +38,20 @@ export default function PetProfile() {
     if (!profile) return null;
     return (
         <View>
-            <View>
-                <View>
+            <View style={styles.profileContainer}>
+                <View style={styles.imageContainer}>
                     {/* Image and profile imformation */}
                     <Image source={{ uri: profile.image }} style={{ width: 300, height: 300 }} />
                 </View>
-                <Text>{profile.name}</Text>
+                <Text style={styles.profileName}>{profile.name}</Text>
                 {profile.isdate !== undefined && (
-                <Text>Date Available: {new Date(profile.isdate).toDateString()}</Text>
+                <Text style={styles.profileData}>Date Available: {new Date(profile.isdate).toDateString()}</Text>
             )}
-                <Text>Description: {profile.desc}</Text>
-                <Text>Disposition: {profile.disposition}</Text>
-                <Text>Specie: {profile.speciesName}</Text>
-                <Text>Breed: {profile.selectedItem.label}</Text>
+                <Text style={styles.profileData}>Description: {profile.desc}</Text>
+                <Text style={styles.profileData}>Disposition:{profile.disposition}</Text>
+                <Text style={styles.profileData}>Specie: {profile.speciesName}</Text>
+                <Text style={styles.profileData}>Breed: {profile.selectedItem.label}</Text>
+
             </View>
         </View>
         );
@@ -123,5 +124,35 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20,
     },
-
+    // profile display container
+    profileContainer:{
+        borderRadius: 12,
+        borderColor : 'grey',
+        borderWidth:  0.5,
+        width: 300,
+        paddingBottom: 15,
+        marginLeft: Platform.OS === 'ios' ? 65 : 50,
+        marginTop: Platform.OS === 'ios' ? 60 : 20,
+    },
+    imageContainer:{
+        elevation:2,
+        height:300,
+        width:298,
+        backgroundColor:'#efefef',
+        position:'relative',
+        overflow:'hidden',
+        borderRadius: 12,
+    },
+    profileName:{
+        marginLeft: 125,
+        marginTop: 10,
+        fontSize: 20,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+    },
+    profileData: {
+        marginLeft: 15,
+        marginTop: 8,
+        fontSize: 16,
+    },
 })
