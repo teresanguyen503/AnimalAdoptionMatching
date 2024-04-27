@@ -57,6 +57,16 @@ export default function PetProfile() {
         );
     };
 
+    // Function to handle "Next Profile" button press
+    const handleNextProfile = () => {
+        setCurrentIndex(currentIndex => (currentIndex + 1) % profiles.length);
+    };
+
+    // Function to handle "Previous Profile" button press
+    const handlePreviousProfile = () => {
+        setCurrentIndex(currentIndex => (currentIndex - 1) % profiles.length);
+    };
+
 return(
     <View>
         {/* Header and back icon */}
@@ -81,6 +91,21 @@ return(
         <View>
         {/* renders profile */}
         {renderCurrentProfile()}
+
+         {/* arrow button for previous profile */}
+         {currentIndex > 0 && (
+            <Icon style={styles.backIcon} name="keyboard-arrow-left" size={40} color="black" onPress={handlePreviousProfile}/>
+        )}
+
+        {/* arrow button for next profile */}
+        {currentIndex == 0 && (
+            <Icon style={styles.firstNextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
+        )}
+        {currentIndex > 0 && (
+            <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
+        )}
+
+
         </View>
 
 
@@ -154,5 +179,23 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginTop: 8,
         fontSize: 16,
+    },
+
+    // Styling for arrow buttons
+    nextIcon:{
+        marginTop: -40,
+        marginLeft: Platform.OS === 'ios' ? 380 : 350,
+
+    },
+    backIcon:{
+        // marginLeft: 350,
+        marginTop: -270,
+
+    },
+
+    firstNextIcon:{
+        marginLeft: Platform.OS === 'ios' ? 380 : 350,
+        marginTop: Platform.OS === 'ios' ? -270 : -270,
+
     },
 })
