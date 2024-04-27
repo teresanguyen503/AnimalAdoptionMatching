@@ -131,7 +131,7 @@ function HomeScreen() {
               <Text style={styles.petTitleText}>Available Pets</Text>
               <View style={styles.petButtonContainer}>
                 <TouchableOpacity style={styles.viewAllButton}>
-                  <Text style={styles.petButtonText}>View All Pets</Text>
+                  <Text style={styles.articleButtonText}>View All Pets</Text>
                   <Icon
                     style={styles.icon}
                     name="keyboard-arrow-right"
@@ -291,7 +291,10 @@ const styles = StyleSheet.create({
   articleText: {
     fontSize: 14,
   },
-  articleButtonText: {},
+  articleButtonText: {
+    alignSelf: "center",
+    paddingLeft: 5
+  },
 
   // Adoption Application Status Section
   adoptionApplicationStatusContainer: {
