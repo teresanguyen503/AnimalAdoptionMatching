@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from "@react-navigation/native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton} from '../components/forms'; 
@@ -51,7 +52,7 @@ function CreateAccountScreen(props) {
 
     return (
         <SafeScreen>
-            <View style={styles.container}>
+            <KeyboardAwareScrollView style={styles.container}>
             <Formik
                 initialValues={{accountType: '', email: '', password: '', securityQuestion: '', securityAnswer: ''}}
                 onSubmit={formSubmit}
@@ -115,7 +116,7 @@ function CreateAccountScreen(props) {
                     </>
                 )}
             </Formik>
-            </View>
+            </KeyboardAwareScrollView>
         </SafeScreen>
     );
 }
