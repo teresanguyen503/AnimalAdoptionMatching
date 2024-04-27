@@ -86,6 +86,7 @@ function CreateAccountScreen(props) {
                                     placeholder="Password"
                                     secureTextEntry={!passwordVisible}
                                     textContentType="password"
+                                    fontSize={18}
                                 />
                             
                                 <TouchableOpacity 
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     }, 
     password: {
         flex: 1, 
-        paddingRight: 5
+        paddingRight: 5, 
     }, 
 })
 
