@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useRoute } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
@@ -13,6 +14,7 @@ const validationSchema = Yup.object().shape({
 }); 
 
 function ResetPasswordScreen() {
+    const navigation = useNavigation();
     const route = useRoute(); 
     const { email } = route.params; 
 
