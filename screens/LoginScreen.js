@@ -73,7 +73,8 @@ function LoginScreen(props) {
                                         name="password"
                                         placeholder="Password"
                                         secureTextEntry={!passwordVisible}
-                                        textContentType="password" 
+                                        textContentType="password"
+                                        fontSize={18} 
                                     />
                                     <TouchableOpacity 
                                         style={styles.eyeOutline}
