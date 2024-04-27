@@ -26,13 +26,13 @@ function ForgotPasswordScreen(props) {
 
             if (!response.ok) {
                 if (response.status === 401) {
-                    alert('That was not the security question you chose when creating your account.');
+                    alert('Invalid answer.');
                 }
                 else if (response.status === 402) {
-                    alert('Your answer did not match to your original answer.'); 
+                    alert('Invalid answer.'); 
                 }                 
                 else if (response.status === 404) {
-                    alert('The email you entered is not in our system.'); 
+                    alert('Not register? Create an account. '); 
                 }
             } else {
                 alert('Great! Now lets reset your password.');
