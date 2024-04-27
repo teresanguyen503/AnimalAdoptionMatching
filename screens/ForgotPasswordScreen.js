@@ -19,6 +19,8 @@ function ForgotPasswordScreen(props) {
     const navigation = useNavigation();
 
     const handleSubmit = async (values) => {
+        const email = values.email; 
+
         try {
             const response = await resetPassword.resetPasswordApi(values); 
 
@@ -34,11 +36,11 @@ function ForgotPasswordScreen(props) {
                 }
             } else {
                 alert('Great! Now lets reset your password.');
-                navigation.navigate("ResetPassword"); 
+                navigation.navigate("ResetPassword", { email }); 
             } 
         } catch (error) {
-            alert('Something went wrong.'); 
             console.log('Reset password error: ', error); 
+            return alert('Something went wrong.'); 
         }
     }
     return (

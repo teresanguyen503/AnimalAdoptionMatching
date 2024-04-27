@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
+import { useRoute } from '@react-navigation/native';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
@@ -11,7 +12,8 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password")
 }); 
 
-function ResetPasswordScreen({ navigation, route }) {
+function ResetPasswordScreen() {
+    const route = useRoute(); 
     const { email } = route.params; 
 
     const handleSubmit = async (values) => {
@@ -26,7 +28,7 @@ function ResetPasswordScreen({ navigation, route }) {
             } 
         } catch (error) {
             alert('Something went wrong.'); 
-            console.log('Reset password error: ', error); 
+            console.log('Reset password error1: ', error); 
         }
     }
 
