@@ -49,6 +49,11 @@ function App() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="AddPet"
         component={AddPet}
         options={{ headerShown: false }}

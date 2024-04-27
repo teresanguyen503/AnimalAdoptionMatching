@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from "@react-navigation/native";
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton } from '../components/forms'; 
@@ -15,6 +16,8 @@ const validationSchema = Yup.object().shape({
 }); 
 
 function ForgotPasswordScreen(props) {
+    const navigation = useNavigation();
+
     const handleSubmit = async (values) => {
         try {
             const response = await resetPassword.resetPasswordApi(values); 
@@ -31,6 +34,7 @@ function ForgotPasswordScreen(props) {
                 }
             } else {
                 alert('Great! Now lets reset your password.');
+                navigation.navigate("Reset"); 
             } 
         } catch (error) {
             alert('Something went wrong.'); 
