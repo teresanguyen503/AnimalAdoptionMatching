@@ -10,6 +10,7 @@ export default function PetProfile() {
     const navigation = useNavigation();
     const [searchText, setSearchText] = useState();
     const [profiles, setProfiles] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     // Search function - empty for now
     function handleSearch(){
@@ -31,6 +32,30 @@ export default function PetProfile() {
         fetchData();
     }, []);
 
+    // Function to render the current profile
+    const renderCurrentProfile = () => {
+    const profile = profiles[currentIndex];
+    if (!profile) return null;
+    return (
+        <View>
+            <View>
+                <View>
+                    {/* Image and profile imformation */}
+                    <Image source={{ uri: profile.image }} style={{ width: 300, height: 300 }} />
+                </View>
+                <Text>{profile.name}</Text>
+                {profile.isdate !== undefined && (
+                <Text>Date Available: {new Date(profile.isdate).toDateString()}</Text>
+            )}
+                <Text>Description: {profile.desc}</Text>
+                <Text>Disposition: {profile.disposition}</Text>
+                <Text>Specie: {profile.speciesName}</Text>
+                <Text>Breed: {profile.selectedItem.label}</Text>
+            </View>
+        </View>
+        );
+    };
+
 return(
     <View>
         {/* Header and back icon */}
@@ -50,6 +75,11 @@ return(
             <AntDesign name="search1" size={20} color="black" />
             <TouchableOpacity onPress={handleSearch}>
             </TouchableOpacity>
+        </View>
+
+        <View>
+        {/* renders profile */}
+        {renderCurrentProfile()}
         </View>
 
 
