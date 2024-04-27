@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   petProfileContainer: {
-    width: "40%",
+    width: "49%",
     borderWidth: 1,
     borderColor: colors.black,
     borderRadius: 5,
