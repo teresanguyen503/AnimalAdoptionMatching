@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Platform} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from '@expo/vector-icons';
 import axios from 'axios'
@@ -67,7 +67,14 @@ export default function PetProfile() {
         setCurrentIndex(currentIndex => (currentIndex - 1) % profiles.length);
     };
 
+    // Function to handle Pass Button - goes to next profile when pass is clicked
+    const handlePassButton = () => {
+        setCurrentIndex(currentIndex => (currentIndex + 1) % profiles.length);
+
+    };
+
 return(
+    <ScrollView>
     <View>
         {/* Header and back icon */}
         <View style={styles.header}>
@@ -104,6 +111,15 @@ return(
         {currentIndex > 0 && (
             <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
         )}
+        </View>
+
+        {/* Pass Button */}
+        <View style={styles.buttonContainer}>
+            <View style={styles.buttonItem}>
+                <TouchableOpacity onPress={handlePassButton}style={styles.button}>
+                <Text>Pass</Text>
+                </TouchableOpacity>
+            </View>
 
 
         </View>
@@ -114,6 +130,7 @@ return(
 
 
     </View>
+    </ScrollView>
 )
 
 }
@@ -192,10 +209,36 @@ const styles = StyleSheet.create({
         marginTop: -270,
 
     },
-
     firstNextIcon:{
         marginLeft: Platform.OS === 'ios' ? 380 : 350,
         marginTop: Platform.OS === 'ios' ? -270 : -270,
 
     },
+    //
+    buttonItem: { // Adjusting the item width to achieve a side-by-side layout
+        width: '40%',
+        paddingHorizontal: 10,
+        paddingLeft: 15,
+        marginLeft: 27,
+        // marginTop: 250,
+        borderRadius: 5,
+        marginTop: Platform.OS === 'ios' ? 320 : 250,
+
+    },
+    buttonContainer: { // Container that controls the items
+        flexDirection: 'row', // Align children from left to right
+        flexWrap: 'wrap',
+        alignItems: 'flex-start', // Align children to the start of the container's cross axis
+        marginBottom: 12,
+    },
+    button: {
+        backgroundColor: 'transparent',
+        padding: 10,
+        borderRadius: 20,
+        borderWidth: 0.5,
+        borderColor: 'gray',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
 })
