@@ -12,6 +12,7 @@ import PetProfile from "./screens/PetProfile";
 import NewsPage from "./screens/NewsPage";
 import LoginScreen from "./screens/LoginScreen"; 
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 
 const styles = StyleSheet.create({
   container: {
