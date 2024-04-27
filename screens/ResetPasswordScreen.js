@@ -18,9 +18,10 @@ function ResetPasswordScreen() {
 
     const handleSubmit = async (values) => {
         try {
-            const response = await newPassword.newPasswordApi(values, email); 
+            const response = await newPassword.newPasswordApi(values.password, email); 
 
             if (!response.ok) {
+                console.log(response); 
                 alert('Something went wrong. Try again.'); 
             } else {
                 alert('Great! Now log back in using your new password.');
