@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
@@ -17,6 +18,11 @@ const validationSchema = Yup.object().shape({
 function LoginScreen(props) {
     const navigation = useNavigation();
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [passwordVisible, setPasswordVisible] = useState(false); 
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible); 
+    }; 
 
     const handleSubmit = async (values) => {
         try {
@@ -58,15 +64,29 @@ function LoginScreen(props) {
                                 placeholder="Email"
                                 textContentType="emailAddress" 
                             />
-                            <AppFormField 
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                icon="lock"
-                                name="password"
-                                placeholder="Password"
-                                secureTextEntry
-                                textContentType="password" 
-                            />
+                            <View style={styles.passwordContainer}>
+                                <View style={styles.password}>
+                                    <AppFormField style={{ flex: 1 }}
+                                        autoCapitalize="none"
+                                        autoCorrect={false}
+                                        icon="lock"
+                                        name="password"
+                                        placeholder="Password"
+                                        secureTextEntry={!passwordVisible}
+                                        textContentType="password" 
+                                    />
+                                    <TouchableOpacity 
+                                        style={styles.eyeOutline}
+                                        onPress={togglePasswordVisibility}
+                                        >
+                                        <MaterialCommunityIcons
+                                        name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
+                                        size={20}
+                                        color={colors.black}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.navigate("ForgotPassword")}
                             >
@@ -84,6 +104,19 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
     container: {
         padding: 10, 
+    }, 
+    eyeOutline: {
+        position: 'absolute', 
+        top: 25, 
+        right: 25
+    }, 
+    passwordContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center'
+    }, 
+    password: {
+        flex: 1, 
+        paddingRight: 5
     }, 
     text: {
         color: colors.mediumblue

@@ -77,7 +77,7 @@ function CreateAccountScreen(props) {
                         />
                         <View style={styles.passwordContainer}>
                             <View style={styles.password}>
-                                <AppFormField 
+                                <AppFormField style={{ flex: 1 }}
                                     autoCapitalize="none"
                                     autoCorrect={false}
                                     icon="lock"
@@ -86,14 +86,18 @@ function CreateAccountScreen(props) {
                                     secureTextEntry={!passwordVisible}
                                     textContentType="password"
                                 />
+                            
+                                <TouchableOpacity 
+                                style={styles.eyeOutline}
+                                onPress={togglePasswordVisibility}
+                                >
+                                    <MaterialCommunityIcons
+                                    name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
+                                    size={20}
+                                    color={colors.black}
+                                    />
+                                </TouchableOpacity>
                             </View>
-                            <TouchableOpacity onPress={togglePasswordVisibility}>
-                                <MaterialCommunityIcons
-                                name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
-                                size={20}
-                                color={colors.black}
-                                />
-                            </TouchableOpacity>
                         </View>
                         <Picker itemStyle={{ fontSize: 16 }} selectedValue={values.securityQuestion} onValueChange={handleChange('securityQuestion')}>
                             <Picker.Item label="Select a security question." value="" />
@@ -108,7 +112,6 @@ function CreateAccountScreen(props) {
                         <AppFormField 
                                     autoCapitalize="none"
                                     autoCorrect={false}
-                                    // icon="lock"
                                     name="securityAnswer"
                                     placeholder="Answer to security question"
                         />
@@ -125,6 +128,11 @@ const styles = StyleSheet.create({
     container: {
         padding: 10
     },
+    eyeOutline: {
+        position: 'absolute', 
+        top: 25, 
+        right: 25
+    }, 
     passwordContainer: {
         flexDirection: 'row', 
         alignItems: 'center'

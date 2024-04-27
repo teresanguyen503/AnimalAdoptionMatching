@@ -1,13 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
 import newPassword from '../api/newPassword';
+import colors from '../config/colors';
 
 const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password")
@@ -15,6 +17,13 @@ const validationSchema = Yup.object().shape({
 
 function ResetPasswordScreen() {
     const navigation = useNavigation();
+
+    const [passwordVisible, setPasswordVisible] = useState(false); 
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible); 
+    }; 
+
     const route = useRoute(); 
     const { email } = route.params; 
 
@@ -46,15 +55,29 @@ function ResetPasswordScreen() {
                     { () => (
                         <>
                             <Text style={styles.text}>Create a new password.</Text>
-                            <AppFormField 
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                icon="lock"
-                                name="password"
-                                placeholder="Password"
-                                secureTextEntry
-                                textContentType="password" 
-                            />
+                                <View style={styles.passwordContainer}>
+                                    <View style={styles.password}>
+                                        <AppFormField style={{ flex: 1 }}
+                                            autoCapitalize="none"
+                                            autoCorrect={false}
+                                            icon="lock"
+                                            name="password"
+                                            placeholder="Password"
+                                            secureTextEntry
+                                            textContentType="password" 
+                                        />
+                                        <TouchableOpacity 
+                                                    style={styles.eyeOutline}
+                                                    onPress={togglePasswordVisibility}
+                                                    >
+                                                    <MaterialCommunityIcons
+                                                    name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
+                                                    size={20}
+                                                    color={colors.black}
+                                                    />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
                             <SubmitButton title="Reset Password" />
                         </>
                     )}
@@ -67,6 +90,19 @@ function ResetPasswordScreen() {
 const styles = StyleSheet.create({
     container: {
         padding: 10
+    }, 
+    eyeOutline: {
+        position: 'absolute', 
+        top: 25, 
+        right: 25
+    }, 
+    passwordContainer: {
+        flexDirection: 'row', 
+        alignItems: 'center'
+    }, 
+    password: {
+        flex: 1, 
+        paddingRight: 5
     }, 
     text: {
         fontSize: 20
