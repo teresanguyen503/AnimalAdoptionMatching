@@ -34,7 +34,7 @@ function ForgotPasswordScreen(props) {
                 }
             } else {
                 alert('Great! Now lets reset your password.');
-                navigation.navigate("Reset"); 
+                navigation.navigate("ResetPassword"); 
             } 
         } catch (error) {
             alert('Something went wrong.'); 
