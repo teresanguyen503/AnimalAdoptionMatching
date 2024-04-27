@@ -17,12 +17,20 @@ const validationSchema = Yup.object().shape({
 function ForgotPasswordScreen(props) {
     const handleSubmit = async (values) => {
         try {
-            const response = resetPassword.resetPasswordApi(values); 
+            const response = await resetPassword.resetPasswordApi(values); 
 
             if (!response.ok) {
-                alert('Invalid email.');
+                if (response.status === 401) {
+                    alert('That was not the security question you chose when creating your account.');
+                }
+                else if (response.status === 402) {
+                    alert('Your answer did not match to your original answer.'); 
+                }                 
+                else if (response.status === 404) {
+                    alert('The email you entered is not in our system.'); 
+                }
             } else {
-                alert('Check your email to continue to reset your password.');
+                alert('Great! Now lets reset your password.');
             } 
         } catch (error) {
             alert('Something went wrong.'); 
