@@ -11,6 +11,8 @@ export default function PetProfile() {
     const [searchText, setSearchText] = useState();
     const [profiles, setProfiles] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [likeButtonColor, setLikeButtonColor] = useState('transparent');
+    const [likeButtonTextColor, setLikeButtonTextColor] = useState('black');
 
     // Search function - empty for now
     function handleSearch(){
@@ -113,15 +115,21 @@ return(
         )}
         </View>
 
-        {/* Pass Button */}
+        {/* Pass and Like Button Container */}
         <View style={styles.buttonContainer}>
+            {/* Pass Button */}
             <View style={styles.buttonItem}>
                 <TouchableOpacity onPress={handlePassButton}style={styles.button}>
                 <Text>Pass</Text>
                 </TouchableOpacity>
             </View>
 
-
+             {/* Like Button */}
+            <View style={styles.buttonItem}>
+                <TouchableOpacity style={[styles.button, { backgroundColor: likeButtonColor }]}>
+                    <Text style={[{ color: likeButtonTextColor }]}>Like</Text>
+                </TouchableOpacity>
+            </View>
         </View>
 
 
