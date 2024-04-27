@@ -9,10 +9,27 @@ import { useNavigation } from "@react-navigation/native";
 export default function PetProfile() {
     const navigation = useNavigation();
     const [searchText, setSearchText] = useState();
+    const [profiles, setProfiles] = useState([]);
 
     // Search function - empty for now
     function handleSearch(){
     }
+
+    // Fetching profile data from server
+    const fetchData = async () => {
+        try {
+          // Make HTTP GET request to fetch profile data
+        const response = await axios.get('http://192.168.1.98:3000/getPet');
+         //console.log("this is new get response:",response.data);
+        setProfiles(response.data)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+      useEffect(() => {
+        fetchData();
+    }, []);
 
 return(
     <View>
@@ -34,7 +51,6 @@ return(
             <TouchableOpacity onPress={handleSearch}>
             </TouchableOpacity>
         </View>
-
 
 
 
@@ -77,6 +93,5 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20,
     },
-
 
 })

@@ -118,7 +118,8 @@ export default function AddPet() {
         // android emulator:
         // const {data} = await axios.post('http://10.0.2.2:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
         // expo go:
-        const {data} = await axios.post('http://192.168.1.12:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
+        // const {data} = await axios.post('http://192.168.1.12:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
+        const {data} = await axios.post('http://192.168.1.98:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
           console.log("Profile created =>", data)
           alert('New Profile successfully added')
           // Clear input fields
