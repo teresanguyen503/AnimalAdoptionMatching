@@ -2,13 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
+import { Picker } from '@react-native-picker/picker';
 
 import SafeScreen from '../components/SafeScreen';
-import { AppFormField, SubmitButton } from '../components/forms'; 
+import { AppFormField, ErrorMessage, SubmitButton } from '../components/forms'; 
 import resetPassword from '../api/resetPassword'
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string().required().email().label("Email"), 
+    email: Yup.string().required().email().label("Email"),
+    securityQuestion: Yup.string().notOneOf(['']).required("Please choose a security question"), 
+    securityAnswer: Yup.string().required("Please input an answer to a security question.") 
 }); 
 
 function ForgotPasswordScreen(props) {
@@ -31,11 +34,11 @@ function ForgotPasswordScreen(props) {
             <View style={styles.container}>
                 <Text style={styles.text}>Enter the email that you want to reset the password for:</Text>
                 <Formik 
-                    initialValues={{ email: '' }}
+                    initialValues={{ email: '', securityQuestion: '', securityAnswer: '' }}
                     onSubmit={handleSubmit}
                     validationSchema={validationSchema}
                 >
-                    { () => (
+                    { ({ handleChange, values, errors, touched }) => (
                         <>
                             <AppFormField
                                 autoCapitalize="none"
@@ -45,6 +48,22 @@ function ForgotPasswordScreen(props) {
                                 name="email"
                                 placeholder="Email"
                                 textContentType="emailAddress" 
+                            />
+                            <Picker itemStyle={{ fontSize: 16 }} selectedValue={values.securityQuestion} onValueChange={handleChange('securityQuestion')}>
+                                <Picker.Item label="Select your security question." value="" />
+                                <Picker.Item label="What is your mother's maiden name?" value="What is your mother's maiden name?" />
+                                <Picker.Item label="What city were you born in?" value="What city were you born in?" />
+                                <Picker.Item label="What middle school did you attend?" value="What middle school did you attend?" /> 
+                                <Picker.Item label="What is the name of our first pet?" value="What is the name of our first pet?" /> 
+                                <Picker.Item label="What was your first car?" value="What was your first car?" /> 
+                                <Picker.Item label="What was your first job?" value="What was your first job?" />  
+                            </Picker>
+                            <ErrorMessage error={errors.securityQuestion} visible={touched.securityQuestion} />
+                            <AppFormField 
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                name="securityAnswer"
+                                placeholder="Answer to security question"
                             />
                             <SubmitButton title="Reset Password" />
                         </>
