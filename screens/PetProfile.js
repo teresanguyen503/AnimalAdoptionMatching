@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from '@expo/vector-icons';
 import axios from 'axios'
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function PetProfile() {
@@ -11,8 +12,6 @@ export default function PetProfile() {
     const [searchText, setSearchText] = useState();
     const [profiles, setProfiles] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [likeButtonColor, setLikeButtonColor] = useState('transparent');
-    const [likeButtonTextColor, setLikeButtonTextColor] = useState('black');
 
     // Search function - empty for now
     function handleSearch(){
@@ -75,6 +74,46 @@ export default function PetProfile() {
 
     };
 
+    // Function to handle Like Button
+    const LikeButton = ({ profileId, initialColor, changedColor }) => {
+        const [liked, setLiked] = useState(false);
+
+        useEffect(() => {
+            // Check if profile is liked when component mounts
+            profileId = JSON.stringify(currentIndex);
+            AsyncStorage.getItem(profileId).then((result) => {
+                if (result === 'liked') {
+                    setLiked(true);
+                }
+            });
+        }, [profileId]);
+
+        const handlePress = () => {
+            setLiked(!liked);
+            // Save liked state to AsyncStorage
+            profileId = JSON.stringify(currentIndex);
+            AsyncStorage.setItem(profileId, liked ? 'unliked' : 'liked');
+        };
+
+        return (
+            <TouchableOpacity
+                style={[styles.likeButton, { backgroundColor: liked ? changedColor : initialColor }]}
+                onPress={handlePress}
+            >
+                <Text style={[ { color: liked ? 'white' : 'black' }]}>{liked ? 'Liked' : 'Like'}</Text>
+            </TouchableOpacity>
+        );
+    };
+
+    const ProfileScreen = ({ profileId }) => {
+        return (
+            <View style={styles.likeContainer}>
+                {/* Profile content */}
+                <LikeButton profileId={profileId} initialColor="transparent" changedColor="black" />
+            </View>
+        );
+    };
+
 return(
     <ScrollView>
     <View>
@@ -123,19 +162,12 @@ return(
                 <Text>Pass</Text>
                 </TouchableOpacity>
             </View>
+            {ProfileScreen(currentIndex)}
 
              {/* Like Button */}
             <View style={styles.buttonItem}>
-                <TouchableOpacity style={[styles.button, { backgroundColor: likeButtonColor }]}>
-                    <Text style={[{ color: likeButtonTextColor }]}>Like</Text>
-                </TouchableOpacity>
             </View>
         </View>
-
-
-
-
-
 
     </View>
     </ScrollView>
@@ -194,11 +226,11 @@ const styles = StyleSheet.create({
         borderRadius: 12,
     },
     profileName:{
-        marginLeft: 125,
         marginTop: 10,
         fontSize: 20,
         fontWeight: 'bold',
         textTransform: 'uppercase',
+        textAlign: 'center',
     },
     profileData: {
         marginLeft: 15,
@@ -210,7 +242,6 @@ const styles = StyleSheet.create({
     nextIcon:{
         marginTop: -40,
         marginLeft: Platform.OS === 'ios' ? 380 : 350,
-
     },
     backIcon:{
         // marginLeft: 350,
@@ -222,13 +253,12 @@ const styles = StyleSheet.create({
         marginTop: Platform.OS === 'ios' ? -270 : -270,
 
     },
-    //
-    buttonItem: { // Adjusting the item width to achieve a side-by-side layout
+    //Pass and Like Button Styling
+    buttonItem: {
         width: '40%',
         paddingHorizontal: 10,
         paddingLeft: 15,
         marginLeft: 27,
-        // marginTop: 250,
         borderRadius: 5,
         marginTop: Platform.OS === 'ios' ? 320 : 250,
 
@@ -248,5 +278,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    likeContainer:{
+        borderRadius: 20,
+        borderColor : 'grey',
+        borderWidth:  0.5,
+        width: '35%',
+        height: '7.5%',
+        marginLeft: Platform.OS === 'ios' ? 225 : 34,
+        marginTop: Platform.OS === 'ios' ? -40 : 251,
+        height: Platform.OS === 'ios' ? '6%' : '7.5%',
+    },
+    likeButton: {
+        padding: 12,
+        borderRadius: 20,
+        marginBottom: -8,
+        alignItems: 'center',
 
+    },
 })
