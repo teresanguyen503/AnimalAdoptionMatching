@@ -37,7 +37,7 @@ function CreateAccountScreen(props) {
                     alert('Email already exists. Please use a different email');
                 } else {
                     console.log(result.status); 
-                    alert('Could not register user. Try again');
+                    alert('Could not register user. Try again'); 
                 }
             } else {
                 alert('Success');
@@ -48,6 +48,7 @@ function CreateAccountScreen(props) {
         }
 
         resetForm(); 
+        navigation.navigate("Login");
     }; 
 
     return (
