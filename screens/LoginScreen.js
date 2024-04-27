@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
 import login from '../api/login'
+import colors from '../config/colors';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -66,11 +67,11 @@ function LoginScreen(props) {
                                 secureTextEntry
                                 textContentType="password" 
                             />
-                            <TouchableHighlight 
+                            <TouchableWithoutFeedback
                                 onPress={() => navigation.navigate("ForgotPassword")}
                             >
-                                <Text>Forgot Password?</Text>
-                            </TouchableHighlight>
+                                <Text style={styles.text}>Forgot Password?</Text>
+                            </TouchableWithoutFeedback>
                             <SubmitButton title="Login" />
                         </>
                     )}
@@ -83,6 +84,9 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
     container: {
         padding: 10, 
+    }, 
+    text: {
+        color: colors.mediumblue
     }
 })
 
