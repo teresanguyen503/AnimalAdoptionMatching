@@ -63,7 +63,7 @@ function ResetPasswordScreen() {
                                             icon="lock"
                                             name="password"
                                             placeholder="Password"
-                                            secureTextEntry
+                                            secureTextEntry={!passwordVisible}
                                             textContentType="password" 
                                         />
                                         <TouchableOpacity 
