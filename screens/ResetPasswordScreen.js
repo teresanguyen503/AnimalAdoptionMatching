@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
+import newPassword from '../api/newPassword';
 
 const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password")
@@ -13,7 +14,7 @@ const validationSchema = Yup.object().shape({
 function ResetPasswordScreen({ navigation, route }) {
     const { email } = route.params; 
 
-    const handleSubmit = (values) => {
+    const handleSubmit = async (values) => {
         try {
             const response = await newPassword.newPasswordApi(values, email); 
 
