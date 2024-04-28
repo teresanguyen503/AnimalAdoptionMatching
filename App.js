@@ -21,6 +21,7 @@ import MenuPublicScreen from "./screens/MenuPublicScreen";
 import SearchPet from "./screens/SearchPet";
 import colors from "./config/colors";
 
+import AddNews from "./screens/AddNews";
 
 const styles = StyleSheet.create({
   container: {
@@ -85,6 +86,10 @@ const HomeNavigator = () => (
     <Stack.Screen
       name="SearchPet"
       component={SearchPet}
+    />
+    <Stack.Screen
+      name="AddNews"
+      component={AddNews}
     />
   </Stack.Navigator>
 )
