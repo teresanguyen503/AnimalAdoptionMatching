@@ -56,7 +56,10 @@ function HomeScreen() {
               <View style={styles.newsTitleContainer}>
                 <Text style={styles.titleText}>Recent News</Text>
                 <View style={styles.newsButtonContainer}>
-                  <TouchableOpacity style={styles.viewAllButton}>
+                  <TouchableOpacity
+                    style={styles.viewAllButton}
+                    onPress={() => navigation.navigate("NewsPage")}
+                  >
                     <Text style={styles.articleButtonText}>View All News</Text>
                     <Icon
                       style={styles.icon}
@@ -292,7 +295,7 @@ const styles = StyleSheet.create({
   },
   articleButtonText: {
     alignSelf: "center",
-    paddingLeft: 5
+    paddingLeft: 5,
   },
 
   // Adoption Application Status Section
