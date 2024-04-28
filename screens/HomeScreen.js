@@ -21,86 +21,88 @@ function HomeScreen() {
 
   return (
     <SafeScreen>
-      {/* <Topbar
+      <ScrollView>
+        {/* <Topbar
             title="Animal Adoption Matching"
             rightButton={<Icon name="menu" />}
         /> */}
-      <View style={styles.container}>
-        {/* <TouchableOpacity onPress={onPressHandler}> */}
-        <View style={styles.header}>
-          <Text style={styles.heading}>Animal Adoption Matching App</Text>
-          <TouchableOpacity>
-            <Icon style={styles.icon} name="menu" size={40} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.accountButtonContainer}>
-          <TouchableOpacity
-            style={styles.accountButton}
-            onPress={() => navigation.navigate("CreateAccount")}
-          >
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.accountButton}>
-            <Text>Sign In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.accountButton}
-            onPress={() => navigation.navigate("AddPet")}
-          >
-            <Text>Add Pet</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.container}>
+          {/* <TouchableOpacity onPress={onPressHandler}> */}
+          <View style={styles.header}>
+            <Text style={styles.heading}>Animal Adoption Matching App</Text>
+            <TouchableOpacity>
+              <Icon style={styles.icon} name="menu" size={40} color="black" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.accountButtonContainer}>
+            <TouchableOpacity
+              style={styles.accountButton}
+              onPress={() => navigation.navigate("CreateAccount")}
+            >
+              <Text>Sign Up</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.accountButton}>
+              <Text>Sign In</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.accountButton}
+              onPress={() => navigation.navigate("AddPet")}
+            >
+              <Text>Add Pet</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.newsContainer}>
+            <View>
+              <View style={styles.newsTitleContainer}>
+                <Text style={styles.titleText}>Recent News</Text>
+                <View style={styles.newsButtonContainer}>
+                  <TouchableOpacity style={styles.viewAllButton}>
+                    <Text style={styles.articleButtonText}>View All News</Text>
+                    <Icon
+                      style={styles.icon}
+                      name="keyboard-arrow-right"
+                      size={20}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
 
-        <View style={styles.newsContainer}>
-          <View>
-            <View style={styles.newsTitleContainer}>
-              <Text style={styles.titleText}>Recent News</Text>
-              <View style={styles.newsButtonContainer}>
-                <TouchableOpacity style={styles.viewAllButton} onPress={() => navigation.navigate("NewsPage")}>
-                  <Text style={styles.articleButtonText}>View All News</Text>
-                  <Icon
-                    style={styles.icon}
-                    name="keyboard-arrow-right"
-                    size={20}
-                    color="black"
-                  />
-                  
-                </TouchableOpacity>
+            <View style={styles.articleContainer}>
+              <View style={styles.imageContainer}>
+                <Image
+                  source={require("../assets/thank-you-adoption.jpg")}
+                  style={{ width: 120, height: 120, resizeMode: "contain" }}
+                />
+              </View>
+              <View style={styles.articleTextContainer}>
+                <Text style={styles.articleTitle}>Sample Article</Text>
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                  <Text style={styles.articleText}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </Text>
+                </ScrollView>
               </View>
             </View>
           </View>
 
-          <View style={styles.articleContainer}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={require("../assets/thank-you-adoption.jpg")}
-                style={{ width: 120, height: 120, resizeMode: "contain" }}
-              />
-            </View>
-            <View style={styles.articleTextContainer}>
-              <Text style={styles.articleTitle}>Sample Article</Text>
-              <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                <Text style={styles.articleText}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </ScrollView>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.petContainer}>
-          <View style={styles.petTitleContainer}>
-            <Text style={styles.petTitleText}>Available Pets</Text>
-            <View style={styles.petButtonContainer}>
+          <View style={styles.adoptionApplicationStatusContainer}>
+            <View style={styles.adoptionStatusHeader}>
+              <Text style={styles.adoptionStatusTitle}>
+                Adoption Application Status
+              </Text>
               <TouchableOpacity style={styles.viewAllButton}>
-                <Text style={styles.petButtonText}>View All Pets</Text>
+                <Text style={styles.articleButtonText}>
+                  View All Applications
+                </Text>
                 <Icon
                   style={styles.icon}
                   name="keyboard-arrow-right"
@@ -109,42 +111,71 @@ function HomeScreen() {
                 />
               </TouchableOpacity>
             </View>
+            <View style={styles.statusContainer}>
+              <View style={styles.petImageContainer}>
+                <Image
+                  source={require("../assets/alvan.jpg")}
+                  style={styles.images}
+                />
+              </View>
+              <View style={styles.petStatusTextContainer}>
+                <Text style={styles.adoptionStatusPetName}>Alvan</Text>
+                <Text style={styles.adoptionStatusText}>Under Review</Text>
+              </View>
+            </View>
           </View>
-        </View>
 
-        <View style={styles.petProfileBanner}>
-          <View style={styles.petProfileContainer}>
-            <View style={styles.petImageContainer}>
-              <Image
-                source={require("../assets/pauline.jpg")}
-                style={styles.images}
-              />
-            </View>
-            <View style={styles.petTextContainer}>
-              <Text style={styles.petName}>Doggy</Text>
-              <Text style={styles.petDescription}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Text>
+          <View style={styles.petContainer}>
+            <View style={styles.petTitleContainer}>
+              <Text style={styles.petTitleText}>Available Pets</Text>
+              <View style={styles.petButtonContainer}>
+                <TouchableOpacity style={styles.viewAllButton}>
+                  <Text style={styles.articleButtonText}>View All Pets</Text>
+                  <Icon
+                    style={styles.icon}
+                    name="keyboard-arrow-right"
+                    size={20}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <View style={styles.petProfileContainer}>
-            <View style={styles.petImageContainer}>
-              <Image
-                source={require("../assets/jeanie.jpg")}
-                style={styles.images}
-              />
+
+          <View style={styles.petProfileBanner}>
+            <View style={styles.petProfileContainer}>
+              <View style={styles.petImageContainer}>
+                <Image
+                  source={require("../assets/pauline.jpg")}
+                  style={styles.images}
+                />
+              </View>
+              <View style={styles.petTextContainer}>
+                <Text style={styles.petName}>Doggy</Text>
+                <Text style={styles.petDescription}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+              </View>
             </View>
-            <View style={styles.petTextContainer}>
-              <Text style={styles.petName}>Kitty</Text>
-              <Text style={styles.petDescription}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Text>
+            <View style={styles.petProfileContainer}>
+              <View style={styles.petImageContainer}>
+                <Image
+                  source={require("../assets/jeanie.jpg")}
+                  style={styles.images}
+                />
+              </View>
+              <View style={styles.petTextContainer}>
+                <Text style={styles.petName}>Kitty</Text>
+                <Text style={styles.petDescription}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeScreen>
   );
 }
@@ -259,7 +290,53 @@ const styles = StyleSheet.create({
   articleText: {
     fontSize: 14,
   },
-  articleButtonText: {},
+  articleButtonText: {
+    alignSelf: "center",
+    paddingLeft: 5
+  },
+
+  // Adoption Application Status Section
+  adoptionApplicationStatusContainer: {
+    textAlign: "center",
+    flexDirection: "wrap",
+    marginVertical: 10,
+    marginBottom: 20,
+    marginHorizontal: 10,
+    maxHeight: 400,
+    overflow: "scroll",
+    borderWidth: 1,
+    padding: 5,
+  },
+  adoptionStatusHeader: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "start",
+    padding: 5,
+  },
+  adoptionStatusTitle: {
+    fontSize: 25,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  statusContainer: {
+    paddingTop: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "start",
+  },
+  petStatusTextContainer: {
+    flexDirection: "column",
+  },
+  adoptionStatusPetName: {
+    fontSize: 18,
+    paddingLeft: 10,
+    fontWeight: "bold",
+  },
+  adoptionStatusText: {
+    fontSize: 18,
+    paddingLeft: 10,
+  },
 
   // Pet Section
   petContainer: {
@@ -296,7 +373,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   petProfileContainer: {
-    width: "40%",
+    width: "49%",
     borderWidth: 1,
     borderColor: colors.black,
     borderRadius: 5,
