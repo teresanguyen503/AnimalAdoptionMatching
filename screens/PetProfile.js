@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, FlatList, Platform, ScrollView} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from '@expo/vector-icons';
 import axios from 'axios'
@@ -9,88 +9,65 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function PetProfile() {
     const navigation = useNavigation();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredProfiles, setFilteredProfiles] = useState([]);
-    const [selectedIndex, setSelectedIndex] = useState(null);
-    const [visible, setVisible] = useState(false);
     const [profiles, setProfiles] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [searchId, setSearchId] = useState('');
+    const [searchResult, setSearchResult] = useState(null);
+    const [searchedProfileIds, setSearchedProfileIds] = useState([]);
+    const [searchOptions, setSearchOptions] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
 
-    // Search function - empty for now
-    // function handleSearch(){
-    // }
-
-    const handleSearch = (text) => {
-        const query = text.toLowerCase();
-        const filtered = profiles.filter((profile) =>
-          profile.name.toLowerCase().includes(query)
-        );
-        setFilteredProfiles(filtered);
-        setSearchQuery(text);
-      };
-
-    const handleProfilePress = (index) => {
-        console.log("current index:", currentIndex);
-        setSelectedIndex(index);
-        setCurrentIndex(-1);
-        setSearchQuery('')
-      };
-
-    // Fetching profile data from server
-    const fetchData = async () => {
+   // Function to fetch profiles from the backend
+    const fetchProfiles = async () => {
         try {
-          // Make HTTP GET request to fetch profile data
-        const response = await axios.get('http://192.168.1.98:3000/getPet');
-         //console.log("this is new get response:",response.data);
-        setProfiles(response.data)
+            // Make HTTP GET request to fetch profile data
+            const response = await axios.get('http://192.168.1.98:3000/getPet');
+            setProfiles(response.data);
+            // Initialize searchedProfileIds with all profile IDs
+            setSearchedProfileIds(response.data.map(profile => profile._id));
         } catch (error) {
-          console.error('Error fetching data:', error);
+        console.error(error);
         }
-      };
+    };
 
-      useEffect(() => {
-        fetchData();
+     // Function to search for a profile by name
+    const searchProfileByName = (text) => {
+        setSearchId(text);
+        // Search for profiles containing the entered text in their name (case insensitive)
+        const results = profiles.filter(profile => profile.name.toLowerCase().includes(text.toLowerCase()));
+        setSearchOptions(results);
+        setModalVisible(true);
+    };
+
+    const selectSearchOption = (profile) => {
+        setSearchId(profile.name);
+        setSearchResult(profile);
+        // Set currentIndex to the index of the selected profile in searchedProfileIds
+        setCurrentIndex(searchedProfileIds.indexOf(profile._id));
+        setSearchOptions([]);
+        setModalVisible(false);
+        setSearchId('');
+    };
+
+    // Function to navigate to the next profile
+    const nextProfile = () => {
+        // Increment index and loop back to the beginning if at the end
+        setCurrentIndex(prevIndex => (prevIndex + 1) % searchedProfileIds.length);
+        setSearchResult(null);
+    };
+
+  // Function to navigate to the previous profile
+    const prevProfile = () => {
+        // Decrement index and loop back to the end if at the beginning
+        setCurrentIndex(prevIndex => (prevIndex - 1 + searchedProfileIds.length) % searchedProfileIds.length);
+        setSearchResult(null);
+    };
+
+    // Fetch profiles when the component mounts
+    useEffect(() => {
+    fetchProfiles();
     }, []);
 
-
-
-     // Function to render filtered profile
-     const renderFilterProfile = () => {
-        const profile = filteredProfiles[selectedIndex];
-        if (!profile) return null;
-        return (
-            <View>
-                <View style={styles.profileContainer}>
-                    <View  style={styles.imageContainer}>
-                        {/* Image and profile imformation */}
-                        <Image source={{ uri: profile.image }} style={{ width: 300, height: 300 }} />
-                    </View>
-                    <Text style={styles.profileName}>{profile.name}</Text>
-                    {profile.isdate !== undefined && (
-                    <Text style={styles.profileData}>Date Available: {new Date(profile.isdate).toDateString()}</Text>
-                )}
-                    <Text style={styles.profileData}>Description: {profile.desc}</Text>
-                    <Text style={styles.profileData}>Disposition:{profile.disposition}</Text>
-                    <Text style={styles.profileData}>Specie: {profile.speciesName}</Text>
-                    <Text style={styles.profileData}>Breed: {profile.selectedItem.label}</Text>
-
-                </View>
-
-        {currentIndex <= 0 &&(
-             <Icon  style={styles.backIcon}name="keyboard-arrow-left" size={40} color="black" onPress={handlePreviousProfile}/>
-        )}
-        {currentIndex <= 0  &&(
-             <Icon style={styles.nextIcon}name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
-        )}
-         {/* {currentIndex >= 1  &&(
-             <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={50} color="black" onPress={handleNextProfile}/>
-        )} */}
-        </View>
-
-
-
-            );
-        };
 
     // Function to render the current profile
     const renderCurrentProfile = () => {
@@ -118,32 +95,9 @@ export default function PetProfile() {
         );
     };
 
-    // Function to handle "Next Profile" button press
-    const handleNextProfile = () => {
-        setCurrentIndex(currentIndex => (Math.abs(currentIndex) + 1) % profiles.length);
-    };
-
-    // Function to handle "Previous Profile" button press
-    const handlePreviousProfile = () => {
-        setCurrentIndex(currentIndex => Math.abs(currentIndex - 1) % profiles.length);
-    };
-
-     // Function to handle "Next FilterProfile" button press
-     const handleNextFilterProfile = () => {
-          setCurrentIndex(selectedIndex => (selectedIndex + 1) % profiles.length);
-      //  setCurrentIndex(currentIndex => Math.abs(currentIndex + 1) % profiles.length);
-         setCurrentIndex(selectedIndex);
-    };
-
-    // Function to handle "Previous Filter Profile" button press
-    const handlePreviousFilterProfile = () => {
-        setSelectedIndex(selectedIndex => (selectedIndex - 1) % profiles.length);
-    };
-
     // Function to handle Pass Button - goes to next profile when pass is clicked
     const handlePassButton = () => {
         setCurrentIndex(currentIndex => (currentIndex + 1) % profiles.length);
-
     };
 
     // Function to handle Like Button
@@ -188,6 +142,7 @@ export default function PetProfile() {
 
 return(
     <View>
+
         {/* Header and back icon */}
         <View style={styles.header}>
             <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")} />
@@ -195,54 +150,28 @@ return(
         </View>
 
         {/* Search Bar */}
-        <View >
-            <TextInput style={styles.input}
-            // style={{ flex: 1, padding: 5, marginRight: 10, marginLeft: 10, marginTop: 12 }}
-            placeholder='Find your perfect match...'
-            value={searchQuery}
-            onChangeText={handleSearch}
-            />
-
-            {/* <AntDesign style={styles.searchIcon} name="search1" size={20} color="black" />
-            <TouchableOpacity onPress={handleSearch}>
-            </TouchableOpacity> */}
-        </View>
-
-        {searchQuery !== '' && filteredProfiles.length > 0 && (
-        <FlatList
-        data={filteredProfiles}
-        listkey ={(profile) =>  profile.id }
-        renderItem={({ item, index}) => (
-          <TouchableOpacity onPress={() => handleProfilePress(index)}>
-             <Text style={[styles.item, index === selectedIndex && styles.selectedItem]}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
+        <TextInput style={styles.input}
+        placeholder="Find your perfect match..."
+         value={searchId}
+         onChangeText={searchProfileByName}
       />
 
-      )}
-        {selectedIndex !== null && currentIndex <= 0 &&(
-         (renderFilterProfile())
+      {/* Display search options */}
+      {searchOptions.length > 0 && (
+        <ScrollView style={{ maxHeight: 200, width: '100%' }}>
+          {searchOptions.map(profile => (
+            <TouchableOpacity key={profile._id} onPress={() => selectSearchOption(profile)}>
+              <Text style={styles.item}>{profile.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       )}
 
-
+        {/* displays all profiles with back and next arrows */}
         <View>
         {renderCurrentProfile()}
-
-         {/* arrow button for previous profile */}
-         {currentIndex > 0 &&(
-            <Icon style={styles.backIcon} name="keyboard-arrow-left" size={40} color="black" onPress={handlePreviousProfile}/>
-        )}
-
-        {/* arrow button for next profile */}
-        {currentIndex == 0 &&(
-            <Icon style={styles.firstNextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
-        )}
-        {currentIndex > 0 && (
-            <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
-        )}
-        {/* {currentIndex <= 0  &&(
-             <Icon style={styles.nextIcon}name="keyboard-arrow-right" size={40} color="black" onPress={handleNextProfile}/>
-        )} */}
+        <Icon style={styles.backIcon} name="keyboard-arrow-left" size={40} color="black" onPress={prevProfile}/>
+        <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={nextProfile}/>
         </View>
 
         {/* Pass and Like Button Container */}
@@ -316,10 +245,6 @@ const styles = StyleSheet.create({
         marginLeft: Platform.OS === 'ios' ? 20 : 12,
         marginRight: Platform.OS === 'ios' ? 20 : 12,
       },
-
-      selectedItem: {
-        backgroundColor: 'lightblue', // Style for selected item
-      },
     // profile display container
     profileContainer:{
         borderRadius: 12,
@@ -359,17 +284,7 @@ const styles = StyleSheet.create({
     },
     backIcon:{
         // marginLeft: 350,
-        marginTop: -270,
-
-    },
-    firstNextIcon:{
-        marginLeft: Platform.OS === 'ios' ? 380 : 350,
-        marginTop: Platform.OS === 'ios' ? -270 : -270,
-
-    },
-    searchNextIcon : {
-        marginLeft: Platform.OS === 'ios' ? 380 : 350,
-        top: Platform.OS === 'ios' ? -45 : -270,
+       marginTop: -270,
 
     },
     //Pass and Like Button Styling
@@ -380,7 +295,6 @@ const styles = StyleSheet.create({
         marginLeft: 27,
         borderRadius: 5,
         marginTop: Platform.OS === 'ios' ? 320 : 250,
-
     },
     buttonContainer: { // Container that controls the items
         flexDirection: 'row', // Align children from left to right
