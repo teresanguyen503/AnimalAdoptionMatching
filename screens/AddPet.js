@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, FlatList, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
@@ -63,6 +63,8 @@ export default function AddPet() {
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
           aspect: [4, 3],
+          maxWidth: 300,
+          maxHeight: 300,
           quality: 1,
         });
 
@@ -115,12 +117,10 @@ export default function AddPet() {
           return;
         }
         try{
-        // android emulator:
-        // const {data} = await axios.post('http://10.0.2.2:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
         // expo go:
         // const {data} = await axios.post('http://192.168.1.12:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
-        const {data} = await axios.post('http://192.168.1.98:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image, disposition})
-          console.log("Profile created =>", data)
+        const base64Image = await convertImageToBase64(image);
+        const {data} = await axios.post('http://192.168.1.98:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image: base64Image, disposition})
           alert('New Profile successfully added')
           // Clear input fields
           setName('');
@@ -136,8 +136,28 @@ export default function AddPet() {
         }
       }
 
+    // converting images to base64
+    const convertImageToBase64 = async (uri) => {
+        if (!uri) return null;
+
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        const base64 = await blobToBase64(blob);
+        return base64;
+    };
+
+    const blobToBase64 = (blob) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = reject;
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+          reader.readAsDataURL(blob);
+        });
+    };
+
     return (
-       //  <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
@@ -283,12 +303,13 @@ export default function AddPet() {
 
                 {/* Add Profile Button */}
                 <View style={styles.addProfileButton}>
-                    <Button title="Add Profile"  onPress={handleAddProfile}></Button>
+                    <TouchableOpacity onPress={handleAddProfile} style={styles.accountButton}>
+                        <Text>Add Profile</Text>
+                    </TouchableOpacity>
+                    {/* <Button title="Add Profile"  onPress={handleAddProfile}></Button> */}
                 </View>
 
         </View>
-
-       // </ScrollView>
 
     );
 
@@ -310,8 +331,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 16,
-        paddingTop: 30,
+      //  paddingTop: 60,
         paddingLeft: 10,
+        marginTop: Platform.OS === 'ios' ? 60 : 25,
     },
     heading: {
         fontSize: 30,
@@ -497,5 +519,17 @@ const styles = StyleSheet.create({
         marginLeft: 18,
         marginTop: -25,
      },
+     accountButton: {
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: "white",
+        borderColor: "black",
+        borderWidth: 2,
+        fontSize: 45,
+        borderRadius: 10,
+        margin: 10,
+        textAlign: "center",
+        alignItems: "center",
+      },
 
 })
