@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import CreateAccountScreen from "./screens/CreateAccountScreen";
 import AddPet from "./screens/AddPet";
+import NewsPage from "./screens/NewsPage";
 import PetProfile from "./screens/PetProfile";
 
 const styles = StyleSheet.create({
@@ -44,6 +45,11 @@ function App() {
         component={PetProfile}
         options={{ headerShown: false }}
       />
+        <Stack.Screen
+          name="NewsPage"
+          component={NewsPage}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
