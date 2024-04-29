@@ -205,7 +205,7 @@ export default function AddPet() {
             <View style={styles.speciesContainer}>
                 <View style={styles.item}>
                     <TouchableOpacity
-                    style={[styles.button, selectedButton ===1 && styles.selectedButton]}
+                    style={[styles.accountButton, selectedButton ===1 && styles.selectedButton]}
                     onPress={() => handleButtonPress(1)}
                     >
                         <Text style={styles.buttonText}>Dog</Text>
@@ -213,7 +213,7 @@ export default function AddPet() {
                 </View>
                 <View style={styles.item}>
                 <TouchableOpacity
-                    style={[styles.button, selectedButton === 2 && styles.selectedButton]}
+                    style={[styles.accountButton, selectedButton === 2 && styles.selectedButton]}
                     onPress={() => handleButtonPress(2)}
                     >
                         <Text style={styles.buttonText}>Cat</Text>
@@ -221,7 +221,7 @@ export default function AddPet() {
                 </View>
                 <View style={styles.item}>
                 <TouchableOpacity
-                    style={[styles.button, selectedButton === 3 && styles.selectedButton]}
+                    style={[styles.accountButton, selectedButton === 3 && styles.selectedButton]}
                     onPress={() => handleButtonPress(3)}
                     >
                         <Text style={styles.buttonText}>Other</Text>
@@ -306,7 +306,6 @@ export default function AddPet() {
                     <TouchableOpacity onPress={handleAddProfile} style={styles.accountButton}>
                         <Text>Add Profile</Text>
                     </TouchableOpacity>
-                    {/* <Button title="Add Profile"  onPress={handleAddProfile}></Button> */}
                 </View>
 
         </View>
@@ -331,9 +330,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingHorizontal: 16,
-      //  paddingTop: 60,
         paddingLeft: 10,
-        marginTop: Platform.OS === 'ios' ? 60 : 25,
+        marginTop: Platform.OS === 'ios' ? 70 : 25,
     },
     heading: {
         fontSize: 30,
@@ -351,7 +349,8 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingBottom: 10,
         fontWeight: 'bold',
-        marginTop: 1,
+        //marginTop: 1,
+         marginTop: Platform.OS === 'ios' ? 15 : 1,
     },
     textInput: {
         borderWidth: 1,
@@ -394,15 +393,17 @@ const styles = StyleSheet.create({
 
     /* Upload Image Styling */
     imageContainer: {
-        marginTop: 12,
         elevation:2,
         height:200,
         width:200,
-        left:65,
         backgroundColor:'#efefef',
         position:'relative',
         overflow:'hidden',
         marginLeft: 5,
+        left: Platform.OS === 'ios' ? 115 : 80,
+        marginTop: Platform.OS === 'ios' ? 30 : 12,
+        marginBottom: Platform.OS === 'ios' ? 20 : 0,
+
     },
     uploadBtnContainer: {
         opacity:0.7,
@@ -442,10 +443,13 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     selectedButton: {
-        backgroundColor: 'black',
+        backgroundColor: 'grey',
+        color: 'white',
+        borderColor: "transparent",
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
+        // color: 'white',
         fontWeight: 'bold',
     },
     breedHeader: {
@@ -463,6 +467,8 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         fontWeight: 'bold', marginTop: 2,
         top: 6,
+        marginBottom: Platform.OS === 'ios' ? 10 : 0,
+        marginTop: Platform.OS === 'ios' ? 12 : 0,
     },
     checkLabel1: {
         top: -8,
@@ -524,12 +530,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: "white",
         borderColor: "black",
-        borderWidth: 2,
+        borderWidth: 1,
         fontSize: 45,
         borderRadius: 10,
-        margin: 10,
         textAlign: "center",
         alignItems: "center",
+        margin: Platform.OS === 'ios' ? 10 : 0,
       },
 
 })
