@@ -11,6 +11,7 @@ import LoginScreen from "./screens/LoginScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewsPage from "./screens/NewsPage";
+import PetProfile from "./screens/PetProfile";
 
 
 const styles = StyleSheet.create({
@@ -57,6 +58,16 @@ function App() {
         name="AddPet"
         component={AddPet}
         options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="PetProfile"
+        component={PetProfile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+          name="NewsPage"
+          component={NewsPage}
+          options={{ headerShown: false }}
       />
       </Stack.Navigator>
     </NavigationContainer>

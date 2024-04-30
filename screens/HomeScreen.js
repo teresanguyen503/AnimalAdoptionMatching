@@ -135,7 +135,9 @@ function HomeScreen() {
             <View style={styles.petTitleContainer}>
               <Text style={styles.petTitleText}>Available Pets</Text>
               <View style={styles.petButtonContainer}>
-                <TouchableOpacity style={styles.viewAllButton}>
+                <TouchableOpacity style={styles.viewAllButton}
+                onPress={() => navigation.navigate("PetProfile")}
+                >
                   <Text style={styles.articleButtonText}>View All Pets</Text>
                   <Icon
                     style={styles.icon}
