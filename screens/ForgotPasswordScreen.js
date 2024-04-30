@@ -68,7 +68,7 @@ function ForgotPasswordScreen(props) {
                                 <Picker.Item label="What is your mother's maiden name?" value="What is your mother's maiden name?" />
                                 <Picker.Item label="What city were you born in?" value="What city were you born in?" />
                                 <Picker.Item label="What middle school did you attend?" value="What middle school did you attend?" /> 
-                                <Picker.Item label="What is the name of our first pet?" value="What is the name of our first pet?" /> 
+                                <Picker.Item label="What is the name of your first pet?" value="What is the name of your first pet?" /> 
                                 <Picker.Item label="What was your first car?" value="What was your first car?" /> 
                                 <Picker.Item label="What was your first job?" value="What was your first job?" />  
                             </Picker>
