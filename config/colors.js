@@ -6,5 +6,6 @@ export default {
     inputBackground: '#d3d3d3',
     white: '#fff',
     headings: '#000',
-    lightgray: '#d3d3d3'
+    lightgray: '#d3d3d3', 
+    mediumblue: '#0000cd'
 }; 
