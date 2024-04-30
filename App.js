@@ -10,6 +10,8 @@ import AddPet from "./screens/AddPet";
 import LoginScreen from "./screens/LoginScreen"; 
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
+import NewsPage from "./screens/NewsPage";
+
 
 const styles = StyleSheet.create({
   container: {
