@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, FlatList, Platform } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, Button, TouchableOpacity, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
@@ -331,7 +331,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingLeft: 10,
-        marginTop: Platform.OS === 'ios' ? 70 : 25,
+        marginTop: 25,
+     //   marginTop: Platform.OS === 'ios' ? 70 : 25,
     },
     heading: {
         fontSize: 30,
@@ -349,8 +350,8 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingBottom: 10,
         fontWeight: 'bold',
-        //marginTop: 1,
-         marginTop: Platform.OS === 'ios' ? 15 : 1,
+        marginTop: 1,
+      //   marginTop: Platform.OS === 'ios' ? 15 : 1,
     },
     textInput: {
         borderWidth: 1,
@@ -400,9 +401,11 @@ const styles = StyleSheet.create({
         position:'relative',
         overflow:'hidden',
         marginLeft: 5,
-        left: Platform.OS === 'ios' ? 115 : 80,
-        marginTop: Platform.OS === 'ios' ? 30 : 12,
-        marginBottom: Platform.OS === 'ios' ? 20 : 0,
+        left: 80,
+        marginTop: 12,
+     //   left: Platform.OS === 'ios' ? 115 : 80,
+      //  marginTop: Platform.OS === 'ios' ? 30 : 12,
+       // marginBottom: Platform.OS === 'ios' ? 20 : 0,
 
     },
     uploadBtnContainer: {
@@ -467,8 +470,6 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         fontWeight: 'bold', marginTop: 2,
         top: 6,
-        marginBottom: Platform.OS === 'ios' ? 10 : 0,
-        marginTop: Platform.OS === 'ios' ? 12 : 0,
     },
     checkLabel1: {
         top: -8,
@@ -535,7 +536,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: "center",
         alignItems: "center",
-        margin: Platform.OS === 'ios' ? 10 : 0,
       },
 
 })
