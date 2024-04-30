@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Platform} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from '@expo/vector-icons';
 import axios from 'axios'
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -21,8 +22,8 @@ export default function PetProfile() {
     const fetchProfiles = async () => {
         try {
             // Make HTTP GET request to fetch profile data
-            // const response = await axios.get('http://192.168.1.98:3000/getPet');
-            const response = await axios.get('http://192.168.1.12:3000/getPet');
+           //  const response = await axios.get('http://192.168.1.98:3000/getPet');
+             const response = await axios.get('http://192.168.1.12:3000/getPet');
             setProfiles(response.data);
             // Initialize searchedProfileIds with all profile IDs
             setSearchedProfileIds(response.data.map(profile => profile._id));
@@ -142,7 +143,8 @@ export default function PetProfile() {
     };
 
 return(
-    <View>
+    <View >
+    <ScrollView >
 
         {/* Header and back icon */}
         <View style={styles.header}>
@@ -170,9 +172,29 @@ return(
 
         {/* displays all profiles with back and next arrows */}
         <View>
-        {renderCurrentProfile()}
-        <Icon style={styles.backIcon} name="keyboard-arrow-left" size={40} color="black" onPress={prevProfile}/>
-        <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={nextProfile}/>
+        {/* {renderCurrentProfile()} */}
+        <View >
+        {/* <Icon style={styles.backIcon}name="keyboard-arrow-left" size={40} color="black" onPress={prevProfile}/> */}
+        {/* <Icon style={styles.nextIcon} name="keyboard-arrow-right" size={40} color="black" onPress={nextProfile}/> */}
+        </View>
+        </View>
+
+
+         {/* displays all profiles with back and next arrows */}
+        <View style={styles.container}>
+            {/* Back icon */}
+            <TouchableOpacity onPress={prevProfile}>
+                <Icon style={styles.backIcon} name="keyboard-arrow-left" size={40} color="black" />
+
+            </TouchableOpacity>
+
+            {/* Container for profiles */}
+                {renderCurrentProfile()}
+
+        {/* Next icon */}
+        <TouchableOpacity onPress={nextProfile}>
+            <Icon name="keyboard-arrow-right" size={40} color="black" />
+        </TouchableOpacity>
         </View>
 
         {/* Pass and Like Button Container */}
@@ -190,6 +212,7 @@ return(
             </View>
         </View>
 
+    </ScrollView>
     </View>
 
 )
@@ -252,9 +275,9 @@ const styles = StyleSheet.create({
         borderColor : 'grey',
         borderWidth:  0.5,
         width: 300,
-        paddingBottom: 15,
-        marginLeft: Platform.OS === 'ios' ? 65 : 50,
-        marginTop: Platform.OS === 'ios' ? 50 : 20,
+      //  marginLeft: 50,
+        marginTop: 50,
+      //  paddingBottom: 15,
     },
     imageContainer:{
         elevation:2,
@@ -281,12 +304,14 @@ const styles = StyleSheet.create({
     // Styling for arrow buttons
     nextIcon:{
         marginTop: -40,
-        marginLeft: Platform.OS === 'ios' ? 380 : 350,
+
+       marginLeft: Platform.OS === 'ios' ? 380 : 350,
     },
     backIcon:{
-        // marginLeft: 350,
-       marginTop: -270,
-
+       // marginLeft: 350,
+       //marginTop: -270,
+       //paddingHorizontal: 10,
+     //  alignSelf: 'flex-start',
     },
     //Pass and Like Button Styling
     buttonItem: {
@@ -295,13 +320,15 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         marginLeft: 27,
         borderRadius: 5,
-        marginTop: Platform.OS === 'ios' ? 320 : 250,
+        marginTop: 250,
+        marginLeft: 50,
     },
     buttonContainer: { // Container that controls the items
         flexDirection: 'row', // Align children from left to right
         flexWrap: 'wrap',
         alignItems: 'flex-start', // Align children to the start of the container's cross axis
-        marginBottom: 12,
+     //   marginBottom: 12,
+
     },
     button: {
         backgroundColor: 'transparent',
@@ -311,6 +338,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: -202,
     },
     likeContainer:{
         borderRadius: 20,
@@ -318,9 +346,7 @@ const styles = StyleSheet.create({
         borderWidth:  0.5,
         width: '35%',
         height: '7.5%',
-        marginLeft: Platform.OS === 'ios' ? 225 : 34,
-        marginTop: Platform.OS === 'ios' ? -40 : 251,
-        height: Platform.OS === 'ios' ? '6%' : '7.5%',
+        marginTop: 48,
     },
     likeButton: {
         padding: 12,
@@ -329,4 +355,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      },
+      profilesContainer: {
+        flex: 1, // This allows the profile container to occupy the remaining space
+        // alignItems: 'center',
+        // justifyContent: 'center',
+       // marginRight: 50,
+       left: -30,
+      },
 })
