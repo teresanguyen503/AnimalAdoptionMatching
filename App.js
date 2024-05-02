@@ -12,6 +12,7 @@ import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewsPage from "./screens/NewsPage";
 import PetProfile from "./screens/PetProfile";
+import MenuPublicScreen from "./screens/MenuPublicScreen";
 
 
 const styles = StyleSheet.create({
@@ -23,54 +24,55 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateAccount"
-        component={CreateAccountScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPasswordScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ResetPassword"
-        component={ResetPasswordScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddPet"
-        component={AddPet}
-        options={{ headerShown: false }}
-      />
-       <Stack.Screen
-        name="PetProfile"
-        component={PetProfile}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-          name="NewsPage"
-          component={NewsPage}
-          options={{ headerShown: false }}
-      />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <MenuPublicScreen />
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName="Home">
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={HomeScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="CreateAccount"
+    //     component={CreateAccountScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="Login"
+    //     component={LoginScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="ForgotPassword"
+    //     component={ForgotPasswordScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="ResetPassword"
+    //     component={ResetPasswordScreen}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="AddPet"
+    //     component={AddPet}
+    //     options={{ headerShown: false }}
+    //   />
+    //    <Stack.Screen
+    //     name="PetProfile"
+    //     component={PetProfile}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //       name="NewsPage"
+    //       component={NewsPage}
+    //       options={{ headerShown: false }}
+    //   />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
 

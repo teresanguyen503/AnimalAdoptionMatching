@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import SafeScreen from '../components/SafeScreen'; 
 
@@ -29,7 +29,14 @@ function MenuPublicScreen(props) {
                 <FlatList 
                     data={menuItems}
                     keyExtractor={(menuItems) => menuItems.title}
-                    ItemSeparatorComponent={styles.separator}
+                    renderItem={({ item }) => (
+                        <TouchableHighlight>
+                            <View>
+                                <Text>{ item.title }</Text>
+                            </View>
+                        </TouchableHighlight>
+                    )}
+                    ItemSeparatorComponent={() => <View style={styles.separator} />}
                 />
             </View>
         </SafeScreen>
