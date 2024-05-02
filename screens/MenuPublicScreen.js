@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-nati
 
 import MenuItem from '../components/MenuItem';
 import SafeScreen from '../components/SafeScreen'; 
+import Icon from '../components/Icon';
 
 import colors from '../config/colors'; 
 
@@ -19,7 +20,7 @@ function MenuPublicScreen(props) {
         {
             title: "Stats", 
             icon: {
-                name: "char-bar", 
+                name: "chart-bar", 
                 backgroundColor: colors.error
             }
         }
@@ -33,6 +34,12 @@ function MenuPublicScreen(props) {
                     renderItem={({ item }) => (
                         <MenuItem 
                             title={item.title}
+                            IconComponent={
+                                <Icon 
+                                    name={item.icon.name}
+                                    backgroundColor={item.icon.backgroundColor}
+                                />
+                            }
                         />
                     )}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
