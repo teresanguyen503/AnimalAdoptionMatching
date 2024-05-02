@@ -3,11 +3,14 @@ import { Text, TouchableHighlight, StyleSheet, View } from 'react-native';
 
 import colors from '../config/colors';
 
-function MenuItem({ title }) {
+function MenuItem({ IconComponent, title }) {
     return (
         <TouchableHighlight>
             <View style={styles.container}>
-                <Text style={styles.text}>{ title }</Text>
+                {IconComponent}
+                <View style={styles.detailsContainer}>
+                    <Text style={styles.text}>{ title }</Text>
+                </View>
             </View>
         </TouchableHighlight>
     );
@@ -19,6 +22,10 @@ const styles = StyleSheet.create({
         padding: 15, 
         backgroundColor: colors.white
     }, 
+    detailsContainer: {
+        marginLeft: 15, 
+        justifyContent: "center"
+    },
     text: {
         fontWeight: 500
     }
