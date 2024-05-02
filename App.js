@@ -3,6 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"; 
+import { MaterialCommunityIcons } from "@expo/vector-icons"; 
 
 import HomeScreen from "./screens/HomeScreen";
 import CreateAccountScreen from "./screens/CreateAccountScreen";
@@ -13,6 +15,7 @@ import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewsPage from "./screens/NewsPage";
 import PetProfile from "./screens/PetProfile";
 import MenuPublicScreen from "./screens/MenuPublicScreen";
+import colors from "./config/colors";
 
 
 const styles = StyleSheet.create({
@@ -25,10 +28,37 @@ const styles = StyleSheet.create({
 });
 
 // const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator(); 
+const TabNavigator = () => (
+  <Tab.Navigator
+    screenOptions={{
+      tabBarActiveBackgroundColor: colors.lightgray, 
+      tabBarActiveTintColor: colors.black
+    }}
+  >
+    <Tab.Screen 
+      name="News Feed" 
+      component={NewsPage}
+      options={{ tabBarIcon: ({ size }) => <MaterialCommunityIcons name="newspaper" size={size} />}}
+    />
+    <Tab.Screen 
+      name="Home" 
+      component={HomeScreen} 
+      options={{ tabBarIcon: ({ size }) => <MaterialCommunityIcons name="home" size={size} />}}
+    />
+    <Tab.Screen 
+      name="Account"  
+      component={MenuPublicScreen}
+      options={{ tabBarIcon: ({ size }) => <MaterialCommunityIcons name="account" size={size} />}}
+    />
+  </Tab.Navigator>
+)
 
 function App() {
   return (
-    <MenuPublicScreen />
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
     // <NavigationContainer>
     //   <Stack.Navigator initialRouteName="Home">
     //   <Stack.Screen
