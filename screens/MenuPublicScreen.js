@@ -10,17 +10,52 @@ import colors from '../config/colors';
 function MenuPublicScreen(props) {
     const menuItems = [
         {
-            title: "Settings", 
+            title: "Dogs", 
             icon: {
-                name: "format-list-bulleted", 
+                name: "dog", 
+                backgroundColor: colors.mediumblue
+            }
+        },
+        {
+            title: "Cats", 
+            icon: {
+                name: "cat", 
+                backgroundColor: colors.mediumblue
+            }
+        },
+        {
+            title: "Other Animals", 
+            icon: {
+                name: "turtle", 
+                backgroundColor: colors.mediumblue
+            }
+        },
+        {
+            title: "Search", 
+            icon: {
+                name: "card-search", 
                 backgroundColor: colors.black
             }, 
             
         }, 
         {
-            title: "Stats", 
+            title: "Favorites", 
             icon: {
-                name: "chart-bar", 
+                name: "star", 
+                backgroundColor: colors.error
+            }
+        }, 
+        {
+            title: "Email Preferences", 
+            icon: {
+                name: "email", 
+                backgroundColor: colors.error
+            }
+        }, 
+        {
+            title: "Account Preferences", 
+            icon: {
+                name: "account", 
                 backgroundColor: colors.error
             }
         }
