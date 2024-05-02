@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
+import MenuItem from '../components/MenuItem';
 import SafeScreen from '../components/SafeScreen'; 
 
 import colors from '../config/colors'; 
@@ -30,11 +31,9 @@ function MenuPublicScreen(props) {
                     data={menuItems}
                     keyExtractor={(menuItems) => menuItems.title}
                     renderItem={({ item }) => (
-                        <TouchableHighlight>
-                            <View>
-                                <Text>{ item.title }</Text>
-                            </View>
-                        </TouchableHighlight>
+                        <MenuItem 
+                            title={item.title}
+                        />
                     )}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
                 />
