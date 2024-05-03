@@ -51,7 +51,7 @@ function HomeScreen() {
             >
               <Text>Sign Up</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.accountButton}
               onPress={() => navigation.navigate("Login")}
             >
@@ -63,6 +63,13 @@ function HomeScreen() {
             >
               <Text>Add Pet</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.accountButton}
+              onPress={() => navigation.navigate("SearchPet")}
+            >
+              <Text>Search Pet</Text>
+            </TouchableOpacity>
+
           </View>
           <View style={styles.newsContainer}>
             <View>
