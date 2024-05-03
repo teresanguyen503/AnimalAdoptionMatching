@@ -107,7 +107,7 @@ const filteredDogData = dogData.filter(item =>
     const applyFilter = async (selectedFilters) => {
         try {
         // Send selectedFilters to the backend API
-        const response = await fetch('http://192.168.1.98:3000/filter', {
+        const response = await fetch('http://192.168.1.12:3000/filter', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
