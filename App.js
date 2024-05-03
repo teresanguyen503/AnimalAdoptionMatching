@@ -15,6 +15,7 @@ import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewsPage from "./screens/NewsPage";
 import PetProfile from "./screens/PetProfile";
 import MenuPublicScreen from "./screens/MenuPublicScreen";
+import MenuAdminScreen from "./screens/MenuAdminScreen"; 
 import colors from "./config/colors";
 
 
@@ -85,8 +86,8 @@ const AccountNavigator = () => (
     }}
   >
     <Stack.Screen
-      name="MenuPublic"
-      component={MenuPublicScreen}
+      name="MenuAdmin"
+      component={MenuAdminScreen}
     />  
     <Stack.Screen
       name="PetProfile"
