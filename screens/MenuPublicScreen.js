@@ -84,6 +84,7 @@ function MenuPublicScreen(props) {
             <View style={styles.separator} />
             <MenuItem 
                 title="Log Out"
+                onPress={() => console.log("Will later replace this with navigation too.")}
                 IconComponent={<Icon name="logout" backgroundColor={colors.lightgray} />}
             />
         </SafeScreen>
