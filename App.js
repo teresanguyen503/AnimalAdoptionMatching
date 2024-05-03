@@ -27,28 +27,94 @@ const styles = StyleSheet.create({
   },
 });
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
+
+const NewsPageNavigator = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}
+  >
+    <Stack.Screen
+      name="NewsPage"
+      component={NewsPage}
+      options={{ headerShown: false }}
+    />
+  </Stack.Navigator>
+)
+
+const HomeNavigator = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}
+  >
+    <Stack.Screen
+      name="HomeStack"
+      component={HomeScreen}
+    />
+    <Stack.Screen
+      name="CreateAccount"
+      component={CreateAccountScreen}
+    />
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+    />
+    <Stack.Screen
+      name="ForgotPassword"
+      component={ForgotPasswordScreen}
+    />
+    <Stack.Screen
+      name="ResetPassword"
+      component={ResetPasswordScreen}
+    /> 
+    <Stack.Screen
+      name="AddPet"
+      component={AddPet}
+    />
+  </Stack.Navigator>
+)
+
+const AccountNavigator = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}
+  >
+    <Stack.Screen
+      name="MenuPublic"
+      component={MenuPublicScreen}
+    />  
+    <Stack.Screen
+      name="PetProfile"
+      component={PetProfile}
+    /> 
+  </Stack.Navigator>
+)
+
 const Tab = createBottomTabNavigator(); 
 const TabNavigator = () => (
   <Tab.Navigator
     screenOptions={{
       tabBarActiveBackgroundColor: colors.lightgray, 
-      tabBarActiveTintColor: colors.black
+      tabBarActiveTintColor: colors.black, 
+      headerShown: false
     }}
   >
     <Tab.Screen 
       name="News Feed" 
-      component={NewsPage}
+      component={NewsPageNavigator}
       options={{ tabBarIcon: ({ size }) => <MaterialCommunityIcons name="newspaper" size={size} />}}
     />
     <Tab.Screen 
       name="Home" 
-      component={HomeScreen} 
+      component={HomeNavigator} 
       options={{ tabBarIcon: ({ size }) => <MaterialCommunityIcons name="home" size={size} />}}
     />
     <Tab.Screen 
       name="Account"  
-      component={MenuPublicScreen}
+      component={AccountNavigator}
       options={{ tabBarIcon: ({ size }) => <MaterialCommunityIcons name="account" size={size} />}}
     />
   </Tab.Navigator>
@@ -59,50 +125,6 @@ function App() {
     <NavigationContainer>
       <TabNavigator />
     </NavigationContainer>
-    // <NavigationContainer>
-    //   <Stack.Navigator initialRouteName="Home">
-    //   <Stack.Screen
-    //     name="Home"
-    //     component={HomeScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="CreateAccount"
-    //     component={CreateAccountScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="Login"
-    //     component={LoginScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="ForgotPassword"
-    //     component={ForgotPasswordScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="ResetPassword"
-    //     component={ResetPasswordScreen}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="AddPet"
-    //     component={AddPet}
-    //     options={{ headerShown: false }}
-    //   />
-    //    <Stack.Screen
-    //     name="PetProfile"
-    //     component={PetProfile}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //       name="NewsPage"
-    //       component={NewsPage}
-    //       options={{ headerShown: false }}
-    //   />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
   );
 }
 
