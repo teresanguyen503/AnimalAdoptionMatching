@@ -14,6 +14,7 @@ const SearchPet = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+    const [dispositionButton, setDispositionButton] = useState(null);
 
     {/* Species Button Function */}
     const handleButtonPress = (buttonId) => {
@@ -53,6 +54,11 @@ const filteredDogData = dogData.filter(item =>
     } else {
       selectedData = otherData;
         specieName = "Other";
+    }
+
+    {/* Disposition Button Function */}
+    const handleDispositionPress = (buttonId) => {
+        setDispositionButton(buttonId);
     }
 
 
@@ -137,6 +143,37 @@ const filteredDogData = dogData.filter(item =>
                     </View>
                 </View>
 
+                {/* Disposition */}
+                <Text style={styles.dispositionHeader}>Disposition</Text>
+                <View style={styles.speciesContainer}>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                        style={[styles.accountButton, dispositionButton === 1  && styles.selectedButton]}
+                        onPress={() => handleDispositionPress(1)}
+                        >
+                        <Text style={styles.buttonText}>Good with other animals</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                        style={[styles.accountButton, dispositionButton === 2 && styles.selectedButton]}
+                        onPress={() => handleDispositionPress(2)}
+                        >
+                        <Text style={styles.buttonText}>Good with children</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                        style={[styles.accountButton, dispositionButton === 3  && styles.selectedButton]}
+                        onPress={() => handleDispositionPress(3)}
+                        >
+                        <Text style={styles.buttonText}>Must be leashed at all times</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+
+
             </View>
         </SafeScreen>
     )
@@ -175,7 +212,6 @@ const styles = StyleSheet.create({
         fontSize: 45,
         borderRadius: 10,
         textAlign: "center",
-        alignItems: "center",
       },
     selectedButton: {
         backgroundColor: 'grey',
@@ -228,6 +264,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginTop: -2,
+    },
+    /* Disposition Checkbox and Label Styling */
+    dispositionHeader: {
+        fontSize: 18,
+        paddingTop: 8,
+        paddingLeft: 20,
+        paddingBottom: 16,
+        fontWeight: 'bold', marginTop: 2,
+        top: 6,
     },
 
 })
