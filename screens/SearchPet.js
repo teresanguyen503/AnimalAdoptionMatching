@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, Modal } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, Modal, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import SafeScreen from '../components/SafeScreen';
 import dogData from '../breed-data/dog-breed.json';
 import catData from '../breed-data/cat-breed.json';
 import otherData from '../breed-data/other-breed.json';
 import DateModal from '../components/DateModal';
+import FilterPet from '../components/FilterPet';
 
 
 const SearchPet = () => {
@@ -17,6 +18,10 @@ const SearchPet = () => {
     const [isFocus, setIsFocus] = useState(false);
     const [dispositionButton, setDispositionButton] = useState(null);
     const [isdate, setDate] = useState('');
+    const [selectedSpecie, setSelectedSpecie] = useState('');
+    const [selectedDisposition, setSelectedDisposition] = useState('');
+    const [filteredProfiles, setFilteredProfiles] = useState([]);
+
 
     {/* Species Button Function */}
     const handleButtonPress = (buttonId) => {
@@ -38,14 +43,13 @@ const filteredDogData = dogData.filter(item =>
         <Text>{item.label}</Text>
       </TouchableOpacity>
     );
-    //console.log("selectedItem:", selectedItem)
 
 
     const handleSelectedItem = (item) => {
       setSelectedItem(item);
       setIsOpen(false); // Close the dropdown after selecting an item
     };
-    //console.log("selectedItem 2:", selectedItem.label)
+
     let selectedData;
     if (selectedButton === 1) {
       selectedData = filteredDogData;
@@ -65,11 +69,62 @@ const filteredDogData = dogData.filter(item =>
     {/* Date Function */}
     const handleDateSelect = (date) => {
         setDate(date)
-    };
-      {/* Apply Filter Function */}
-    const handleApplyFilter = () => {
+        handleStartDatePress(date)
     };
 
+      {/* Filter Function */}
+      const handleSpeciePress = (specie) => {
+        setSelectedSpecie(specie);
+    };
+
+    const handleDispositionPr = (disposition) => {
+        setSelectedDisposition(disposition);
+    };
+
+    const handleStartDatePress = (startDate) => {
+        setDate(startDate);
+    };
+
+    const handleItemPress = (item) => {
+        setSelectedItem(item.label);
+    };
+     {/* Apply Filter Function */}
+     const handleApplyFilter = () => {
+        const selectedFilters = {
+            speciesName: selectedSpecie,
+            disposition: selectedDisposition,
+            isdate: setDate,
+            selectedItem: selectedItem
+        };
+       applyFilter(selectedFilters);
+       setSelectedButton('')
+       setDate('');
+       setDispositionButton('');
+       setSelectedItem('');
+
+    };
+
+    const applyFilter = async (selectedFilters) => {
+        try {
+        // Send selectedFilters to the backend API
+        const response = await fetch('http://192.168.1.98:3000/filter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(selectedFilters)
+        })
+        const data = await response.json();
+        if(data == '' ){
+            alert('No profiles found!')
+            return;
+          }
+        setFilteredProfiles(data);
+        } catch(error) {
+            // Handle errors
+            console.error('Error applying filter:', error);
+        };
+    };
 
 
     return(
@@ -87,21 +142,21 @@ const filteredDogData = dogData.filter(item =>
                 <View style={styles.speciesContainer}>
                     <View style={styles.item}>
                         <TouchableOpacity style={[styles.accountButton, selectedButton === 1 && styles.selectedButton]}
-                        onPress={() => handleButtonPress(1)}
+                        onPress={() => {handleSpeciePress('Dog'); handleButtonPress(1); }}
                         >
                         <Text style={styles.buttonText}>Dog</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
                         <TouchableOpacity style={[styles.accountButton, selectedButton === 2 && styles.selectedButton]}
-                        onPress={() => handleButtonPress(2)}
+                        onPress={() => {handleSpeciePress('Cat'); handleButtonPress(2); }}
                         >
                         <Text style={styles.buttonText}>Cat</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.item}>
                         <TouchableOpacity style={[styles.accountButton, selectedButton === 3 && styles.selectedButton]}
-                        onPress={() => handleButtonPress(3)}
+                        onPress={() => {handleSpeciePress('Other'); handleButtonPress(3); }}
                         >
                         <Text style={styles.buttonText}>Other</Text>
                         </TouchableOpacity>
@@ -152,38 +207,9 @@ const filteredDogData = dogData.filter(item =>
                     </View>
                 </View>
 
-                {/* Disposition */}
-                <Text style={styles.dispositionHeader}>Disposition</Text>
-                <View style={styles.speciesContainer}>
-                    <View style={styles.item}>
-                        <TouchableOpacity
-                        style={[styles.accountButton, dispositionButton === 1  && styles.selectedButton]}
-                        onPress={() => handleDispositionPress(1)}
-                        >
-                        <Text style={styles.buttonText}>Good with other animals</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.item}>
-                        <TouchableOpacity
-                        style={[styles.accountButton, dispositionButton === 2 && styles.selectedButton]}
-                        onPress={() => handleDispositionPress(2)}
-                        >
-                        <Text style={styles.buttonText}>Good with children</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.item}>
-                        <TouchableOpacity
-                        style={[styles.accountButton, dispositionButton === 3  && styles.selectedButton]}
-                        onPress={() => handleDispositionPress(3)}
-                        >
-                        <Text style={styles.buttonText}>Must be leashed at all times</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
                 {/* Date Placeholder */}
                 <View>
-                    <Text style={styles.name}>Date Available</Text>
+                    <Text style={styles.dateHeader}>Date Available</Text>
                     <TouchableOpacity
                     style={styles.textInput}>
                     <Text >{isdate}</Text>
@@ -194,12 +220,46 @@ const filteredDogData = dogData.filter(item =>
                 {/* Date Picker Modal */}
                 <DateModal onDateSelect={handleDateSelect}/>
 
+                {/* Disposition */}
+                <Text style={styles.dispositionHeader}>Disposition</Text>
+                <View style={styles.speciesContainer}>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                        style={[styles.accountButton, dispositionButton === 1  && styles.selectedButton]}
+                        onPress={() =>  {handleDispositionPr('Good with other animals'); handleDispositionPress(1);}}
+                        >
+                        <Text style={styles.buttonText}>Good with other animals</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                        style={[styles.accountButton, dispositionButton === 2 && styles.selectedButton]}
+                        onPress={() =>  {handleDispositionPr('Good with children'); handleDispositionPress(2);}}
+                        >
+                        <Text style={styles.buttonText}>Good with children</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                        style={[styles.accountButton, dispositionButton === 3  && styles.selectedButton]}
+                        onPress={() => {handleDispositionPr('Animal must be leashed at all times'); handleDispositionPress(3);}}
+                        >
+                        <Text style={styles.buttonText}>Must be leashed at all times</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 {/* Apply filter Button */}
                 <View style={styles.applyFilterButton}>
                     <TouchableOpacity onPress={handleApplyFilter} style={styles.accountButton}>
                     <Text>Apply Filter</Text>
                     </TouchableOpacity>
                 </View>
+
+
+
+                <FilterPet onFilteredProfiles={filteredProfiles}/>
+
 
 
 
@@ -267,7 +327,6 @@ const styles = StyleSheet.create({
     },
     /* Dropdown Styling */
     dropdown: {
-        // height: 50,
         borderColor: 'gray',
         borderWidth: 0.5,
         borderRadius: 8,
@@ -310,9 +369,20 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderRadius: 5,
         padding: 5,
-        paddingLeft: 10,
+        paddingLeft: 20,
         width: '90%',
         marginTop: -12,
+        marginLeft: 15,
+    },
+    dateHeader : {
+        fontSize: 18,
+        paddingTop: 10,
+        paddingLeft: 5,
+        paddingBottom: 10,
+        fontWeight: 'bold',
+        marginTop: 5,
+        marginLeft: 15,
+
     },
     applyFilterButton: {
         width: '90%',
