@@ -69,6 +69,7 @@ function MenuPublicScreen(props) {
                     renderItem={({ item }) => (
                         <MenuItem 
                             title={item.title}
+                            onPress={() => console.log("Will later replace this with navigation.")}
                             IconComponent={
                                 <Icon 
                                     name={item.icon.name}
