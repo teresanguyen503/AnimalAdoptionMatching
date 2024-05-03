@@ -119,8 +119,8 @@ export default function AddPet() {
         try{
         // expo go:
         const base64Image = await convertImageToBase64(image);
-       // const {data} = await axios.post('http://192.168.1.12:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image:base64Image, disposition})
-         const {data} = await axios.post('http://192.168.1.98:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image: base64Image, disposition})
+        const {data} = await axios.post('http://192.168.1.12:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image:base64Image, disposition})
+       //  const {data} = await axios.post('http://192.168.1.98:3000/addPet', {name, isdate, desc, speciesName, selectedItem, image: base64Image, disposition})
           alert('New Profile successfully added')
           // Clear input fields
           setName('');
