@@ -79,6 +79,10 @@ const HomeNavigator = () => (
       component={AddPet}
     />
     <Stack.Screen
+      name="PetProfile"
+      component={PetProfile}
+    />
+    <Stack.Screen
       name="SearchPet"
       component={SearchPet}
     />
