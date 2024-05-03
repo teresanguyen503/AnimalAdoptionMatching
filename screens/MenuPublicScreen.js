@@ -80,6 +80,7 @@ function MenuPublicScreen(props) {
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
                 />
             </View>
+            <View style={styles.separator} />
             <MenuItem 
                 title="Log Out"
                 IconComponent={<Icon name="logout" backgroundColor={colors.lightgray} />}
