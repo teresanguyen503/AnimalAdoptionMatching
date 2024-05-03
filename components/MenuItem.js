@@ -3,9 +3,9 @@ import { Text, TouchableHighlight, StyleSheet, View } from 'react-native';
 
 import colors from '../config/colors';
 
-function MenuItem({ IconComponent, title }) {
+function MenuItem({ IconComponent, onPress, title }) {
     return (
-        <TouchableHighlight>
+        <TouchableHighlight underlayColor={colors.lightgray} onPress={onPress}>
             <View style={styles.container}>
                 {IconComponent}
                 <View style={styles.detailsContainer}>
