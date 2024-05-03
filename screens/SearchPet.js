@@ -66,6 +66,9 @@ const filteredDogData = dogData.filter(item =>
     const handleDateSelect = (date) => {
         setDate(date)
     };
+      {/* Apply Filter Function */}
+    const handleApplyFilter = () => {
+    };
 
 
 
@@ -191,6 +194,13 @@ const filteredDogData = dogData.filter(item =>
                 {/* Date Picker Modal */}
                 <DateModal onDateSelect={handleDateSelect}/>
 
+                {/* Apply filter Button */}
+                <View style={styles.applyFilterButton}>
+                    <TouchableOpacity onPress={handleApplyFilter} style={styles.accountButton}>
+                    <Text>Apply Filter</Text>
+                    </TouchableOpacity>
+                </View>
+
 
 
             </View>
@@ -231,6 +241,7 @@ const styles = StyleSheet.create({
         fontSize: 45,
         borderRadius: 10,
         textAlign: "center",
+        alignItems: "center",
       },
     selectedButton: {
         backgroundColor: 'grey',
@@ -303,6 +314,12 @@ const styles = StyleSheet.create({
         width: '90%',
         marginTop: -12,
     },
+    applyFilterButton: {
+        width: '90%',
+        paddingTop: 45,
+        marginLeft: 18,
+        marginTop: -25,
+     },
 
 })
 
