@@ -5,6 +5,7 @@ import SafeScreen from '../components/SafeScreen';
 import dogData from '../breed-data/dog-breed.json';
 import catData from '../breed-data/cat-breed.json';
 import otherData from '../breed-data/other-breed.json';
+import DateModal from '../components/DateModal';
 
 
 const SearchPet = () => {
@@ -15,6 +16,7 @@ const SearchPet = () => {
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
     const [dispositionButton, setDispositionButton] = useState(null);
+    const [isdate, setDate] = useState('');
 
     {/* Species Button Function */}
     const handleButtonPress = (buttonId) => {
@@ -60,6 +62,10 @@ const filteredDogData = dogData.filter(item =>
     const handleDispositionPress = (buttonId) => {
         setDispositionButton(buttonId);
     }
+    {/* Date Function */}
+    const handleDateSelect = (date) => {
+        setDate(date)
+    };
 
 
 
@@ -172,6 +178,19 @@ const filteredDogData = dogData.filter(item =>
                     </View>
                 </View>
 
+                {/* Date Placeholder */}
+                <View>
+                    <Text style={styles.name}>Date Available</Text>
+                    <TouchableOpacity
+                    style={styles.textInput}>
+                    <Text >{isdate}</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                {/* Date Picker Modal */}
+                <DateModal onDateSelect={handleDateSelect}/>
+
 
 
             </View>
@@ -273,6 +292,16 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         fontWeight: 'bold', marginTop: 2,
         top: 6,
+    },
+    // Date
+    textInput: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5,
+        padding: 5,
+        paddingLeft: 10,
+        width: '90%',
+        marginTop: -12,
     },
 
 })
