@@ -49,7 +49,8 @@ const NewsPageNavigator = () => (
 const HomeNavigator = () => (
   <Stack.Navigator
     screenOptions={{
-      headerShown: false
+      headerBackButtonMenuEnabled: true, 
+      headerTitle: ""
     }}
   >
     <Stack.Screen
@@ -82,7 +83,8 @@ const HomeNavigator = () => (
 const AccountNavigator = () => (
   <Stack.Navigator
     screenOptions={{
-      headerShown: false
+      headerBackButtonMenuEnabled: true,
+      headerTitle: ""
     }}
   >
     <Stack.Screen
