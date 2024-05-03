@@ -15,7 +15,10 @@ import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewsPage from "./screens/NewsPage";
 import PetProfile from "./screens/PetProfile";
 import MenuPublicScreen from "./screens/MenuPublicScreen";
-import MenuAdminScreen from "./screens/MenuAdminScreen"; 
+import MenuAdminScreen from "./screens/MenuAdminScreen";
+
+import AuthNavigator from "./navigation/AuthNavigator";
+
 import colors from "./config/colors";
 
 
@@ -126,7 +129,7 @@ const TabNavigator = () => (
 function App() {
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <AuthNavigator />
     </NavigationContainer>
   );
 }
