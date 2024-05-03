@@ -1,37 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, FlatList, Platform} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, Image, FlatList} from 'react-native';
 import axios from 'axios';
-// import SearchPet from '../screens/SearchPet';
-
 
 
 export default function FilterPet({onFilteredProfiles}){
-    const [filteredProfiles, setFilteredProfiles] = useState([]);
-
-    // const applyFilter = async (selectedFilters) => {
-    //     console.log("applyFilter:", "here")
-    //     try {
-    //     // Send selectedFilters to the backend API
-    //     const response = await fetch('http://192.168.1.98:3000/filter', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(selectedFilters)
-    //     })
-    //     const data = await response.json();
-    //     setFilteredProfiles(data);
-    //     } catch(error) {
-    //         // Handle errors
-    //         console.error('Error applying filter:', error);
-    //     };
-    // };
-
 
     return (
         <View>
-            {/* <SearchPet applyFilter={applyFilter} /> */}
-
             <FlatList
                 data={onFilteredProfiles}
                 renderItem={({ item }) => (
