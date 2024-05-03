@@ -225,7 +225,7 @@ const filteredDogData = dogData.filter(item =>
                 <View style={styles.speciesContainer}>
                     <View style={styles.item}>
                         <TouchableOpacity
-                        style={[styles.accountButton, dispositionButton === 1  && styles.selectedButton]}
+                        style={[styles.dispositionButton, dispositionButton === 1  && styles.selectedButton]}
                         onPress={() =>  {handleDispositionPr('Good with other animals'); handleDispositionPress(1);}}
                         >
                         <Text style={styles.buttonText}>Good with other animals</Text>
@@ -233,7 +233,7 @@ const filteredDogData = dogData.filter(item =>
                     </View>
                     <View style={styles.item}>
                         <TouchableOpacity
-                        style={[styles.accountButton, dispositionButton === 2 && styles.selectedButton]}
+                        style={[styles.dispositionButton, dispositionButton === 2 && styles.selectedButton]}
                         onPress={() =>  {handleDispositionPr('Good with children'); handleDispositionPress(2);}}
                         >
                         <Text style={styles.buttonText}>Good with children</Text>
@@ -241,7 +241,7 @@ const filteredDogData = dogData.filter(item =>
                     </View>
                     <View style={styles.item}>
                         <TouchableOpacity
-                        style={[styles.accountButton, dispositionButton === 3  && styles.selectedButton]}
+                        style={[styles.dispositionButton, dispositionButton === 3  && styles.selectedButton]}
                         onPress={() => {handleDispositionPr('Animal must be leashed at all times'); handleDispositionPress(3);}}
                         >
                         <Text style={styles.buttonText}>Must be leashed at all times</Text>
@@ -251,7 +251,7 @@ const filteredDogData = dogData.filter(item =>
 
                 {/* Apply filter Button */}
                 <View style={styles.applyFilterButton}>
-                    <TouchableOpacity onPress={handleApplyFilter} style={styles.accountButton}>
+                    <TouchableOpacity onPress={handleApplyFilter} style={styles.filterButton}>
                     <Text>Apply Filter</Text>
                     </TouchableOpacity>
                 </View>
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center', // Align items to the start (left)
         alignItems: 'center', // Center vertically
         paddingHorizontal: 16, // Add padding for spacing
-        paddingTop: 20,
+        paddingTop: 10,
     },
     heading: {
         fontSize: 30,
@@ -302,6 +302,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: "center",
         alignItems: "center",
+        marginTop: -10,
       },
     selectedButton: {
         backgroundColor: 'grey',
@@ -352,7 +353,7 @@ const styles = StyleSheet.create({
         paddingLeft: 22,
         fontSize: 18,
         fontWeight: 'bold',
-        marginTop: -2,
+        marginTop: -10,
     },
     /* Disposition Checkbox and Label Styling */
     dispositionHeader: {
@@ -362,6 +363,20 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         fontWeight: 'bold', marginTop: 2,
         top: 6,
+    },
+    dispositionButton: {
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: "white",
+        borderColor: "black",
+        borderWidth: 1,
+        fontSize: 45,
+        borderRadius: 10,
+        textAlign: "center",
+        alignItems: "center",
+        marginTop: -20,
+        marginBottom: -5,
+
     },
     // Date
     textInput: {
@@ -386,10 +401,21 @@ const styles = StyleSheet.create({
     },
     applyFilterButton: {
         width: '90%',
-        paddingTop: 45,
+        paddingTop: 20,
         marginLeft: 18,
-        marginTop: -25,
-     },
+        marginTop: -30,
+    },
+    filterButton: {
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: "white",
+        borderColor: "black",
+        borderWidth: 1,
+        fontSize: 45,
+        borderRadius: 10,
+        textAlign: "center",
+        alignItems: "center",
+    }
 
 })
 
