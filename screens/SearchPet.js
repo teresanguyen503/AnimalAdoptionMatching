@@ -93,14 +93,14 @@ const filteredDogData = dogData.filter(item =>
         const selectedFilters = {
             speciesName: selectedSpecie,
             disposition: selectedDisposition,
-            isdate: setDate,
+            isdate: isdate,
             selectedItem: selectedItem
         };
        applyFilter(selectedFilters);
-       setSelectedButton('')
-       setDate('');
-       setDispositionButton('');
-       setSelectedItem('');
+    //    setSelectedButton('')
+    //    setDate('');
+    //    setDispositionButton('');
+    //    setSelectedItem('');
 
     };
 
