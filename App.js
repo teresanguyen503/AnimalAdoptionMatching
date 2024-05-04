@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
 
 function App() {
   const [user, setUser] = useState(null); 
-  console.log(user); 
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

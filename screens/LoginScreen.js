@@ -42,7 +42,7 @@ function LoginScreen(props) {
                 const user = response.data.data; 
                 authConext.setUser(user);
                 alert('Success');
-                navigation.navigate("Home")
+                navigation.navigate("HomeStack"); 
             } 
         } catch (error) {
             alert('Invalid email or password'); 
