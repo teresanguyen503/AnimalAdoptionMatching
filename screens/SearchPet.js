@@ -36,12 +36,6 @@ const SearchPet = () => {
         });
     };
 
-    const handleFiltering = () => {
-        // Apply filtering logic based on selected filters
-        console.log('Applying filters:', selectedDispFilters);
-        // Perform filtering action based on selected filters
-    };
-
 
     {/* Species Button Function */}
     const handleButtonPress = (buttonId) => {
@@ -277,25 +271,24 @@ const filteredDogData = dogData.filter(item =>
                     </View>
                 </View> */}
 
-                {/* Starting here */}
                 <View style={styles.speciesContainer}>
                     <TouchableOpacity  style={styles.dispButton}
                      onPress={() => toggleFilterSelection('Good with children')}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Good with children') ? 'grey' : 'transparent', padding: 8, }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Good with children') ? 'grey' : 'transparent', padding: 8,  borderRadius: 10, }}>
                             <Text style={styles.buttonText}>Good with children</Text>
                             {selectedDispFilters.includes('Good with children')}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity  style={styles.dispButton}
                     onPress={() => toggleFilterSelection('Good with other animals')}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Good with other animals') ? 'grey' : 'transparent', padding: 8 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Good with other animals') ? 'grey' : 'transparent', padding: 8,  borderRadius: 10, }}>
                             <Text style={styles.buttonText}>Good with other animals</Text>
                             {selectedDispFilters.includes('Good with other animals')}
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity  style={styles.dispButton}
                     onPress={() => toggleFilterSelection('Animal must be leashed at all times')}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Animal must be leashed at all times') ? 'grey' : 'transparent',padding: 8, }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Animal must be leashed at all times') ? 'grey' : 'transparent',padding: 8,  borderRadius: 10,}}>
                             <Text style={styles.buttonText}>Animal must be leashed at all times</Text>
                             {selectedDispFilters.includes('Animal must be leashed at all times')}
                         </View>
@@ -444,7 +437,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 15,
-        // width: '30%',
         alignItems: 'center',
         marginRight:5,
 
