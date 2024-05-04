@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, Modal, Image } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, Modal, Button } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import SafeScreen from '../components/SafeScreen';
 import dogData from '../breed-data/dog-breed.json';
@@ -21,6 +21,26 @@ const SearchPet = () => {
     const [selectedSpecie, setSelectedSpecie] = useState('');
     const [selectedDisposition, setSelectedDisposition] = useState('');
     const [filteredProfiles, setFilteredProfiles] = useState([]);
+    const [selectedDispFilters, setSelectedDispFilters] = useState('');
+
+    // Function to toggle selection of a filter
+    const toggleFilterSelection = (filter) => {
+        setSelectedDispFilters(prevSelectedFilters => {
+            if (prevSelectedFilters.includes(filter)) {
+                // If filter is already selected, remove it
+                return prevSelectedFilters.filter(item => item !== filter);
+            } else {
+                // If filter is not selected, add it
+                return [...prevSelectedFilters, filter];
+            }
+        });
+    };
+
+    const handleFiltering = () => {
+        // Apply filtering logic based on selected filters
+        console.log('Applying filters:', selectedDispFilters);
+        // Perform filtering action based on selected filters
+    };
 
 
     {/* Species Button Function */}
@@ -92,15 +112,12 @@ const filteredDogData = dogData.filter(item =>
      const handleApplyFilter = () => {
         const selectedFilters = {
             speciesName: selectedSpecie,
-            disposition: selectedDisposition,
+           // disposition: selectedDisposition,
+          disposition: selectedDispFilters,
             isdate: isdate,
             selectedItem: selectedItem
         };
        applyFilter(selectedFilters);
-    //    setSelectedButton('')
-    //    setDate('');
-    //    setDispositionButton('');
-    //    setSelectedItem('');
 
     };
     const resetFilter = () => {
@@ -110,6 +127,7 @@ const filteredDogData = dogData.filter(item =>
         setDispositionButton('');
         setSelectedItem('');
         setFilteredProfiles([]);
+        setSelectedDispFilters('');
 
     }
 
@@ -231,11 +249,11 @@ const filteredDogData = dogData.filter(item =>
 
                 {/* Disposition */}
                 <Text style={styles.dispositionHeader}>Disposition</Text>
-                <View style={styles.speciesContainer}>
+                {/* <View style={styles.speciesContainer}>
                     <View style={styles.item}>
                         <TouchableOpacity
                         style={[styles.dispositionButton, dispositionButton === 1  && styles.selectedButton]}
-                        onPress={() =>  {handleDispositionPr('Good with other animals'); handleDispositionPress(1);}}
+                         onPress={() =>  {handleDispositionPr('Good with other animals'); handleDispositionPress(1);}}
                         >
                         <Text style={styles.buttonText}>Good with other animals</Text>
                         </TouchableOpacity>
@@ -243,7 +261,7 @@ const filteredDogData = dogData.filter(item =>
                     <View style={styles.item}>
                         <TouchableOpacity
                         style={[styles.dispositionButton, dispositionButton === 2 && styles.selectedButton]}
-                        onPress={() =>  {handleDispositionPr('Good with children'); handleDispositionPress(2);}}
+                         onPress={() =>  {handleDispositionPr('Good with children'); handleDispositionPress(2);}}
                         >
                         <Text style={styles.buttonText}>Good with children</Text>
                         </TouchableOpacity>
@@ -251,11 +269,38 @@ const filteredDogData = dogData.filter(item =>
                     <View style={styles.item}>
                         <TouchableOpacity
                         style={[styles.dispositionButton, dispositionButton === 3  && styles.selectedButton]}
-                        onPress={() => {handleDispositionPr('Animal must be leashed at all times'); handleDispositionPress(3);}}
+                         onPress={() => {handleDispositionPr('Animal must be leashed at all times'); handleDispositionPress(3);}}
+
                         >
                         <Text style={styles.buttonText}>Must be leashed at all times</Text>
                         </TouchableOpacity>
                     </View>
+                </View> */}
+
+                {/* Starting here */}
+                <View style={styles.speciesContainer}>
+                    <TouchableOpacity  style={styles.dispButton}
+                     onPress={() => toggleFilterSelection('Good with children')}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Good with children') ? 'grey' : 'transparent', padding: 8, }}>
+                            <Text style={styles.buttonText}>Good with children</Text>
+                            {selectedDispFilters.includes('Good with children')}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity  style={styles.dispButton}
+                    onPress={() => toggleFilterSelection('Good with other animals')}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Good with other animals') ? 'grey' : 'transparent', padding: 8 }}>
+                            <Text style={styles.buttonText}>Good with other animals</Text>
+                            {selectedDispFilters.includes('Good with other animals')}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity  style={styles.dispButton}
+                    onPress={() => toggleFilterSelection('Animal must be leashed at all times')}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: selectedDispFilters.includes('Animal must be leashed at all times') ? 'grey' : 'transparent',padding: 8, }}>
+                            <Text style={styles.buttonText}>Animal must be leashed at all times</Text>
+                            {selectedDispFilters.includes('Animal must be leashed at all times')}
+                        </View>
+                    </TouchableOpacity>
+
                 </View>
 
                 {/* Apply filter Button */}
@@ -263,7 +308,7 @@ const filteredDogData = dogData.filter(item =>
                     <TouchableOpacity onPress={handleApplyFilter} style={styles.filterButton}>
                     <Text>Apply Filter</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={resetFilter} style={styles.filterButton}>
+                    <TouchableOpacity onPress={resetFilter} style={styles.resetButton}>
                     <Text>Reset Search</Text>
                     </TouchableOpacity>
                 </View>
@@ -390,6 +435,20 @@ const styles = StyleSheet.create({
         marginBottom: -5,
 
     },
+    dispButton: {
+        backgroundColor: "white",
+        borderColor: "black",
+        borderWidth: 0.5,
+        borderRadius: 10,
+        textAlign: "center",
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 15,
+        // width: '30%',
+        alignItems: 'center',
+        marginRight:5,
+
+    },
     // Date
     textInput: {
         borderWidth: 1,
@@ -412,13 +471,15 @@ const styles = StyleSheet.create({
 
     },
     applyFilterButton: {
-        width: '90%',
+        // width: '200%',
         paddingTop: 20,
         marginLeft: 18,
         marginTop: -30,
+        flexDirection: 'row',
+        padding: 12,
     },
     filterButton: {
-        paddingVertical: 5,
+        paddingVertical: 10,
         paddingHorizontal: 10,
         backgroundColor: "white",
         borderColor: "black",
@@ -427,6 +488,23 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: "center",
         alignItems: "center",
+        marginTop:5,
+        marginLeft: 50,
+    },
+    resetButton: {
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        backgroundColor: "white",
+        borderColor: "black",
+        borderWidth: 1,
+        fontSize: 45,
+        borderRadius: 10,
+        textAlign: "center",
+        alignItems: "center",
+        marginTop:5,
+        marginLeft: 30,
+
+
     }
 
 })
