@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, FlatList, ScrollView} from 'react-native';
 import axios from 'axios';
-
+import { useSafeAreaInsets } from 'react-native-safe-area-context'; 
 
 export default function FilterPet({onFilteredProfiles}){
+    const insets = useSafeAreaInsets(); 
+    const tabBarHeight = insets.bottom + 20; // Height of the bottom tab navigation
 
     return (
         <View>
             <View style={styles.filteredProfileContainer}>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: tabBarHeight }}>
                   {onFilteredProfiles.map(profile => (
                  <View key={profile._id} style={{  flexDirection: 'row', alignItems: 'center', padding: 10 }}>
                  <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
