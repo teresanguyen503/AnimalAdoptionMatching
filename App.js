@@ -29,7 +29,7 @@ function App() {
           ) : user === "admin" ? (
             <AppAdminNavigator />
           ) : (
-            <AppAdminNavigator />
+            <AppPublicNavigator />
           )
         }
       </NavigationContainer>

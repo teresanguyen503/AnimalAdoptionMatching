@@ -1,12 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import MenuAdminScreen from "../screens/MenuAdminScreen";
+import MenuPublicScreen from "../screens/MenuPublicScreen";
 import PetProfile from "../screens/PetProfile";
 
 const Stack = createNativeStackNavigator(); 
 
-const AccountAdminNavigator = () => (
+const AccountPublicNavigator = () => (
     <Stack.Navigator
       screenOptions={{
         headerBackButtonMenuEnabled: true,
@@ -15,7 +15,7 @@ const AccountAdminNavigator = () => (
     >
         <Stack.Screen
             name="MenuAdmin"
-            component={MenuAdminScreen}
+            component={MenuPublicScreen}
         />  
         <Stack.Screen
             name="PetProfile"
@@ -24,4 +24,4 @@ const AccountAdminNavigator = () => (
     </Stack.Navigator>
 )
 
-export default AccountAdminNavigator; 
+export default AccountPublicNavigator; 
