@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
 import MenuItem from '../components/MenuItem';
 import SafeScreen from '../components/SafeScreen'; 
 import Icon from '../components/Icon';
+import AuthContext from '../auth/context';
 
 import colors from '../config/colors'; 
 
 function MenuPublicScreen(props) {
+    const { user, setUser } = useContext(AuthContext); 
+
     const menuItems = [
         {
             title: "Dogs", 
@@ -77,8 +80,8 @@ function MenuPublicScreen(props) {
             <View style={styles.separator} />
             <MenuItem 
                 title="Log Out"
-                onPress={() => console.log("Will later replace this with navigation too.")}
                 IconComponent={<Icon name="logout" backgroundColor={colors.lightgray} />}
+                onPress={() => setUser(null)}
             />
         </SafeScreen>
     );
