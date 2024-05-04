@@ -1,10 +1,12 @@
 import "react-native-gesture-handler";
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import AuthNavigator from "./navigation/AuthNavigator";
 import AppAdminNavigator from "./navigation/AppAdminNavigator";
 import AppPublicNavigator from "./navigation/AppPublicNavigator";
+import AuthContext from "./auth/context";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,10 +18,23 @@ const styles = StyleSheet.create({
 });
 
 function App() {
+  const [user, setUser] = useState(null); 
+  console.log(user); 
+
   return (
-    <NavigationContainer>
-      <AppPublicNavigator />
-    </NavigationContainer>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <NavigationContainer>
+        {
+          user === null ? (
+            <AuthNavigator />
+          ) : user === "admin" ? (
+            <AppAdminNavigator />
+          ) : (
+            <AppAdminNavigator />
+          )
+        }
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 
