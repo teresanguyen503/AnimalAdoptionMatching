@@ -103,11 +103,20 @@ const filteredDogData = dogData.filter(item =>
     //    setSelectedItem('');
 
     };
+    const resetFilter = () => {
+        setSelectedButton('');
+        setSelectedSpecie('')
+        setDate('');
+        setDispositionButton('');
+        setSelectedItem('');
+        setFilteredProfiles([]);
+
+    }
 
     const applyFilter = async (selectedFilters) => {
         try {
         // Send selectedFilters to the backend API
-        const response = await fetch('http://192.168.1.12:3000/filter', {
+        const response = await fetch('http://192.168.1.98:3000/filter', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -253,6 +262,9 @@ const filteredDogData = dogData.filter(item =>
                 <View style={styles.applyFilterButton}>
                     <TouchableOpacity onPress={handleApplyFilter} style={styles.filterButton}>
                     <Text>Apply Filter</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={resetFilter} style={styles.filterButton}>
+                    <Text>Reset Search</Text>
                     </TouchableOpacity>
                 </View>
 
