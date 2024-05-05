@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -8,10 +8,12 @@ import {
   Image,
   ScrollView,
   TextInput,
+  Button,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from '@expo/vector-icons';
 // import articles from "../api/articles";
 
 import colors from "../config/colors";
@@ -23,47 +25,47 @@ function AddNews() {
   const [articleTitle, setTitle] = useState("");
   const [articleByline, setByline] = useState("");
   const [articleText, setArticleText] = useState("");
-//   const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
 
-//     /* Image Function */
-//   useEffect(() => {
-//     (async () => {
-//       const galleryStatus =
-//         await ImagePicker.requestMediaLibraryPermissionsAsync();
-//       setHasGalleryPermission(galleryStatus.status === "granted");
-//     })();
-//   }, []);
+    /* Image Function */
+  useEffect(() => {
+    (async () => {
+      const galleryStatus =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasGalleryPermission(galleryStatus.status === "granted");
+    })();
+  }, []);
 
-//   const pickImage = async () => {
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.All,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-//     if (!result.canceled) {
-//       setImage(result.assets[0].uri);
-//     }
-//   };
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
-//   const submitForm = async (user) => {
-//     try {
-//       const result = await userAccounts.addUser(user);
-//       if (!result.ok) {
-//         if (result.problem === "CLIENT_ERROR" && result.status === 409) {
-//           alert("Email already exists. Please use a different email");
-//         } else {
-//           alert("Could not register user. Try again");
-//         }
-//       } else {
-//         alert("Success");
-//       }
-//     } catch (error) {
-//       console.error("Error occurred: ", error);
-//       alert("An error occurred. Please try again later.");
-//     }
-//   };
+  const submitForm = async (news) => {
+    try {
+      const result = await news.addArticle(news);
+      if (!result.ok) {
+        if (result.problem === "CLIENT_ERROR" && result.status === 409) {
+          alert("Email already exists. Please use a different email");
+        } else {
+          alert("Could not register user. Try again");
+        }
+      } else {
+        alert("Success");
+      }
+    } catch (error) {
+      console.error("Error occurred: ", error);
+      alert("An error occurred. Please try again later.");
+    }
+  };
 
   return (
     <SafeScreen>
@@ -110,32 +112,32 @@ function AddNews() {
         </View>
 
         {/* Image */}
-        {/* <View style={styles.imageContainer}> */}
-          {/* {image && (
+        <View style={styles.imageContainer}>
+          {image && (
             <Image
               source={{ uri: image }}
               style={{ width: 200, height: 200 }}
             />
-          )} */}
-          {/* <View style={styles.uploadBtnContainer}> */}
-            {/* <TouchableOpacity onPress={pickImage} style={styles.uploadBtn}> */}
-              {/* <AntDesign name="camera" size={20} color="black" /> */}
-              {/* <Text>{image ? "Edit" : "Upload"} Image</Text> */}
-            {/* </TouchableOpacity> */}
-          {/* </View> */}
-        {/* </View> */}
+          )}
+          <View style={styles.uploadBtnContainer}>
+            <TouchableOpacity onPress={pickImage} style={styles.uploadBtn}>
+              <AntDesign name="camera" size={20} color="black" />
+              <Text>{image ? "Edit" : "Upload"} Image</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
         {/* Button */}
-        {/* <View style={styles.addArticleButton}> */}
-          {/* <Button title="Add Article" onPress={submitForm}></Button> */}
-        {/* </View> */}
+        <View style={styles.addArticleButton}>
+          <Button title="Add Article" onPress={submitForm}></Button>
+        </View>
 
         {/* Bottom Container */}
-        {/* <View style={styles.bottomContainer}>
+        <View style={styles.bottomContainer}>
           <Text>
             Once added, the news story will be visible to adoption seekers.
           </Text>
-        </View> */}
+        </View>
       </ScrollView>
     </SafeScreen>
   );
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   // Form
   title: {
     fontWeight: "bold",
-    fontSize: "18",
+    fontSize: 18,
     padding: 10,
     paddingStart: 15,
   },
@@ -174,17 +176,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "gray",
     borderRadius: 5,
-    width: "90%",
+    width: "95%",
     padding: 10,
-    marginStart: "1%",
+    marginStart: "3%",
   },
   longTextInput: {
     borderWidth: 1,
     borderColor: "gray",
     borderRadius: 5,
-    width: "90%",
+    width: "95%",
     padding: 10,
-    marginStart: "1%",
+    marginStart: "3%",
     maxHeight: 100, 
   },
 
@@ -199,6 +201,7 @@ const styles = StyleSheet.create({
     position: "relative",
     overflow: "hidden",
     marginLeft: 5,
+    alignContent: "center",
   },
   uploadBtnContainer: {
     opacity: 0.7,
@@ -225,9 +228,13 @@ const styles = StyleSheet.create({
 
   // Bottom Container
   bottomContainer: {
+    marginTop: 20,
+    padding: 2,
     backgroundColor: "lightgray",
     fontWeight: "bold",
     fontSize: 18,
+    marginStart: "3%",
+    width: "95%",
   },
 });
 
