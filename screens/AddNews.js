@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginStart: "1%",
     maxHeight: 100, 
-    multiline:"true",
   },
 
   // Image
