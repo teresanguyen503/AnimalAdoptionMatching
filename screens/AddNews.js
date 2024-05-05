@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "90%",
     padding: 10,
+    marginStart: "1%",
   },
   longTextInput: {
     borderWidth: 1,
@@ -183,7 +184,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "90%",
     padding: 10,
-    height: "25%",
+    marginStart: "1%",
+    maxHeight: 100, 
+    multiline:"true",
   },
 
   // Image
