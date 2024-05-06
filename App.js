@@ -16,6 +16,7 @@ import NewsPage from "./screens/NewsPage";
 import PetProfile from "./screens/PetProfile";
 import MenuPublicScreen from "./screens/MenuPublicScreen";
 import SearchPet from "./screens/SearchPet";
+import AdminPetProfile from "./screens/AdminPetProfile";
 import colors from "./config/colors";
 
 
@@ -82,6 +83,10 @@ const HomeNavigator = () => (
     <Stack.Screen
       name="SearchPet"
       component={SearchPet}
+    />
+     <Stack.Screen
+      name="AdminPetProfile"
+      component={AdminPetProfile}
     />
   </Stack.Navigator>
 )
