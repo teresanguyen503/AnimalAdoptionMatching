@@ -153,40 +153,41 @@ export default function AdminPetProfile() {
         return (
             <View  style={styles.container}>
                 <View >
-                <TouchableOpacity
-                style={[styles.availablityButton, buttonStatus === 'available' && styles.activeButton]}
-                onPress={() =>  {handleButtonPress('available'); handlePetClick(currentIndex, 'Available')}}
-                >
-                <Text>Available</Text>
-            </TouchableOpacity>
+                    <TouchableOpacity
+                    style={[styles.availablityButton, buttonStatus === 'available' && styles.activeButton]}
+                    onPress={() =>  {handleButtonPress('available'); handlePetClick(currentIndex, 'Available')}}
+                    >
+                    <Text>Available</Text>
+                    </TouchableOpacity>
 
-            <TouchableOpacity
-                style={[styles.availablityButton, buttonStatus === 'adopted' && styles.activeButton]}
-                onPress={() => {handleButtonPress('adopted'); handlePetClick(currentIndex, 'Adopted')}}
-                >
-                <Text>Adopted</Text>
-            </TouchableOpacity>
+                    <TouchableOpacity
+                    style={[styles.availablityButton, buttonStatus === 'adopted' && styles.activeButton]}
+                    onPress={() => {handleButtonPress('adopted'); handlePetClick(currentIndex, 'Adopted')}}
+                    >
+                    <Text>Adopted</Text>
+                    </TouchableOpacity>
 
-            </View>
+                </View>
 
-
-            <View>
-            <TouchableOpacity
-        style={[styles.availablityButton, buttonStatus === 'pending' && styles.activeButton]}
-        onPress={() => {handleButtonPress('pending'); handlePetClick(currentIndex, 'Pending')}}
-      >
-        <Text>Pending</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.availablityButton, buttonStatus === 'not_available' && styles.activeButton]}
-        onPress={() => {handleButtonPress('not_available'); handlePetClick(currentIndex, 'Not Available')}}
-      >
-        <Text>Not Available</Text>
-      </TouchableOpacity>
-
-
-            </View>
-
+                <View>
+                    <TouchableOpacity
+                    style={[styles.availablityButton, buttonStatus === 'pending' && styles.activeButton]}
+                    onPress={() => {handleButtonPress('pending'); handlePetClick(currentIndex, 'Pending')}}
+                    >
+                    <Text>Pending</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                    style={[styles.availablityButton, buttonStatus === 'not_available' && styles.activeButton]}
+                    onPress={() => {handleButtonPress('not_available'); handlePetClick(currentIndex, 'Not Available')}}
+                    >
+                    <Text>Not Available</Text>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity
+                     style={[styles.deleteButton]}
+                    >
+                        <Text>Delete</Text>
+                    </TouchableOpacity> */}
+                </View>
             </View>
 
         );
@@ -247,20 +248,17 @@ return(
         </TouchableOpacity>
         </View>
 
-        {/* Pass and Like Button Container */}
-        {/* <View style={styles.buttonContainer}> */}
-            {/* Pass Button */}
-            {/* <View style={styles.buttonItem}>
-                <TouchableOpacity onPress={handlePassButton}style={styles.button}>
-                <Text>Pass</Text>
-                </TouchableOpacity>
-            </View> */}
             {ProfileScreen(currentIndex)}
+            {/* Delete Button */}
+            <View>
+                <TouchableOpacity
+                style={[styles.deleteButton]}
+                >
+                <Text>Delete</Text>
+                </TouchableOpacity>
+            </View>
 
-             {/* Like Button */}
-            {/* <View style={styles.buttonItem}>
-            </View> */}
-        {/* </View> */}
+
 
     </ScrollView>
     </View>
@@ -415,5 +413,16 @@ const styles = StyleSheet.create({
     },
     selected: {
         backgroundColor: 'blue', // Change the color to whatever you prefer
+    },
+    deleteButton: {
+        borderWidth: 0.5,
+        marginLeft: 140,
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: 'transparent',
+        paddingVertical: 10,
+        width: '30%',
+        marginTop: 10,
+        marginBottom: 20,
     },
 })
