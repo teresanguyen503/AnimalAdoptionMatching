@@ -14,7 +14,8 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
-// import articles from "../api/articles";
+import * as ImagePicker from 'expo-image-picker';
+import articles from "../api/articles";
 
 import colors from "../config/colors";
 
@@ -26,12 +27,15 @@ function AddNews() {
   const [articleByline, setByline] = useState("");
   const [articleText, setArticleText] = useState("");
   const [image, setImage] = useState(null);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
     /* Image Function */
   useEffect(() => {
     (async () => {
+      // const grantedStorage = await ImagePicker._requestStoragePermissions();
       const galleryStatus =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
+      // setHasGalleryPermission(galleryStatus.status === "granted" || grantedStorage.status === "granted");
       setHasGalleryPermission(galleryStatus.status === "granted");
     })();
   }, []);
@@ -50,14 +54,14 @@ function AddNews() {
   };
 
   const submitForm = async (news) => {
+    if(!articleTitle || !articleByline || !articleText ){
+      alert('Please check required fields (i.e., title, byline, and text). Images are optional.')
+      return;
+    }
     try {
-      const result = await news.addArticle(news);
+      const result = await articles.addArticle(news);
       if (!result.ok) {
-        if (result.problem === "CLIENT_ERROR" && result.status === 409) {
-          alert("Email already exists. Please use a different email");
-        } else {
-          alert("Could not register user. Try again");
-        }
+          alert("Could not add article. Try again");
       } else {
         alert("Success");
       }
@@ -91,21 +95,21 @@ function AddNews() {
           <Text style={styles.title}>News Title</Text>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter title"
+            placeholder="Enter Title"
             onChangeText={setTitle}
             value={articleTitle}
           />
           <Text style={styles.title}>Article Byline</Text>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter byline"
+            placeholder="Enter Byline"
             onChangeText={setByline}
             value={articleByline}
           />
           <Text style={styles.title}>Article Text</Text>
           <TextInput
             style={styles.longTextInput}
-            placeholder="Enter text"
+            placeholder="Enter Text"
             onChangeText={setArticleText}
             value={articleText}
           />
@@ -132,12 +136,6 @@ function AddNews() {
           <Button title="Add Article" onPress={submitForm}></Button>
         </View>
 
-        {/* Bottom Container */}
-        <View style={styles.bottomContainer}>
-          <Text>
-            Once added, the news story will be visible to adoption seekers.
-          </Text>
-        </View>
       </ScrollView>
     </SafeScreen>
   );
@@ -196,12 +194,12 @@ const styles = StyleSheet.create({
     elevation: 2,
     height: 200,
     width: 200,
-    left: 65,
     backgroundColor: "#efefef",
     position: "relative",
-    overflow: "hidden",
-    marginLeft: 5,
-    alignContent: "center",
+    justifyContent: "center",
+    marginStart: "25%",
+    alignItems: "center",
+    flexDirection: "row",
   },
   uploadBtnContainer: {
     opacity: 0.7,
@@ -224,17 +222,6 @@ const styles = StyleSheet.create({
     paddingTop: 45,
     marginLeft: 18,
     marginTop: -25,
-  },
-
-  // Bottom Container
-  bottomContainer: {
-    marginTop: 20,
-    padding: 2,
-    backgroundColor: "lightgray",
-    fontWeight: "bold",
-    fontSize: 18,
-    marginStart: "3%",
-    width: "95%",
   },
 });
 
