@@ -112,7 +112,27 @@ export default function AdminPetProfile() {
           // Handle errors
           console.error('Error fetching pet profile:', error);
         }
-      };
+     };
+
+    // Remove the profile once they are deleted
+    const onDelete = (deletedPetId) => {
+        setProfiles(profiles.filter(pet => pet._id !== deletedPetId));
+    //    console.log("deletedPetId", deletedPetId)
+
+    };
+
+    //  Delete pet profile by id
+    const handleDelete = async () => {
+        try {
+            // Get the ID of the pet at the current index
+            const petId = searchedProfileIds[currentIndex];
+          // Send a DELETE request to the backend to delete the pet profile
+          await axios.delete(`http://192.168.1.98:3000/${petId}`);
+          onDelete(petId);
+        } catch (error) {
+          console.error('Error deleting pet profile:', error);
+        }
+    };
 
     const AvailableButton = ({ profileId }) => {
         useEffect(() => {
@@ -253,6 +273,7 @@ return(
             <View>
                 <TouchableOpacity
                 style={[styles.deleteButton]}
+                onPress={() => handleDelete()}
                 >
                 <Text>Delete</Text>
                 </TouchableOpacity>
