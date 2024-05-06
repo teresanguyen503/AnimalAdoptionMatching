@@ -18,6 +18,7 @@ export default function AdminPetProfile() {
     const [searchOptions, setSearchOptions] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [buttonStatus, setButtonStatus] = useState('available');
+    const [availabilityStatus, setAvailabilityStatus] = useState('available');
 
    // Function to fetch profiles from the backend
     const fetchProfiles = async () => {
@@ -98,7 +99,22 @@ export default function AdminPetProfile() {
         );
     };
 
-    const AvailableButton = ({ profileId, initialColor, changedColor }) => {
+    const handlePetClick = async (currentIndex, status) => {
+        try {
+          const petId = searchedProfileIds[currentIndex]; // Get the ID of the pet at the current index
+          // Send a request with the ID of the pet at the current index
+        //   console.log("status:",status)
+        //   console.log("petId:",petId)
+          const response = await axios.patch(`http://192.168.1.98:3000/${petId}`, { availability: status });
+          setAvailabilityStatus(status);
+          // Handle the response from the backend
+        } catch (error) {
+          // Handle errors
+          console.error('Error fetching pet profile:', error);
+        }
+      };
+
+    const AvailableButton = ({ profileId }) => {
         useEffect(() => {
             profileId = JSON.stringify(currentIndex);
             // Load button status from AsyncStorage when component mounts
@@ -139,14 +155,14 @@ export default function AdminPetProfile() {
                 <View >
                 <TouchableOpacity
                 style={[styles.availablityButton, buttonStatus === 'available' && styles.activeButton]}
-                onPress={() => handleButtonPress('available')}
+                onPress={() =>  {handleButtonPress('available'); handlePetClick(currentIndex, 'Available')}}
                 >
                 <Text>Available</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 style={[styles.availablityButton, buttonStatus === 'adopted' && styles.activeButton]}
-                onPress={() => handleButtonPress('adopted')}
+                onPress={() => {handleButtonPress('adopted'); handlePetClick(currentIndex, 'Adopted')}}
                 >
                 <Text>Adopted</Text>
             </TouchableOpacity>
@@ -157,13 +173,13 @@ export default function AdminPetProfile() {
             <View>
             <TouchableOpacity
         style={[styles.availablityButton, buttonStatus === 'pending' && styles.activeButton]}
-        onPress={() => handleButtonPress('pending')}
+        onPress={() => {handleButtonPress('pending'); handlePetClick(currentIndex, 'Pending')}}
       >
         <Text>Pending</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.availablityButton, buttonStatus === 'not_available' && styles.activeButton]}
-        onPress={() => handleButtonPress('not_available')}
+        onPress={() => {handleButtonPress('not_available'); handlePetClick(currentIndex, 'Not Available')}}
       >
         <Text>Not Available</Text>
       </TouchableOpacity>
@@ -180,7 +196,7 @@ export default function AdminPetProfile() {
         return (
             <View>
                 {/* Profile content */}
-                <AvailableButton profileId={profileId} initialColor="transparent" changedColor="black" />
+                <AvailableButton profileId={profileId} />
             </View>
         );
     };
