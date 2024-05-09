@@ -21,7 +21,7 @@ import colors from "../config/colors";
 
 const { width } = Dimensions.get("window");
 
-function AddNews() {
+function AddNews(props) {
   const navigation = useNavigation();
   const [articleTitle, setTitle] = useState("");
   const [articleByline, setByline] = useState("");
@@ -53,14 +53,15 @@ function AddNews() {
     }
   };
 
-  const submitForm = async (news) => {
+  const submitForm = async (article) => {
     if(!articleTitle || !articleByline || !articleText ){
       alert('Please check required fields (i.e., title, byline, and text). Images are optional.')
       return;
     }
     try {
-      const result = await articles.addArticle(news);
+      const result = await articles.addArticle(article);
       if (!result.ok) {
+          console.log(result);
           alert("Could not add article. Try again");
       } else {
         alert("Success");
