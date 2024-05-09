@@ -53,7 +53,12 @@ function AddNews(props) {
     }
   };
 
-  const submitForm = async (article) => {
+  const submitForm = async () => {
+    const article = {
+      articleTitle: articleTitle, 
+      articleByline: articleByline, 
+      articleText: articleText
+    }; 
     if(!articleTitle || !articleByline || !articleText ){
       alert('Please check required fields (i.e., title, byline, and text). Images are optional.')
       return;
