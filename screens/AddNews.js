@@ -57,7 +57,8 @@ function AddNews(props) {
     const article = {
       articleTitle: articleTitle, 
       articleByline: articleByline, 
-      articleText: articleText
+      articleText: articleText, 
+      image: image
     }; 
     if(!articleTitle || !articleByline || !articleText ){
       alert('Please check required fields (i.e., title, byline, and text). Images are optional.')
@@ -66,7 +67,6 @@ function AddNews(props) {
     try {
       const result = await articles.addArticle(article);
       if (!result.ok) {
-          console.log(result);
           alert("Could not add article. Try again");
       } else {
         alert("Success");
