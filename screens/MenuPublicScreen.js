@@ -13,21 +13,7 @@ function MenuPublicScreen(props) {
 
     const menuItems = [
         {
-            title: "Dogs", 
-            icon: {
-                name: "dog", 
-                backgroundColor: colors.mediumblue
-            }
-        },
-        {
-            title: "Cats", 
-            icon: {
-                name: "cat", 
-                backgroundColor: colors.mediumblue
-            }
-        },
-        {
-            title: "Other Animals", 
+            title: "All Animals", 
             icon: {
                 name: "turtle", 
                 backgroundColor: colors.mediumblue
