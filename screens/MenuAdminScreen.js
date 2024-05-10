@@ -13,21 +13,7 @@ function MenuPublicScreen(props) {
 
     const menuItems = [
         {
-            title: "Dogs", 
-            icon: {
-                name: "dog", 
-                backgroundColor: colors.mediumblue
-            }
-        },
-        {
-            title: "Cats", 
-            icon: {
-                name: "cat", 
-                backgroundColor: colors.mediumblue
-            }
-        },
-        {
-            title: "Other Animals", 
+            title: "View All Animals", 
             icon: {
                 name: "turtle", 
                 backgroundColor: colors.mediumblue
@@ -42,9 +28,16 @@ function MenuPublicScreen(props) {
             
         }, 
         {
-            title: "Add or Update Animals", 
+            title: "Add Animals", 
             icon: {
                 name: "plus", 
+                backgroundColor: colors.error
+            }
+        }, 
+        {
+            title: "Update Animals", 
+            icon: {
+                name: "update", 
                 backgroundColor: colors.error
             }
         }, 
