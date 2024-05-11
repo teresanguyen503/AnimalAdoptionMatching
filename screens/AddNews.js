@@ -102,6 +102,8 @@ function AddNews(props) {
           />
           <Text style={styles.title}>Article Text</Text>
           <TextInput
+            multiline
+            numberOfLines={100}
             style={styles.longTextInput}
             placeholder="Enter Text"
             onChangeText={setArticleText}
