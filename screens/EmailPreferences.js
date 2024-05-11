@@ -26,7 +26,14 @@ export default function EmailPreferences() {
         }
     };
 
-
+    const handleSavePreferences = () => {
+        if(!frequency || !events){
+            alert("Please select both preferences.")
+        }
+        else{
+            alert("Your email preferences have been saved.")
+        }
+    }
 
     return(
         <View>
@@ -76,7 +83,6 @@ export default function EmailPreferences() {
                     <TouchableOpacity style={[styles.accountButton, selectedButton === 1 && styles.selectedButton]}
                      onPress={() => handleEventsChange('AdoptablePetUpdates')}
                     >
-                    {/* <Text style={styles.buttonText}>Adoptable Pet Updates</Text> */}
                      <Text style={styles.buttonText}> {events === 'AdoptablePetUpdates' ? '✓' : ''} Adoptable Pet Updates</Text>
                     </TouchableOpacity>
                 </View>
@@ -86,14 +92,19 @@ export default function EmailPreferences() {
                     <TouchableOpacity style={[styles.accountButton, selectedButton === 3 && styles.selectedButton]}
                        onPress={() => handleEventsChange('AdoptionEvents')}
                     >
-                    {/* <Text style={styles.buttonText}>Adoption Events</Text> */}
                      <Text style={styles.buttonText}> {events === 'AdoptionEvents' ? '✓' : ''} Adoption Events</Text>
                     </TouchableOpacity>
                 </View>
 
+                <View style={styles.addProfileButton}>
+                    <TouchableOpacity style={styles.accountButton}
+                    onPress={() => handleSavePreferences()}
+                    >
+                    <Text>Save Preferences</Text>
+                    </TouchableOpacity>
+                </View>
 
             </View>
-
 
 
         </View>
@@ -158,6 +169,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: "center",
         alignItems: "center",
+    },
+    addProfileButton: {
+        width: '90%',
+        paddingTop: 45,
+        marginLeft: 18,
+        marginTop: -25,
     },
 
 })
