@@ -11,7 +11,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
-import AuthConext from "../auth/context"; 
+import AuthConext from "../auth/context";
 
 import colors from "../config/colors";
 
@@ -19,13 +19,13 @@ const { width } = Dimensions.get("window");
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const { user } = useContext(AuthConext); 
+  const { user } = useContext(AuthConext);
 
   const handleViewNavigation = (nav) => {
     if (user) {
-      navigation.navigate(nav); 
+      navigation.navigate(nav);
     } else {
-      alert("Login Required. Please login or sign up."); 
+      alert("Login Required. Please login or sign up.");
     }
   }
 
@@ -59,12 +59,6 @@ function HomeScreen() {
             </TouchableOpacity>
 
           </View>
-          <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("AdminPetProfile")}
-            >
-              <Text>AdminPetProfile</Text>
-            </TouchableOpacity>
           <View style={styles.newsContainer}>
             <View>
               <View style={styles.newsTitleContainer}>

@@ -129,6 +129,7 @@ export default function AdminPetProfile() {
           // Send a DELETE request to the backend to delete the pet profile
           await axios.delete(`http://192.168.1.98:3000/${petId}`);
           onDelete(petId);
+          alert("Pet has been deleted")
         } catch (error) {
           console.error('Error deleting pet profile:', error);
         }
