@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "./screens/HomeScreen";
 import CreateAccountScreen from "./screens/CreateAccountScreen";
 import AddPet from "./screens/AddPet";
+import AddNews from "./screens/AddNews";
 import LoginScreen from "./screens/LoginScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
@@ -82,6 +83,10 @@ const HomeNavigator = () => (
     <Stack.Screen
       name="SearchPet"
       component={SearchPet}
+    />
+    <Stack.Screen
+      name="AddNews"
+      component={AddNews}
     />
   </Stack.Navigator>
 )
