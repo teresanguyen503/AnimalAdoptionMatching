@@ -42,12 +42,19 @@ function MenuPublicScreen(props) {
             }
         }, 
         {
-            title: "Add or Update News", 
+            title: "Add News", 
             icon: {
                 name: "newspaper-plus", 
                 backgroundColor: colors.error
             }
-        }, 
+        },
+        {
+            title: "Update News", 
+            icon: {
+                name: "newspaper-variant", 
+                backgroundColor: colors.error
+            }
+        },  
     ]
     return (
         <SafeScreen> 
