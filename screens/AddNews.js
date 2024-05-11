@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Alert,
   Dimensions,
   StyleSheet,
   Text,
@@ -83,10 +84,26 @@ function AddNews(props) {
   };
 
   const resetButton = () => {
-    setTitle(""); 
-    setByline(""); 
-    setArticleText(""); 
-    setImage(null);  
+    Alert.alert(
+      "Confirmation", 
+      "Are you sure you want to reset?", 
+      [
+        {
+          text: "No", 
+          style: "cancel", 
+        }, 
+        {
+          text: "Yes", 
+          onPress: () => {
+            setTitle(""); 
+            setByline(""); 
+            setArticleText(""); 
+            setImage(null); 
+          },
+        },
+      ],
+      { cancelable: false }
+    ) 
   }
 
   return (
