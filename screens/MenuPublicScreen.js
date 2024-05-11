@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
 import MenuItem from '../components/MenuItem';
 import SafeScreen from '../components/SafeScreen'; 
@@ -10,43 +11,49 @@ import colors from '../config/colors';
 
 function MenuPublicScreen(props) {
     const { user, setUser } = useContext(AuthContext); 
+    const navigation = useNavigation();
 
     const menuItems = [
         {
             title: "All Animals", 
             icon: {
                 name: "turtle", 
-                backgroundColor: colors.mediumblue
-            }
+                backgroundColor: colors.mediumblue,
+            },
+            nav: "PetProfile"
         },
         {
             title: "Search", 
             icon: {
                 name: "card-search", 
-                backgroundColor: colors.black
+                backgroundColor: colors.black,
             }, 
+            nav: "SearchPet"
             
         }, 
         {
             title: "Favorites", 
             icon: {
                 name: "star", 
-                backgroundColor: colors.error
-            }
+                backgroundColor: colors.error,
+            },
+            nav: "SearchPet"
         }, 
         {
             title: "Email Preferences", 
             icon: {
                 name: "email", 
-                backgroundColor: colors.error
-            }
+                backgroundColor: colors.error, 
+            },
+            nav: "SearchPet"
         }, 
         {
             title: "Account Preferences", 
             icon: {
                 name: "account", 
-                backgroundColor: colors.error
-            }
+                backgroundColor: colors.error, 
+            },
+            nav: "SearchPet"
         }
     ]
     return (
@@ -63,7 +70,7 @@ function MenuPublicScreen(props) {
                     renderItem={({ item }) => (
                         <MenuItem 
                             title={item.title}
-                            onPress={() => console.log("Will later replace this with navigation.")}
+                            onPress={() => navigation.navigate(item.nav)}
                             IconComponent={
                                 <Icon 
                                     name={item.icon.name}
