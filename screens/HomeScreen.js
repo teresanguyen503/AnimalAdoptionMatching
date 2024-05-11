@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -11,6 +11,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
+import AuthConext from "../auth/context"; 
 
 import colors from "../config/colors";
 
@@ -18,6 +19,15 @@ const { width } = Dimensions.get("window");
 
 function HomeScreen() {
   const navigation = useNavigation();
+  const { user } = useContext(AuthConext); 
+
+  const handleViewNavigation = (nav) => {
+    if (user) {
+      navigation.navigate(nav); 
+    } else {
+      alert("Login Required. Please login or sign up."); 
+    }
+  }
 
   return (
     <SafeScreen>
@@ -47,24 +57,6 @@ function HomeScreen() {
             >
               <Text>Sign In</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("AddPet")}
-            >
-              <Text>Add Pet</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("SearchPet")}
-            >
-              <Text>Search Pet</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("AddNews")}
-            >
-              <Text>Add News</Text>
-            </TouchableOpacity>
 
           </View>
           <View style={styles.newsContainer}>
@@ -74,7 +66,7 @@ function HomeScreen() {
                 <View style={styles.newsButtonContainer}>
                   <TouchableOpacity
                     style={styles.viewAllButton}
-                    onPress={() => navigation.navigate("NewsPage")}
+                    onPress={() => handleViewNavigation("NewsPage")}
                   >
                     <Text style={styles.articleButtonText}>View All News</Text>
                     <Icon
@@ -149,7 +141,7 @@ function HomeScreen() {
               <Text style={styles.petTitleText}>Available Pets</Text>
               <View style={styles.petButtonContainer}>
                 <TouchableOpacity style={styles.viewAllButton}
-                onPress={() => navigation.navigate("PetProfile")}
+                onPress={() => handleViewNavigation("PetProfile")}
                 >
                   <Text style={styles.articleButtonText}>View All Pets</Text>
                   <Icon
