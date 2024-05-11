@@ -87,7 +87,7 @@ function MenuPublicScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
-        
+        marginVertical: 20
     }, 
     separator: {
         width: "100%", 
