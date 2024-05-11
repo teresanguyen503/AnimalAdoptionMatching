@@ -69,6 +69,12 @@ function HomeScreen() {
             >
               <Text>Search Pet</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.accountButton}
+              onPress={() => navigation.navigate("AddNews")}
+            >
+              <Text>Add News</Text>
+            </TouchableOpacity>
 
           </View>
           <View style={styles.newsContainer}>
