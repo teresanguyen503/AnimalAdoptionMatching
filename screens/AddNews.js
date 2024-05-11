@@ -70,6 +70,10 @@ function AddNews(props) {
           alert("Could not add article. Try again");
       } else {
         alert("Success");
+        setTitle(""); 
+        setByline(""); 
+        setArticleText(""); 
+        setImage(null); 
       }
     } catch (error) {
       console.error("Error occurred: ", error);
