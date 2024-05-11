@@ -82,6 +82,13 @@ function AddNews(props) {
     }
   };
 
+  const resetButton = () => {
+    setTitle(""); 
+    setByline(""); 
+    setArticleText(""); 
+    setImage(null);  
+  }
+
   return (
     <SafeScreen>
       <KeyboardAwareScrollView>
@@ -127,9 +134,12 @@ function AddNews(props) {
           </View>
         </View>
 
-        {/* Button */}
+        {/* Buttons */}
         <View style={styles.addArticleButton}>
           <Button title="Add Article" onPress={submitForm}></Button>
+        </View>
+        <View style={styles.addArticleButton}>
+          <Button title="Reset" onPress={resetButton}></Button>
         </View>
 
       </KeyboardAwareScrollView>
