@@ -55,6 +55,7 @@ function MenuPublicScreen(props) {
                 title={user[1]}
                 IconComponent={<Icon name="account" backgroundColor={colors.lightgray} />}
             />
+            <View style={styles.separator} />
             <View style={styles.container}>
                 <FlatList 
                     data={menuItems}
