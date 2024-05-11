@@ -40,6 +40,7 @@ function LoginScreen(props) {
             } else {
                 setIsLoggedIn(true);
                 const user = response.data.data; 
+                console.log(user); 
                 authConext.setUser(user);
                 alert('Success');
                 navigation.navigate("HomeStack"); 

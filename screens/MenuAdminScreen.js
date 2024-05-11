@@ -51,6 +51,10 @@ function MenuPublicScreen(props) {
     ]
     return (
         <SafeScreen> 
+            <MenuItem 
+                title={user[1]}
+                IconComponent={<Icon name="account" backgroundColor={colors.lightgray} />}
+            />
             <View style={styles.container}>
                 <FlatList 
                     data={menuItems}

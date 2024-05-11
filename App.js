@@ -26,7 +26,7 @@ function App() {
         {
           user === null ? (
             <AuthNavigator />
-          ) : user === "admin" ? (
+          ) : user[0] === "admin" ? (
             <AppAdminNavigator />
           ) : (
             <AppPublicNavigator />
