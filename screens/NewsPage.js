@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -17,11 +17,44 @@ import colors from "../config/colors";
 const { width } = Dimensions.get("window");
 
 function NewsPage() {
+
   const navigation = useNavigation();
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   fetchArticles();
+  //   }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchArticles(5, 0); // Fetch first 5 entries
+    setLoading(false);
+  }, []);
+
+   // Function to fetch articles from the backend
+   const fetchArticles = async (limit, skip) => {
+    try {
+        // Make HTTP GET request to fetch profile data
+         const response = await axios.get('http://192.168.254.23:3000/getArticles');
+        setArticles(response.data);
+    } catch (error) {
+    console.error(error);
+    }
+  };
+
+  const handleLoadMore = () => {
+    setLoading(true);
+    const newSkip = currentPage * 5; // Calculate new skip offset
+    fetchData(5, newSkip);
+    setCurrentPage(currentPage + 1);
+    setLoading(false);
+  };
 
   return (
     <SafeScreen>
-      <ScrollView>
+      <ScrollView onEndReached={handleLoadMore}>
       <View style={styles.header}>
         <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
         <Text style={styles.heading}>Recent News</Text>
@@ -30,101 +63,31 @@ function NewsPage() {
         </TouchableOpacity>
       </View>
 
-      {/* Article 1 */}
-      <View style={styles.articleContainer}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require("../assets/thank-you-adoption.jpg")}
-            style={{ width: 120, height: 120, resizeMode: "contain" }}
-          />
-        </View>
-        <View style={styles.articleTextContainer}>
-          <Text style={styles.articleTitle}>Sample Article</Text>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={styles.articleText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-          </ScrollView>
-        </View>
-      </View>
 
-      {/* Article 2 */}
+      {loading ? (
+          <ActivityIndicator size="large" style={styles.loadingIndicator} />
+        ) : data.length > 0 ? (
+          data.map((article, index) => (
       <View style={styles.articleContainer}>
         <View style={styles.imageContainer}>
           <Image
-            source={require("../assets/kanashi.jpg")}
+            source={{uri: data.imageUrl}}
             style={{ width: 120, height: 120, resizeMode: "contain" }}
           />
         </View>
         <View style={styles.articleTextContainer}>
-          <Text style={styles.articleTitle}>Sample Article</Text>
+          <Text style={styles.articleTitle}>data.articleTitle</Text>
+          <Text style = {styles.articleByline}>data.articleByline</Text>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.articleText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              data.articleText
             </Text>
           </ScrollView>
         </View>
       </View>
-
-      {/* Article 3 */}
-      <View style={styles.articleContainer}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require("../assets/hannah.jpg")}
-            style={{ width: 120, height: 120, resizeMode: "contain" }}
-          />
-        </View>
-        <View style={styles.articleTextContainer}>
-          <Text style={styles.articleTitle}>Sample Article</Text>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={styles.articleText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-          </ScrollView>
-        </View>
-      </View>
-
-      {/* Article 4 */}
-      <View style={styles.articleContainer}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require("../assets/kabo.jpg")}
-            style={{ width: 120, height: 120, resizeMode: "contain" }}
-          />
-        </View>
-        <View style={styles.articleTextContainer}>
-          <Text style={styles.articleTitle}>Sample Article</Text>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={styles.articleText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-          </ScrollView>
-        </View>
-      </View>
+       ))) : (
+        <Text style = {styles.noneFound}>No articles found.</Text>
+      )}
       </ScrollView>
     </SafeScreen>
   );
@@ -178,8 +141,24 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 10,
   },
+  articleByline: {
+    fontSize: 16,
+    fontStyle: "italic",
+    margin: 10,
+  },
   articleText: {
     fontSize: 14,
+    margin: 10,
+  },
+
+  noneFound: {
+    fontStyle: "italic",
+    margin: 10,
+    marginStart: 5,
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: colors.black,
+    padding: 5,
   },
 });
 
