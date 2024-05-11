@@ -85,23 +85,6 @@ function AddNews(props) {
   return (
     <SafeScreen>
       <KeyboardAwareScrollView>
-        <View style={styles.container}>
-          {/* Header */}
-          <View style={styles.header}>
-            <TouchableOpacity>
-              <Icon
-                style={styles.icon}
-                name="keyboard-arrow-left"
-                size={40}
-                color="black"
-                onPress={() => navigation.navigate("Home")}
-              />
-            </TouchableOpacity>
-            <Text style={styles.heading}>Add News Article</Text>
-          </View>
-        </View>
-
-        {/* Adding News */}
         <View>
           <Text style={styles.title}>News Title</Text>
           <TextInput
