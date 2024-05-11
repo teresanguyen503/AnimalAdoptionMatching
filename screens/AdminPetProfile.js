@@ -127,7 +127,7 @@ export default function AdminPetProfile() {
             // Get the ID of the pet at the current index
             const petId = searchedProfileIds[currentIndex];
           // Send a DELETE request to the backend to delete the pet profile
-          await axios.delete(`http://192.168.1.98:3000/${petId}`);
+          await axios.delete(`http://192.168.1.12:3000/${petId}`);
           onDelete(petId);
           alert("Pet has been deleted")
         } catch (error) {
