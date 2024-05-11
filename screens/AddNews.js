@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import articles from "../api/articles";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import colors from "../config/colors";
 
@@ -83,7 +84,7 @@ function AddNews(props) {
 
   return (
     <SafeScreen>
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <View style={styles.container}>
           {/* Header */}
           <View style={styles.header}>
@@ -146,7 +147,7 @@ function AddNews(props) {
           <Button title="Add Article" onPress={submitForm}></Button>
         </View>
 
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeScreen>
   );
 }
