@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
 import MenuItem from '../components/MenuItem';
@@ -15,46 +15,53 @@ function MenuPublicScreen(props) {
 
     const menuItems = [
         {
-            title: "All Animals", 
+            title: "View All Animals", 
             icon: {
                 name: "turtle", 
-                backgroundColor: colors.mediumblue,
-            },
+                backgroundColor: colors.mediumblue
+            }, 
             nav: "PetProfile"
         },
         {
             title: "Search", 
             icon: {
                 name: "card-search", 
-                backgroundColor: colors.black,
+                backgroundColor: colors.black
             }, 
             nav: "SearchPet"
-            
         }, 
         {
-            title: "Favorites", 
+            title: "Add Animals", 
             icon: {
-                name: "star", 
-                backgroundColor: colors.error,
-            },
-            nav: "SearchPet"
+                name: "plus", 
+                backgroundColor: colors.error
+            }, 
+            nav: "AddPet"
         }, 
         {
-            title: "Email Preferences", 
+            title: "Update Animals", 
             icon: {
-                name: "email", 
-                backgroundColor: colors.error, 
-            },
-            nav: "SearchPet"
+                name: "update", 
+                backgroundColor: colors.error
+            }, 
+            nav: "AddPet"
         }, 
         {
-            title: "Account Preferences", 
+            title: "Add News", 
             icon: {
-                name: "account", 
-                backgroundColor: colors.error, 
-            },
-            nav: "SearchPet"
-        }
+                name: "newspaper-plus", 
+                backgroundColor: colors.error
+            }, 
+            nav: "AddNews"
+        },
+        {
+            title: "Update News", 
+            icon: {
+                name: "newspaper-variant", 
+                backgroundColor: colors.error
+            }, 
+            nav: "AddNews"
+        },  
     ]
     return (
         <SafeScreen> 
@@ -94,7 +101,7 @@ function MenuPublicScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 20
+        marginVertical: 20,
     }, 
     separator: {
         width: "100%", 

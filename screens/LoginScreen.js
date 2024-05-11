@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
@@ -9,6 +9,7 @@ import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
 import login from '../api/login'
 import colors from '../config/colors';
+import AuthContext from '../auth/context';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
@@ -18,7 +19,9 @@ const validationSchema = Yup.object().shape({
 function LoginScreen(props) {
     const navigation = useNavigation();
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
-    const [passwordVisible, setPasswordVisible] = useState(false); 
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    
+    const authConext = useContext(AuthContext); 
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible); 
@@ -35,9 +38,12 @@ function LoginScreen(props) {
                     alert('Invalid password. Try again.');
                 }
             } else {
-                setIsLoggedIn(true); 
+                setIsLoggedIn(true);
+                const user = response.data.data; 
+                console.log(user); 
+                authConext.setUser(user);
                 alert('Success');
-                navigation.navigate("Home")
+                navigation.navigate("HomeStack"); 
             } 
         } catch (error) {
             alert('Invalid email or password'); 
