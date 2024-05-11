@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function EmailPreferences() {
     const [selectedButton, setSelectedButton] = useState(null);
     const [frequency, setFrequency] = useState('');
+    const [events, setEvents] = useState('');
 
     const handleFrequencyChange = async (selectedFrequency) => {
         setFrequency(selectedFrequency);
@@ -14,7 +15,17 @@ export default function EmailPreferences() {
         } catch (error) {
           console.error('Error saving email frequency:', error);
         }
-      };
+    };
+
+    const handleEventsChange = async (selectedEvent) => {
+        setEvents(selectedEvent);
+        try {
+          await AsyncStorage.setItem('eventType', selectedEvent);
+        } catch (error) {
+          console.error('Error saving event type:', error);
+        }
+    };
+
 
 
     return(
@@ -55,6 +66,35 @@ export default function EmailPreferences() {
                     </TouchableOpacity>
                 </View>
             </View>
+
+            <View style={styles.contain}>
+                <Text>Select the type of emails you would like to recieve from us</Text>
+            </View>
+
+            <View style={styles.speciesContainer}>
+                <View style={styles.item}>
+                    <TouchableOpacity style={[styles.accountButton, selectedButton === 1 && styles.selectedButton]}
+                     onPress={() => handleEventsChange('AdoptablePetUpdates')}
+                    >
+                    {/* <Text style={styles.buttonText}>Adoptable Pet Updates</Text> */}
+                     <Text style={styles.buttonText}> {events === 'AdoptablePetUpdates' ? '✓' : ''} Adoptable Pet Updates</Text>
+                    </TouchableOpacity>
+                </View>
+
+
+                <View style={styles.item}>
+                    <TouchableOpacity style={[styles.accountButton, selectedButton === 3 && styles.selectedButton]}
+                       onPress={() => handleEventsChange('AdoptionEvents')}
+                    >
+                    {/* <Text style={styles.buttonText}>Adoption Events</Text> */}
+                     <Text style={styles.buttonText}> {events === 'AdoptionEvents' ? '✓' : ''} Adoption Events</Text>
+                    </TouchableOpacity>
+                </View>
+
+
+            </View>
+
+
 
         </View>
     )
