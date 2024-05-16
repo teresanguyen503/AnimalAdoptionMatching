@@ -24,8 +24,8 @@ export default function AdminPetProfile() {
     const fetchProfiles = async () => {
         try {
             // Make HTTP GET request to fetch profile data
-             const response = await axios.get('http://192.168.1.98:3000/getPet');
-            // const response = await axios.get('http://192.168.1.12:3000/getPet');
+            // const response = await axios.get('http://192.168.1.98:3000/getPet');
+             const response = await axios.get('http://192.168.1.12:3000/getPet');
             setProfiles(response.data);
             // Initialize searchedProfileIds with all profile IDs
             setSearchedProfileIds(response.data.map(profile => profile._id));
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: 16, 
+        paddingHorizontal: 16,
         paddingTop: 10,
         paddingLeft: 10,
         // top: 10,
