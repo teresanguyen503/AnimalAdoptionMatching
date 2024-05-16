@@ -22,8 +22,8 @@ export default function PetProfile() {
     const fetchProfiles = async () => {
         try {
             // Make HTTP GET request to fetch profile data
-           //  const response = await axios.get('http://192.168.1.98:3000/getPet');
-             const response = await axios.get('http://192.168.1.12:3000/getPet');
+             const response = await axios.get('http://192.168.1.98:3000/getPet');
+            // const response = await axios.get('http://192.168.1.12:3000/getPet');
             setProfiles(response.data);
             // Initialize searchedProfileIds with all profile IDs
             setSearchedProfileIds(response.data.map(profile => profile._id));
@@ -148,7 +148,6 @@ return(
 
         {/* Header and back icon */}
         <View style={styles.header}>
-            <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")} />
             <Text style={styles.heading}>Pet Match</Text>
         </View>
 
@@ -223,13 +222,12 @@ return(
 const styles = StyleSheet.create({
     // Header Styling
     header: {
-        flexDirection: 'row', // Align items in a row
-        justifyContent: 'flex-start', // Align items to the start (left)
-        alignItems: 'center', // Center vertically
-        paddingHorizontal: 16, // Add padding for spacing
-        paddingTop: 60,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+        paddingTop: 10,
         paddingLeft: 10,
-        // top: 10,
     },
     heading: {
         fontSize: 30,
