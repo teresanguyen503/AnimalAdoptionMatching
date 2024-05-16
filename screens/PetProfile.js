@@ -336,7 +336,8 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: -202,
+        // marginTop: 12,
+        // marginTop: -1,
     },
     likeContainer:{
         borderRadius: 20,
@@ -344,7 +345,6 @@ const styles = StyleSheet.create({
         borderWidth:  0.5,
         width: '35%',
         height: '7.5%',
-        marginTop: 48,
     },
     likeButton: {
         padding: 12,
