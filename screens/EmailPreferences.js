@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 16,
-        paddingTop: 20,
+        paddingTop: 10,
         paddingLeft: 10,
     },
     emailHeading: {
