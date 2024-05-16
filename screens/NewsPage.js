@@ -73,16 +73,16 @@ function NewsPage() {
       <View style={styles.articleContainer} key={index + 1}>
         <View style={styles.imageContainer}>
           <Image
-            source={{uri: data.imageUrl}}
+            source={{uri: article.articleImage}}
             style={{ width: 120, height: 120, resizeMode: "contain" }}
           />
         </View>
         <View style={styles.articleTextContainer}>
-          <Text style={styles.articleTitle}>data.articleTitle</Text>
-          <Text style = {styles.articleByline}>data.articleByline</Text>
+          <Text style={styles.articleTitle}>{article.articleTitle}</Text>
+          <Text style = {styles.articleByline}>{article.articleByline}</Text>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.articleText}>
-              data.articleText
+              {article.articleText}
             </Text>
           </ScrollView>
         </View>
