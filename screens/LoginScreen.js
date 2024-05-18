@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useNavigation } from "@react-navigation/native";
@@ -54,6 +54,10 @@ function LoginScreen(props) {
     return (
         <SafeScreen>
             <View style={styles.container}>
+                <Image
+                    style={styles.logo}
+                    source={require("../assets/logo.png")}
+                />
                 <Formik 
                     initialValues={{ email: '', password: '' }}
                     onSubmit={handleSubmit}
@@ -117,6 +121,13 @@ const styles = StyleSheet.create({
         top: 25, 
         right: 25
     }, 
+    logo: {
+        width: 80, 
+        height: 80, 
+        alignSelf: 'center', 
+        marginTop: 50, 
+        marginBottom: 200
+    },
     passwordContainer: {
         flexDirection: 'row', 
         alignItems: 'center'
