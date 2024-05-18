@@ -32,14 +32,6 @@ function MenuPublicScreen(props) {
 
         },
         {
-            title: "Favorites",
-            icon: {
-                name: "star",
-                backgroundColor: colors.error,
-            },
-            nav: "SearchPet"
-        },
-        {
             title: "Email Preferences",
             icon: {
                 name: "email",
@@ -47,14 +39,6 @@ function MenuPublicScreen(props) {
             },
             nav: "EmailPreferences"
         },
-        {
-            title: "Account Preferences",
-            icon: {
-                name: "account",
-                backgroundColor: colors.error,
-            },
-            nav: "SearchPet"
-        }
     ]
     return (
         <SafeScreen>
