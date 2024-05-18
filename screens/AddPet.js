@@ -160,7 +160,6 @@ export default function AddPet() {
     return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
                     <Text style={styles.heading}>Add Pet</Text>
                 </View>
 
@@ -327,12 +326,12 @@ const styles = StyleSheet.create({
      /* Main Heading */
     header: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingLeft: 10,
-        marginTop: 25,
-     //   marginTop: Platform.OS === 'ios' ? 70 : 25,
+        paddingTop: 10,
+        // marginTop: 15,
     },
     heading: {
         fontSize: 30,

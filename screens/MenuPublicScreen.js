@@ -3,76 +3,76 @@ import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-nati
 import { useNavigation } from "@react-navigation/native";
 
 import MenuItem from '../components/MenuItem';
-import SafeScreen from '../components/SafeScreen'; 
+import SafeScreen from '../components/SafeScreen';
 import Icon from '../components/Icon';
 import AuthContext from '../auth/context';
 
-import colors from '../config/colors'; 
+import colors from '../config/colors';
 
 function MenuPublicScreen(props) {
-    const { user, setUser } = useContext(AuthContext); 
+    const { user, setUser } = useContext(AuthContext);
     const navigation = useNavigation();
 
     const menuItems = [
         {
-            title: "All Animals", 
+            title: "All Animals",
             icon: {
-                name: "turtle", 
+                name: "turtle",
                 backgroundColor: colors.mediumblue,
             },
             nav: "PetProfile"
         },
         {
-            title: "Search", 
+            title: "Search",
             icon: {
-                name: "card-search", 
+                name: "card-search",
                 backgroundColor: colors.black,
-            }, 
+            },
             nav: "SearchPet"
-            
-        }, 
+
+        },
         {
-            title: "Favorites", 
+            title: "Favorites",
             icon: {
-                name: "star", 
+                name: "star",
                 backgroundColor: colors.error,
             },
             nav: "SearchPet"
-        }, 
+        },
         {
-            title: "Email Preferences", 
+            title: "Email Preferences",
             icon: {
-                name: "email", 
-                backgroundColor: colors.error, 
+                name: "email",
+                backgroundColor: colors.error,
             },
-            nav: "SearchPet"
-        }, 
+            nav: "EmailPreferences"
+        },
         {
-            title: "Account Preferences", 
+            title: "Account Preferences",
             icon: {
-                name: "account", 
-                backgroundColor: colors.error, 
+                name: "account",
+                backgroundColor: colors.error,
             },
             nav: "SearchPet"
         }
     ]
     return (
-        <SafeScreen> 
-            <MenuItem 
+        <SafeScreen>
+            <MenuItem
                 title={user[1]}
                 IconComponent={<Icon name="account" backgroundColor={colors.lightgray} />}
             />
             <View style={styles.separator} />
             <View style={styles.container}>
-                <FlatList 
+                <FlatList
                     data={menuItems}
                     keyExtractor={(menuItems) => menuItems.title}
                     renderItem={({ item }) => (
-                        <MenuItem 
+                        <MenuItem
                             title={item.title}
                             onPress={() => navigation.navigate(item.nav)}
                             IconComponent={
-                                <Icon 
+                                <Icon
                                     name={item.icon.name}
                                     backgroundColor={item.icon.backgroundColor}
                                 />
@@ -83,7 +83,7 @@ function MenuPublicScreen(props) {
                 />
             </View>
             <View style={styles.separator} />
-            <MenuItem 
+            <MenuItem
                 title="Log Out"
                 IconComponent={<Icon name="logout" backgroundColor={colors.lightgray} />}
                 onPress={() => setUser(null)}
@@ -95,9 +95,9 @@ function MenuPublicScreen(props) {
 const styles = StyleSheet.create({
     container: {
         marginVertical: 20
-    }, 
+    },
     separator: {
-        width: "100%", 
+        width: "100%",
         height: 1,
         backgroundColor: colors.lightgray
     }

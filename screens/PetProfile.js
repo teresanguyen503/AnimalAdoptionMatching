@@ -148,7 +148,6 @@ return(
 
         {/* Header and back icon */}
         <View style={styles.header}>
-            <Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")} />
             <Text style={styles.heading}>Pet Match</Text>
         </View>
 
@@ -223,13 +222,12 @@ return(
 const styles = StyleSheet.create({
     // Header Styling
     header: {
-        flexDirection: 'row', // Align items in a row
-        justifyContent: 'flex-start', // Align items to the start (left)
-        alignItems: 'center', // Center vertically
-        paddingHorizontal: 16, // Add padding for spacing
-        paddingTop: 60,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+        paddingTop: 10,
         paddingLeft: 10,
-        // top: 10,
     },
     heading: {
         fontSize: 30,
@@ -338,7 +336,8 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: -202,
+        // marginTop: 12,
+        // marginTop: -1,
     },
     likeContainer:{
         borderRadius: 20,
@@ -346,7 +345,6 @@ const styles = StyleSheet.create({
         borderWidth:  0.5,
         width: '35%',
         height: '7.5%',
-        marginTop: 48,
     },
     likeButton: {
         padding: 12,
