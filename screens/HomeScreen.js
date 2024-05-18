@@ -25,6 +25,8 @@ function HomeScreen() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  const firstArticle = data.length > 0 ? data[0] : null;
+
   const handleViewNavigation = (nav) => {
     if (user) {
       navigation.navigate(nav);
@@ -104,25 +106,24 @@ function HomeScreen() {
 
             {loading ? (
           <ActivityIndicator size="large" style={styles.loadingIndicator} />
-        ) : data.length > 0 ? (
-          data.map((article, index) => (
-            <View style={styles.articleContainer} key={index + 1}>
+        ) : firstArticle ? (
+            <View style={styles.articleContainer}>
               <View style={styles.imageContainer}>
                 <Image
-                source={{uri: article.imageUrl}}
-                style={{ width: 120, height: 120, resizeMode: "contain" }}
+                  source={{uri: firstArticle.articleImage}}
+                  style={{ width: 100, height: 100, resizeMode: "contain" }}
                 />
               </View>
               <View style={styles.articleTextContainer}>
-                <Text style={styles.articleTitle}>{article.articleTitle}</Text>
+                <Text style={styles.articleTitle}>{firstArticle.articleTitle}</Text>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                   <Text style={styles.articleText}>
-                    {article.articleText}
+                    {firstArticle.articleText}
                   </Text>
                 </ScrollView>
               </View>
             </View>
-              ))) : (
+              ) : (
               <Text style = {styles.noneFound}>No articles found.</Text>
             )}
           </View>
