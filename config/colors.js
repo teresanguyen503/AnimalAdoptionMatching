@@ -3,6 +3,7 @@ export default {
     animal: '#6495ed',
     black: '#000',
     button: '#e6e6fa',
+    email: '#ff7f50',
     error: '#ff0000',  
     dimGrey: '#696969',
     iconTextInput: '#6495ed',
