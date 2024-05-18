@@ -58,13 +58,8 @@ function NewsPage() {
     <SafeScreen>
       <ScrollView onEndReached={handleLoadMore}>
       <View style={styles.header}>
-        <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
         <Text style={styles.heading}>Recent News</Text>
-        <TouchableOpacity>
-          <Icon style={styles.icon} name="menu" size={40} color="black" />
-        </TouchableOpacity>
       </View>
-
 
       {loading ? (
           <ActivityIndicator size="large" style={styles.loadingIndicator} />
