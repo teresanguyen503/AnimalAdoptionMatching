@@ -32,17 +32,9 @@ function HomeScreen() {
   return (
     <SafeScreen>
       <ScrollView>
-        {/* <Topbar
-            title="Animal Adoption Matching"
-            rightButton={<Icon name="menu" />}
-        /> */}
         <View style={styles.container}>
-          {/* <TouchableOpacity onPress={onPressHandler}> */}
           <View style={styles.header}>
             <Text style={styles.heading}>Animal Adoption Matching App</Text>
-            <TouchableOpacity>
-              <Icon style={styles.icon} name="menu" size={40} color="black" />
-            </TouchableOpacity>
           </View>
           <View style={styles.accountButtonContainer}>
             <TouchableOpacity
