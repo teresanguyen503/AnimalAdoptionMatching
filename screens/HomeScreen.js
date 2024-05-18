@@ -36,21 +36,27 @@ function HomeScreen() {
           <View style={styles.header}>
             <Text style={styles.heading}>Animal Adoption Matching App</Text>
           </View>
-          <View style={styles.accountButtonContainer}>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("CreateAccount")}
-            >
-              <Text>Sign Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <Text>Sign In</Text>
-            </TouchableOpacity>
 
-          </View>
+          {!user ? (
+            <View style={styles.accountButtonContainer}>
+              <TouchableOpacity
+                style={styles.accountButton}
+                onPress={() => navigation.navigate("CreateAccount")}
+              >
+                <Text>Sign Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.accountButton}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text>Sign In</Text>
+              </TouchableOpacity>
+            </View>
+            ) : (
+              <View />
+            )
+          }
+
           <View style={styles.newsContainer}>
             <View>
               <View style={styles.newsTitleContainer}>
