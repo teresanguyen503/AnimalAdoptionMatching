@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         height: 80, 
         alignSelf: 'center', 
         marginTop: 50, 
-        marginBottom: 200
+        marginBottom: 50
     },
     passwordContainer: {
         flexDirection: 'row', 
