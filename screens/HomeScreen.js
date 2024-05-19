@@ -41,7 +41,7 @@ function HomeScreen() {
 
 
   const fetchPets = async (limit, skip) => {
-    const cachedData = JSON.parse(localStorage.getItem('petData'));
+    const cachedData = JSON.parse(localStorage.getItem('firstPet'));
     if (cachedData && isDataRecent(cachedData)) {
       setData(cachedData);
       return;
@@ -50,7 +50,7 @@ function HomeScreen() {
     try {
         // Make HTTP GET request to fetch profile data
          const response = await axios.get('http://192.168.1.12:3000/getPet');
-        localStorage.setItem('petData', JSON.stringify(response.data));
+        localStorage.setItem('firstPet', JSON.stringify(response.data));
     } catch (error) {
     console.error(error);
     console.log(error);
