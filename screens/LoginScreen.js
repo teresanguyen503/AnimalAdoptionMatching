@@ -78,6 +78,7 @@ function LoginScreen(props) {
                                 name="email"
                                 placeholder="Email"
                                 textContentType="emailAddress" 
+                                style={{color: colors.whiteSmoke}}
                             />
                             <View style={styles.passwordContainer}>
                                 <View style={styles.password}>
@@ -105,7 +106,6 @@ function LoginScreen(props) {
                             </View>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.navigate("ForgotPassword")}
-                                
                             >
                                 <Text style={styles.text}>Forgot Password?</Text>
                             </TouchableWithoutFeedback>
@@ -156,9 +156,6 @@ const styles = StyleSheet.create({
     }, 
     text: {
         paddingStart: 5,
-    },
-    button: {
-        color: colors.darkBlue,
     },
 })
 
