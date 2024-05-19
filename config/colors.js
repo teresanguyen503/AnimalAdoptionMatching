@@ -15,12 +15,14 @@ export default {
     mediumblue: '#0000cd',
     search: '#8fbc8f',
     white: '#fff',
+    lightBlue: '#EBF2FF',
     darkBlue: '#003087',
+    lighterPink: '#FBEEF0',
     lightPink: '#F2C3CB',
+    lightPurple: '#C2ACD8',
     darkPurple: '#5B3A7B',
     darkRose: '#B5446E',
     iceWhite: '#F5F5F5',
     nightBlack: '#0B0909',
-
 }; 
 

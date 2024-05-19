@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     width,
+    backgroundColor: colors.lighterPink,
   },
   header: {
     flexDirection: "row",
@@ -196,8 +197,8 @@ const styles = StyleSheet.create({
   accountButton: {
     paddingVertical: 5,
     paddingHorizontal: 10,
-    backgroundColor: "white",
-    borderColor: "black",
+    backgroundColor: colors.lightPink,
+    borderColor: colors.nightBlack,
     borderWidth: 2,
     fontSize: 45,
     borderRadius: 10,
@@ -216,8 +217,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     maxHeight: 400,
     overflow: "scroll",
-    borderWidth: 1,
     padding: 5,
+    borderWidth: 1,
+    borderColor: colors.nightBlack,
+    borderRadius: 5,
+    backgroundColor: colors.iceWhite,
   },
   newsTitleContainer: {
     padding: 0,
@@ -238,7 +242,9 @@ const styles = StyleSheet.create({
   },
   viewAllButton: {
     flexDirection: "row",
+    borderColor: colors.nightBlack,
     borderWidth: 2,
+    backgroundColor: colors.lightPink,
     fontSize: 45,
     borderRadius: 10,
     margin: 15,
@@ -312,10 +318,11 @@ const styles = StyleSheet.create({
   petProfileContainer: {
     width: "49%",
     borderWidth: 1,
-    borderColor: colors.black,
+    borderColor: colors.nightBlack,
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
+    backgroundColor: colors.iceWhite,
   },
   petName: {
     fontSize: 18,
