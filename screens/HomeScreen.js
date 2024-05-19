@@ -24,6 +24,7 @@ function HomeScreen() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const firstPet = data.length > 0 ? data[0] : null;
 
   const handleViewNavigation = (nav) => {
     if (user) {
