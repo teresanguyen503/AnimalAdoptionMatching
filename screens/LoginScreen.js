@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik'; 
 import * as Yup from 'yup'; 
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { LinearGradient } from 'expo-linear-gradient';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, SubmitButton } from '../components/forms'; 
@@ -15,6 +16,8 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"), 
     password: Yup.string().required().min(6).label("Password")
 }); 
+
+const { viewportHeight } = Dimensions.get("window");
 
 function LoginScreen(props) {
     const navigation = useNavigation();
@@ -53,7 +56,9 @@ function LoginScreen(props) {
 
     return (
         <SafeScreen>
+            <LinearGradient colors={['#B5446E', '#F2F2F2']} style={styles.gradient}>
             <View style={styles.container}>
+                <Text style={styles.title}>Welcome back!</Text>
                 <Image
                     style={styles.logo}
                     source={require("../assets/logo.png")}
@@ -76,7 +81,7 @@ function LoginScreen(props) {
                             />
                             <View style={styles.passwordContainer}>
                                 <View style={styles.password}>
-                                    <AppFormField style={{ flex: 1 }}
+                                    <AppFormField style={{ flex: 1}}
                                         autoCapitalize="none"
                                         autoCorrect={false}
                                         icon="lock"
@@ -93,29 +98,42 @@ function LoginScreen(props) {
                                         <MaterialCommunityIcons
                                         name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
                                         size={20}
-                                        color={colors.black}
+                                        color={colors.nightBlack}
                                         />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.navigate("ForgotPassword")}
+                                
                             >
                                 <Text style={styles.text}>Forgot Password?</Text>
                             </TouchableWithoutFeedback>
-                            <SubmitButton title="Login" />
+                            <SubmitButton backgroundColor={colors.darkBlue} title="Login" />
                         </>
                     )}
                 </Formik>
+                
             </View>
+            </LinearGradient>
         </SafeScreen>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10, 
+        padding: 10,
     }, 
+    gradient: {
+        padding: 0,
+    },
+    title: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        top: 15,
+        fontSize: 28,
+        color: colors.whiteSmoke,
+    },
     eyeOutline: {
         position: 'absolute', 
         top: 25, 
@@ -130,15 +148,18 @@ const styles = StyleSheet.create({
     },
     passwordContainer: {
         flexDirection: 'row', 
-        alignItems: 'center'
+        alignItems: 'center',
+        color: colors.whiteSmoke,
     }, 
     password: {
         flex: 1, 
-        paddingRight: 5
     }, 
     text: {
-        color: colors.mediumblue
-    }
+        paddingStart: 5,
+    },
+    button: {
+        color: colors.darkBlue,
+    },
 })
 
 export default LoginScreen; 

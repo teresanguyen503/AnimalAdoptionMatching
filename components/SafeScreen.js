@@ -12,7 +12,10 @@ function SafeScreen({ children, style }) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Constants.statusBarHeight
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: Constants.statusBarHeight,
     }
 })
 

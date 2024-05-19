@@ -15,5 +15,12 @@ export default {
     mediumblue: '#0000cd',
     search: '#8fbc8f',
     white: '#fff',
+    darkBlue: '#003087',
+    lightPink: '#F2C3CB',
+    darkPurple: '#5B3A7B',
+    darkRose: '#B5446E',
+    iceWhite: '#F5F5F5',
+    nightBlack: '#0B0909',
+
 }; 
 
