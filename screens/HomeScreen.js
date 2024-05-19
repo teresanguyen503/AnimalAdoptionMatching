@@ -21,6 +21,9 @@ const { width } = Dimensions.get("window");
 function HomeScreen() {
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const handleViewNavigation = (nav) => {
     if (user) {
