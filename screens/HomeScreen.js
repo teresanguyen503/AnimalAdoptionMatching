@@ -11,7 +11,8 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
-import AuthConext from "../auth/context";
+import AuthContext from "../auth/context";
+import axios from 'axios';
 
 import colors from "../config/colors";
 
@@ -19,7 +20,7 @@ const { width } = Dimensions.get("window");
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const { user } = useContext(AuthConext);
+  const { user } = useContext(AuthContext);
 
   const handleViewNavigation = (nav) => {
     if (user) {
@@ -28,6 +29,24 @@ function HomeScreen() {
       alert("Login Required. Please login or sign up.");
     }
   }
+
+  useEffect(() => {
+    setLoading(true);
+    fetchPets(1, 0); // Fetch first entry
+    setLoading(false);
+  }, []);
+
+
+  const fetchPets = async (limit, skip) => {
+    try {
+        // Make HTTP GET request to fetch profile data
+         const response = await axios.get('http://192.168.1.12:3000/getPet');
+        setData(response.data);
+    } catch (error) {
+    console.error(error);
+    console.log(error);
+    }
+  };
 
   return (
     <SafeScreen>
@@ -122,38 +141,30 @@ function HomeScreen() {
             </View>
           </View>
 
+          {loading ? (
+          <ActivityIndicator size="large" style={styles.loadingIndicator} />
+        ) : firstPet ? (
           <View style={styles.petProfileBanner}>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
                 <Image
-                  source={require("../assets/pauline.jpg")}
+                  source={{uri: firstPet.image}}
                   style={styles.images}
                 />
               </View>
               <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Doggy</Text>
-                <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <Text style={styles.petName}>
+                  {firstPet.name}
                 </Text>
-              </View>
-            </View>
-            <View style={styles.petProfileContainer}>
-              <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/jeanie.jpg")}
-                  style={styles.images}
-                />
-              </View>
-              <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Kitty</Text>
                 <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  {firstPet.desc}
                 </Text>
               </View>
             </View>
           </View>
+          ) : (
+            <Text style = {styles.noneFound}>No pets found.</Text>
+          )}
         </View>
       </ScrollView>
     </SafeScreen>
@@ -273,6 +284,12 @@ const styles = StyleSheet.create({
   articleButtonText: {
     alignSelf: "center",
     paddingLeft: 5,
+  },
+
+  noneFound: {
+    fontStyle: "italic",
+    fontSize: 16,
+    margin: 10,
   },
 
   // Pet Section
