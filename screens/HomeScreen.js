@@ -41,9 +41,16 @@ function HomeScreen() {
 
 
   const fetchPets = async (limit, skip) => {
+    const cachedData = getCachedData();
+    if (cachedData && isDataRecent(cachedData)) {
+      setData(cachedData);
+      return;
+    }
+
     try {
         // Make HTTP GET request to fetch profile data
          const response = await axios.get('http://192.168.1.12:3000/getPet');
+        setCachedData(response.data);
         setData(response.data);
     } catch (error) {
     console.error(error);
