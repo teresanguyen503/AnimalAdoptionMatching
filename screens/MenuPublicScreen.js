@@ -18,7 +18,7 @@ function MenuPublicScreen(props) {
             title: "All Animals",
             icon: {
                 name: "turtle",
-                backgroundColor: colors.mediumblue,
+                backgroundColor: colors.animal,
             },
             nav: "PetProfile"
         },
@@ -26,41 +26,25 @@ function MenuPublicScreen(props) {
             title: "Search",
             icon: {
                 name: "card-search",
-                backgroundColor: colors.black,
+                backgroundColor: colors.search,
             },
             nav: "SearchPet"
 
         },
         {
-            title: "Favorites",
-            icon: {
-                name: "star",
-                backgroundColor: colors.error,
-            },
-            nav: "SearchPet"
-        },
-        {
             title: "Email Preferences",
             icon: {
                 name: "email",
-                backgroundColor: colors.error,
+                backgroundColor: colors.email,
             },
             nav: "EmailPreferences"
         },
-        {
-            title: "Account Preferences",
-            icon: {
-                name: "account",
-                backgroundColor: colors.error,
-            },
-            nav: "SearchPet"
-        }
     ]
     return (
         <SafeScreen>
             <MenuItem
                 title={user[1]}
-                IconComponent={<Icon name="account" backgroundColor={colors.lightgray} />}
+                IconComponent={<Icon name="account" iconColor={colors.black} backgroundColor={colors.white} size={50} />}
             />
             <View style={styles.separator} />
             <View style={styles.container}>
@@ -85,7 +69,7 @@ function MenuPublicScreen(props) {
             <View style={styles.separator} />
             <MenuItem
                 title="Log Out"
-                IconComponent={<Icon name="logout" backgroundColor={colors.lightgray} />}
+                IconComponent={<Icon name="logout" iconColor={colors.lightSlateGray} backgroundColor={colors.logout} />}
                 onPress={() => setUser(null)}
             />
         </SafeScreen>

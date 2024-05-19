@@ -1,10 +1,17 @@
 export default {
+    add: '#e9967a',
+    animal: '#6495ed',
     black: '#000',
-    error: '#ff0000',  
-    iconTextInput: '#ffb6c1',
+    button: '#e6e6fa',
+    error: '#ff0000',
+    dimGrey: '#696969',
+    iconTextInput: '#6495ed',
     inputBackground: '#d3d3d3',
-    white: '#fff',
     headings: '#000',
-    lightgray: '#d3d3d3', 
-    mediumblue: '#0000cd'
-}; 
+    lightgray: '#d3d3d3',
+    lightSlateGray: '#778899',
+    logout: '#ffff00',
+    mediumblue: '#0000cd',
+    search: '#8fbc8f',
+    white: '#fff',
+};
