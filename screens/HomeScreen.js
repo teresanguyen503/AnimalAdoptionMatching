@@ -32,33 +32,31 @@ function HomeScreen() {
   return (
     <SafeScreen>
       <ScrollView>
-        {/* <Topbar
-            title="Animal Adoption Matching"
-            rightButton={<Icon name="menu" />}
-        /> */}
         <View style={styles.container}>
-          {/* <TouchableOpacity onPress={onPressHandler}> */}
           <View style={styles.header}>
             <Text style={styles.heading}>Animal Adoption Matching App</Text>
-            <TouchableOpacity>
-              <Icon style={styles.icon} name="menu" size={40} color="black" />
-            </TouchableOpacity>
           </View>
-          <View style={styles.accountButtonContainer}>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("CreateAccount")}
-            >
-              <Text>Sign Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.accountButton}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <Text>Sign In</Text>
-            </TouchableOpacity>
 
-          </View>
+          {!user ? (
+            <View style={styles.accountButtonContainer}>
+              <TouchableOpacity
+                style={styles.accountButton}
+                onPress={() => navigation.navigate("CreateAccount")}
+              >
+                <Text>Sign Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.accountButton}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text>Sign In</Text>
+              </TouchableOpacity>
+            </View>
+            ) : (
+              <View />
+            )
+          }
+
           <View style={styles.newsContainer}>
             <View>
               <View style={styles.newsTitleContainer}>
