@@ -6,7 +6,7 @@ export default {
     email: '#ff7f50',
     error: '#ff0000',  
     dimGrey: '#696969',
-    iconTextInput: '#6495ed',
+    iconTextInput: '#ffb6c1',
     inputBackground: '#d3d3d3',
     headings: '#000',
     lightgray: '#d3d3d3', 
@@ -16,3 +16,4 @@ export default {
     search: '#8fbc8f',
     white: '#fff',
 }; 
+
