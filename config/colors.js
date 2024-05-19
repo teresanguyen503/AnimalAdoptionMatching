@@ -1,8 +1,7 @@
 export default {
     black: '#000',
-    button: '#e6e6fa',
     error: '#ff0000',  
-    iconTextInput: '#6495ed',
+    iconTextInput: '#ffb6c1',
     inputBackground: '#d3d3d3',
     white: '#fff',
     headings: '#000',
