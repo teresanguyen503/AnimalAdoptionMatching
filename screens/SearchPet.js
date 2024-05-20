@@ -7,6 +7,7 @@ import catData from '../breed-data/cat-breed.json';
 import otherData from '../breed-data/other-breed.json';
 import DateModal from '../components/DateModal';
 import FilterPet from '../components/FilterPet';
+import apiClient from '../api/client';
 
 
 const SearchPet = () => {
@@ -128,7 +129,12 @@ const filteredDogData = dogData.filter(item =>
     const applyFilter = async (selectedFilters) => {
         try {
         // Send selectedFilters to the backend API
-        const response = await fetch('http://192.168.1.12:3000/filter', {
+        //  const {data} = await apiClient.post(('/addPet'), {name, isdate, desc, speciesName, selectedItem, image:base64Image, disposition});
+        // const response = await apiClient.post('/filter');
+        // const response = await fetch(`${apiClient.baseURL}/filter`);
+       // const response = await apiClient.fetch(('/filter'), {
+          const response = await fetch(`${apiClient.getBaseURL()}/filter`, {
+   //     const response = await fetch('http://192.168.1.12:3000/filter', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
