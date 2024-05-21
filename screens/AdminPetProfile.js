@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import petProfile from '../api/petProfile';
 
 
 export default function AdminPetProfile() {
@@ -24,8 +25,7 @@ export default function AdminPetProfile() {
     const fetchProfiles = async () => {
         try {
             // Make HTTP GET request to fetch profile data
-            // const response = await axios.get('http://192.168.1.98:3000/getPet');
-             const response = await axios.get('http://192.168.1.12:3000/getPet');
+            const response = await petProfile.petProfileApi()
             setProfiles(response.data);
             // Initialize searchedProfileIds with all profile IDs
             setSearchedProfileIds(response.data.map(profile => profile._id));
