@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from "@react-navigation/native";
 
+import colors from "../config/colors";
+
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton } from '../components/forms'; 
 import resetPassword from '../api/resetPassword'
@@ -90,7 +92,8 @@ function ForgotPasswordScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        padding: 10,
+        backgroundColor: colors.lightgray,
     }, 
     text: {
         fontSize: 20, 

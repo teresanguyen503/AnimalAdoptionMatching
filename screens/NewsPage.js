@@ -22,6 +22,7 @@ function NewsPage() {
   return (
     <SafeScreen>
       <ScrollView>
+      <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
         <Text style={styles.heading}>Recent News</Text>
@@ -125,12 +126,17 @@ function NewsPage() {
           </ScrollView>
         </View>
       </View>
+      </View>
       </ScrollView>
     </SafeScreen>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.lightgray,
+  },
+
   header: {
     flexDirection: "row",
     alignItems: "center",

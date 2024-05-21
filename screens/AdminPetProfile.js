@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import colors from '../config/colors';
 
 
 export default function AdminPetProfile() {
@@ -408,6 +409,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        backgroundColor: colors.lightgray,
       },
       profilesContainer: {
         flex: 1, // This allows the profile container to occupy the remaining space

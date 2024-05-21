@@ -8,6 +8,7 @@ import otherData from '../breed-data/other-breed.json';
 import DateModal from '../components/DateModal';
 import FilterPet from '../components/FilterPet';
 
+import colors from "../config/colors";
 
 const SearchPet = () => {
     const [selectedButton, setSelectedButton] = useState(null);
@@ -150,7 +151,7 @@ const filteredDogData = dogData.filter(item =>
 
     return(
         <SafeScreen>
-            <View>
+            <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.heading}>Refine Search</Text>
                 </View>
@@ -319,6 +320,9 @@ const filteredDogData = dogData.filter(item =>
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colors.lightgray,
+    },
     header: {
         flexDirection: 'row', // Align items in a row
         justifyContent: 'center', // Align items to the start (left)

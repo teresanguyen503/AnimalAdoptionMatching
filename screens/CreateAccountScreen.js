@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import SafeScreen from '../components/SafeScreen';
 import { AppFormField, ErrorMessage, SubmitButton} from '../components/forms'; 
@@ -53,6 +54,7 @@ function CreateAccountScreen(props) {
 
     return (
         <SafeScreen>
+            <LinearGradient colors={['#B5446E', '#F2F2F2']} style={styles.gradient}>
             <KeyboardAwareScrollView style={styles.container}>
             <Formik
                 initialValues={{accountType: '', email: '', password: '', securityQuestion: '', securityAnswer: ''}}
@@ -122,6 +124,7 @@ function CreateAccountScreen(props) {
                 )}
             </Formik>
             </KeyboardAwareScrollView>
+            </LinearGradient>
         </SafeScreen>
     );
 }

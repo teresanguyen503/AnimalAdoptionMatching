@@ -43,13 +43,13 @@ function HomeScreen() {
                 style={styles.accountButton}
                 onPress={() => navigation.navigate("CreateAccount")}
               >
-                <Text>Sign Up</Text>
+                <Text style={styles.accountButtonText}>Sign Up</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.accountButton}
                 onPress={() => navigation.navigate("Login")}
               >
-                <Text>Sign In</Text>
+                <Text style={styles.accountButtonText}>Sign In</Text>
               </TouchableOpacity>
             </View>
             ) : (
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     width,
-    backgroundColor: colors.lighterPink,
+    backgroundColor: colors.lightgray,
   },
   header: {
     flexDirection: "row",
@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
   icon: {
     paddingRight: 0.5,
     alignItems: "center",
+    color: colors.iceWhite,
   },
 
   // Account Section
@@ -197,14 +198,17 @@ const styles = StyleSheet.create({
   accountButton: {
     paddingVertical: 5,
     paddingHorizontal: 10,
-    backgroundColor: colors.lightPink,
-    borderColor: colors.nightBlack,
+    backgroundColor: colors.darkRose,
+    borderColor: colors.darkRose,
     borderWidth: 2,
     fontSize: 45,
     borderRadius: 10,
     margin: 10,
     textAlign: "center",
     alignItems: "center",
+  },
+  accountButtonText: {
+    color: colors.iceWhite,
   },
 
   // News Section
@@ -218,8 +222,8 @@ const styles = StyleSheet.create({
     maxHeight: 400,
     overflow: "scroll",
     padding: 5,
-    borderWidth: 1,
-    borderColor: colors.nightBlack,
+    // borderWidth: 1,
+    // borderColor: colors.nightBlack,
     borderRadius: 5,
     backgroundColor: colors.iceWhite,
   },
@@ -242,10 +246,11 @@ const styles = StyleSheet.create({
   },
   viewAllButton: {
     flexDirection: "row",
-    borderColor: colors.nightBlack,
+    borderColor: colors.darkRose,
     borderWidth: 2,
-    backgroundColor: colors.lightPink,
+    backgroundColor: colors.darkRose,
     fontSize: 45,
+    color: colors.iceWhite,
     borderRadius: 10,
     margin: 15,
   },
@@ -279,13 +284,14 @@ const styles = StyleSheet.create({
   articleButtonText: {
     alignSelf: "center",
     paddingLeft: 5,
+    color: colors.iceWhite,
   },
 
   // Pet Section
   petContainer: {
     textAlign: "center",
     flexWrap: "wrap",
-    margin: 15,
+    marginStart: 10,
   },
   petTitleContainer: {
     flexDirection: "row",
@@ -317,8 +323,8 @@ const styles = StyleSheet.create({
   },
   petProfileContainer: {
     width: "49%",
-    borderWidth: 1,
-    borderColor: colors.nightBlack,
+    // borderWidth: 1,
+    // borderColor: colors.nightBlack,
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,

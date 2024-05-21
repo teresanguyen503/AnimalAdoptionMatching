@@ -90,7 +90,8 @@ function ResetPasswordScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        padding: 10,
+        backgroundColor: colors.lightgray,
     }, 
     eyeOutline: {
         position: 'absolute', 

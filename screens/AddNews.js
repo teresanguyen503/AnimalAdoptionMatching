@@ -167,6 +167,7 @@ function AddNews(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: colors.lightgray,
   },
 
   //  Header
@@ -245,6 +246,7 @@ const styles = StyleSheet.create({
     paddingTop: 45,
     marginLeft: 18,
     marginTop: -25,
+    
   },
 });
 

@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import colors from "../config/colors";
+
 export default function EmailPreferences() {
     const [selectedButton, setSelectedButton] = useState(null);
     const [frequency, setFrequency] = useState('');
@@ -37,6 +39,7 @@ export default function EmailPreferences() {
 
     return(
         <View>
+            <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.emailHeading}>Email Preferences</Text>
             </View>
@@ -105,14 +108,17 @@ export default function EmailPreferences() {
                 </View>
 
             </View>
-
-
+            </View>
         </View>
     )
 
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: colors.lightgray,
+    },
+
     // Header Styling
     header: {
         flexDirection: 'row',

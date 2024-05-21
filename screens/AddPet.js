@@ -14,6 +14,8 @@ import DateModal from '../components/DateModal';
 import axios from 'axios'
 import { useNavigation } from "@react-navigation/native";
 
+import colors from "../config/colors";
+
 export default function AddPet() {
     const navigation = useNavigation();
     const [name, setName] = useState('');
@@ -320,7 +322,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: colors.lightgray,
     },
 
      /* Main Heading */
@@ -419,7 +421,11 @@ const styles = StyleSheet.create({
     uploadBtn: {
         display:'flex',
         alignItems:"center",
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor: colors.darkRose,
+        borderColor: colors.darkRose,
+        borderWidth: 2,
+        borderRadius: 10,
     },
 
     /* Species Styling */

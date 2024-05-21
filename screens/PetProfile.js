@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import colors from "../config/colors";
 
 export default function PetProfile() {
     const navigation = useNavigation();

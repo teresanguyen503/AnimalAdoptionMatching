@@ -78,7 +78,6 @@ function LoginScreen(props) {
                                 name="email"
                                 placeholder="Email"
                                 textContentType="emailAddress" 
-                                style={{color: colors.whiteSmoke}}
                             />
                             <View style={styles.passwordContainer}>
                                 <View style={styles.password}>
@@ -109,7 +108,7 @@ function LoginScreen(props) {
                             >
                                 <Text style={styles.text}>Forgot Password?</Text>
                             </TouchableWithoutFeedback>
-                            <SubmitButton backgroundColor={colors.darkBlue} title="Login" />
+                            <SubmitButton title="Login" />
                         </>
                     )}
                 </Formik>
@@ -149,10 +148,10 @@ const styles = StyleSheet.create({
     passwordContainer: {
         flexDirection: 'row', 
         alignItems: 'center',
-        color: colors.whiteSmoke,
+        color: colors.iceWhite,
     }, 
     password: {
-        flex: 1, 
+        width: '99%',
     }, 
     text: {
         paddingStart: 5,
