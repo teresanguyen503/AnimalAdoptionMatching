@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     }, 
     passwordContainer: {
         flexDirection: 'row', 
-        alignItems: 'center'
+        alignItems: 'center',
     }, 
     password: {
         flex: 1, 

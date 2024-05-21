@@ -499,8 +499,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop:5,
         marginLeft: 30,
-
-
     }
 
 })

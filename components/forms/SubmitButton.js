@@ -6,7 +6,7 @@ import AppButton from '../AppButton';
 function SubmitButton({ title }) {
     const { handleSubmit } = useFormikContext(); 
     return (
-        <AppButton title={title} onPress={handleSubmit} />
+        <AppButton title={title} onPress={handleSubmit} style={{backgroundColor: '#B5446E', color: '#F5F5F5'}}/>
     );
 }
 
