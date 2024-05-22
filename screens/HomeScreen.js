@@ -146,31 +146,51 @@ function HomeScreen() {
           <View style={styles.petProfileBanner}>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
+                { profileOne ? (
                 <Image
                   source={{ uri: profileOne.image }}
                   style={styles.images}
-                />
+                /> ) : (
+                  <Text> Profile image does not exist</Text>
+                )}
               </View>
               <View style={styles.petTextContainer}>
+                { profileOne ? (
+                  <>
                 <Text style={styles.petName}>{ profileOne.name }</Text>
                 <Text style={styles.petDescription}>
                   { profileOne.desc }
                 </Text>
+                </>
+                ) : (
+                  <Text>Profile does not exist</Text>
+                )
+                }
               </View>
             </View>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
+                { profileTwo ? (
                 <Image
-                  source={require("../assets/jeanie.jpg")}
+                  source={{ uri: profileTwo.image }}
                   style={styles.images}
                 />
+                ) : (
+                  <Text>Profile2 does not exist</Text>
+                )}
               </View>
               <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Kitty</Text>
+                { profileTwo ? (
+                  <>
+                <Text style={styles.petName}>{ profileTwo.name }</Text>
                 <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  { profileTwo.desc }
                 </Text>
+                </>
+                ) : (
+                  <Text> Profile does not exist </Text>
+                )
+                }
               </View>
             </View>
           </View>
