@@ -147,49 +147,51 @@ function HomeScreen() {
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
                 { profileOne ? (
-                <Image
-                  source={{ uri: profileOne.image }}
-                  style={styles.images}
-                /> ) : (
-                  <Text> Profile image does not exist</Text>
-                )}
+                  <Image
+                    source={{ uri: profileOne.image }}
+                    style={styles.images}
+                  /> ) : 
+                  (
+                    <View />
+                  )
+                }
               </View>
               <View style={styles.petTextContainer}>
                 { profileOne ? (
                   <>
-                <Text style={styles.petName}>{ profileOne.name }</Text>
-                <Text style={styles.petDescription}>
-                  { profileOne.desc }
-                </Text>
-                </>
-                ) : (
-                  <Text>Profile does not exist</Text>
-                )
+                    <Text style={styles.petName}>{ profileOne.name }</Text>
+                    <Text style={styles.petDescription}>{ profileOne.desc }</Text>
+                  </>
+                  ) :   
+                  (
+                    <View />
+                  )
                 }
               </View>
             </View>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
                 { profileTwo ? (
-                <Image
-                  source={{ uri: profileTwo.image }}
-                  style={styles.images}
-                />
-                ) : (
-                  <Text>Profile2 does not exist</Text>
-                )}
+                  <Image
+                    source={{ uri: profileTwo.image }}
+                    style={styles.images}
+                  />
+                  ) : 
+                  (
+                    <View />
+                  )
+                }
               </View>
               <View style={styles.petTextContainer}>
                 { profileTwo ? (
                   <>
-                <Text style={styles.petName}>{ profileTwo.name }</Text>
-                <Text style={styles.petDescription}>
-                  { profileTwo.desc }
-                </Text>
-                </>
-                ) : (
-                  <Text> Profile does not exist </Text>
-                )
+                    <Text style={styles.petName}>{ profileTwo.name }</Text>
+                    <Text style={styles.petDescription}>{ profileTwo.desc }</Text>
+                  </>
+                  ) : 
+                  (
+                    <View />
+                  )
                 }
               </View>
             </View>
