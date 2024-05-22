@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -12,6 +12,8 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
 import AuthConext from "../auth/context";
+import petProfile from '../api/petProfile';
+
 
 import colors from "../config/colors";
 
@@ -21,6 +23,8 @@ function HomeScreen() {
   const navigation = useNavigation();
   const { user } = useContext(AuthConext);
 
+  const [profiles, setProfiles] = useState([]);
+
   const handleViewNavigation = (nav) => {
     if (user) {
       navigation.navigate(nav);
@@ -29,6 +33,23 @@ function HomeScreen() {
     }
   }
 
+  const fetchProfiles = async () => {
+    try {
+        // Make HTTP GET request to fetch profile data
+        const response = await petProfile.petProfileApi()
+        setProfiles(response.data);
+    } catch (error) {
+    console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfiles();
+    }, []
+  );
+
+  const profileOne = profiles[0]; 
+  const profileTwo = profiles[1]; 
   return (
     <SafeScreen>
       <ScrollView>
@@ -125,32 +146,53 @@ function HomeScreen() {
           <View style={styles.petProfileBanner}>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/pauline.jpg")}
-                  style={styles.images}
-                />
+                { profileOne ? (
+                  <Image
+                    source={{ uri: profileOne.image }}
+                    style={styles.images}
+                  /> ) : 
+                  (
+                    <View />
+                  )
+                }
               </View>
               <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Doggy</Text>
-                <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
+                { profileOne ? (
+                  <>
+                    <Text style={styles.petName}>{ profileOne.name }</Text>
+                    <Text style={styles.petDescription}>{ profileOne.desc }</Text>
+                  </>
+                  ) :   
+                  (
+                    <View />
+                  )
+                }
               </View>
             </View>
             <View style={styles.petProfileContainer}>
               <View style={styles.petImageContainer}>
-                <Image
-                  source={require("../assets/jeanie.jpg")}
-                  style={styles.images}
-                />
+                { profileTwo ? (
+                  <Image
+                    source={{ uri: profileTwo.image }}
+                    style={styles.images}
+                  />
+                  ) : 
+                  (
+                    <View />
+                  )
+                }
               </View>
               <View style={styles.petTextContainer}>
-                <Text style={styles.petName}>Kitty</Text>
-                <Text style={styles.petDescription}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
+                { profileTwo ? (
+                  <>
+                    <Text style={styles.petName}>{ profileTwo.name }</Text>
+                    <Text style={styles.petDescription}>{ profileTwo.desc }</Text>
+                  </>
+                  ) : 
+                  (
+                    <View />
+                  )
+                }
               </View>
             </View>
           </View>
