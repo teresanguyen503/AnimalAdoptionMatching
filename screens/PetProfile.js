@@ -24,7 +24,7 @@ export default function PetProfile() {
         try {
             // Make HTTP GET request to fetch profile data
            //  const response = await axios.get('http://192.168.1.98:3000/getPet');
-             const response = await axios.get('http://192.168.1.12:3000/getPet');
+             const response = await axios.get('http://192.168.254.23:3000/getPet');
             setProfiles(response.data);
             // Initialize searchedProfileIds with all profile IDs
             setSearchedProfileIds(response.data.map(profile => profile._id));

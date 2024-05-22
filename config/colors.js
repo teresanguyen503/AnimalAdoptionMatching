@@ -7,7 +7,7 @@ export default {
     error: '#ff0000',  
     dimGrey: '#696969',
     iconTextInput: '#ffb6c1',
-    inputBackground: '#d3d3d3',
+    inputBackground: '#F5F5F5',
     headings: '#000',
     lighterGray: '#F5F5F5',
     lightgray: '#d3d3d3', 

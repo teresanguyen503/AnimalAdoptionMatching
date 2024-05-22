@@ -26,7 +26,7 @@ export default function AdminPetProfile() {
         try {
             // Make HTTP GET request to fetch profile data
             // const response = await axios.get('http://192.168.1.98:3000/getPet');
-             const response = await axios.get('http://192.168.1.12:3000/getPet');
+             const response = await axios.get('http://192.168.254.23:3000/getPet');
             setProfiles(response.data);
             // Initialize searchedProfileIds with all profile IDs
             setSearchedProfileIds(response.data.map(profile => profile._id));
@@ -106,7 +106,7 @@ export default function AdminPetProfile() {
           // Send a request with the ID of the pet at the current index
         //   console.log("status:",status)
         //   console.log("petId:",petId)
-          const response = await axios.patch(`http://192.168.1.98:3000/${petId}`, { availability: status });
+          const response = await axios.patch(`http://192.168.254.23:3000/${petId}`, { availability: status });
           setAvailabilityStatus(status);
           // Handle the response from the backend
         } catch (error) {
@@ -128,7 +128,7 @@ export default function AdminPetProfile() {
             // Get the ID of the pet at the current index
             const petId = searchedProfileIds[currentIndex];
           // Send a DELETE request to the backend to delete the pet profile
-          await axios.delete(`http://192.168.1.12:3000/${petId}`);
+          await axios.delete(`http://192.168.254.23:3000/${petId}`);
           onDelete(petId);
           alert("Pet has been deleted")
         } catch (error) {
