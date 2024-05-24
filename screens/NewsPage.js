@@ -48,8 +48,8 @@ function NewsPage() {
 
   const handleLoadMore = () => {
     setLoading(true);
-    const newSkip = currentPage * 5; // Calculate new skip offset
-    fetchData(5, newSkip);
+    const newSkip = currentPage * 20; // Calculate new skip offset
+    fetchData(20, newSkip);
     setCurrentPage(currentPage + 1);
     setLoading(false);
   };
