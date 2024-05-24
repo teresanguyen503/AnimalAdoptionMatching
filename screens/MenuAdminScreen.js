@@ -15,7 +15,7 @@ function MenuPublicScreen(props) {
 
     const menuItems = [
         {
-            title: "View All Animals",
+            title: "All Animals",
             icon: {
                 name: "turtle",
                 backgroundColor: colors.animal

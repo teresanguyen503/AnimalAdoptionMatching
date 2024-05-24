@@ -13,6 +13,7 @@ const AccountAdminNavigator = () => (
     <Stack.Navigator
       screenOptions={{
         headerBackButtonMenuEnabled: true,
+        headerBackTitle: "Back",
         headerTitle: ""
       }}
     >
