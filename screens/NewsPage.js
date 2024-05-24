@@ -42,7 +42,7 @@ function NewsPage() {
 
     try {
         // Make HTTP GET request to fetch profile data
-         const response = await axios.get('http://192.168.1.12:3000/getArticles');
+        const response = await axios.get('http://192.168.1.12:3000/getArticles');
         setData(response.data);
     } catch (error) {
     console.error(error);
