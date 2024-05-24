@@ -42,7 +42,7 @@ export default function EmailPreferences() {
             </View>
             <View style={styles.contain}>
                 <Text style={styles.heading}>Choose your email preferences</Text>
-                <Text>Choose how often would you like to recieve updates</Text>
+                <Text>Choose how often would you like to receive updates</Text>
             </View>
             <View style={styles.contain}>
                 <Text style={styles.heading}>Frequency</Text>
@@ -75,7 +75,7 @@ export default function EmailPreferences() {
             </View>
 
             <View style={styles.contain}>
-                <Text>Select the type of emails you would like to recieve from us</Text>
+                <Text>Select the type of emails you would like to receive from us</Text>
             </View>
 
             <View style={styles.speciesContainer}>
