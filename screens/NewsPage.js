@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import axios from 'axios';
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
+import { AsyncStorage } from "@react-native-async-storage/async-storage";
 
 import colors from "../config/colors";
 
@@ -30,12 +31,19 @@ function NewsPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetchArticles(5, 0); // Fetch first 5 entries
+    fetchArticles(10, 0); // Fetch first 5 entries
     setLoading(false);
   }, []);
 
    // Function to fetch articles from the backend
    const fetchArticles = async (limit, skip) => {
+    const cachedData = JSON.parse(AsyncStorage.getItem('petData'));
+
+    if (cachedData && isDataRecent(cachedData)) {
+      setData(cachedData);
+      return;
+    }
+
     try {
         // Make HTTP GET request to fetch profile data
          const response = await axios.get('http://192.168.1.12:3000/getArticles');
@@ -45,6 +53,11 @@ function NewsPage() {
     console.log(error);
     }
   };
+
+  function isDataRecent(data) {
+    const threshold = 5 * 60 * 1000; // 5 minutes in milliseconds
+    return Date.now() - data.timestamp < threshold;
+  }
 
   const handleLoadMore = () => {
     setLoading(true);
@@ -58,13 +71,18 @@ function NewsPage() {
     <SafeScreen>
       <ScrollView onEndReached={handleLoadMore}>
       <View style={styles.header}>
+        <TouchableOpacity><Icon style={styles.icon} name="keyboard-arrow-left" size={40} color="black" onPress={() => navigation.navigate("Home")}/></TouchableOpacity>
         <Text style={styles.heading}>Recent News</Text>
+        <TouchableOpacity>
+          <Icon style={styles.icon} name="menu" size={40} color="black" />
+        </TouchableOpacity>
       </View>
 
       {loading ? (
           <ActivityIndicator size="large" style={styles.loadingIndicator} />
         ) : data.length > 0 ? (
           data.map((article, index) => (
+
       <View style={styles.articleContainer} key={index + 1}>
         <View style={styles.imageContainer}>
           <Image
@@ -77,12 +95,12 @@ function NewsPage() {
           <Text style = {styles.articleByline}>{article.articleByline}</Text>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.articleText}>
-              {article.articleText}
+            {article.articleText}
             </Text>
           </ScrollView>
         </View>
       </View>
-       ))) : (
+      ))) : (
         <Text style = {styles.noneFound}>No articles found.</Text>
       )}
       </ScrollView>
@@ -145,9 +163,7 @@ const styles = StyleSheet.create({
   },
   articleText: {
     fontSize: 14,
-    margin: 10,
   },
-
   noneFound: {
     fontStyle: "italic",
     margin: 10,
