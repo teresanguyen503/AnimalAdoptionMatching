@@ -25,19 +25,15 @@ function NewsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   fetchArticles();
-  //   }, []);
-
   useEffect(() => {
     setLoading(true);
-    fetchArticles(10, 0); // Fetch first 5 entries
+    fetchArticles(10, 0); // Fetch first 10 entries
     setLoading(false);
   }, []);
 
    // Function to fetch articles from the backend
    const fetchArticles = async (limit, skip) => {
-    const cachedData = JSON.parse(AsyncStorage.getItem('petData'));
+    const cachedData = JSON.parse(AsyncStorage.getItem('articles'));
 
     if (cachedData && isDataRecent(cachedData)) {
       setData(cachedData);
