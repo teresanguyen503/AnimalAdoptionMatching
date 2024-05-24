@@ -42,7 +42,6 @@ function LoginScreen(props) {
                 const user = response.data.data; 
                 console.log(user); 
                 authConext.setUser(user);
-                alert('Success');
                 navigation.navigate("HomeStack"); 
             } 
         } catch (error) {
