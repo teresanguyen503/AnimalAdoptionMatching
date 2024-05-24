@@ -152,11 +152,13 @@ function AddNews(props) {
         </View>
 
         {/* Buttons */}
-        <View style={styles.addArticleButton}>
-          <Button title="Add Article" onPress={submitForm}></Button>
-        </View>
-        <View style={styles.addArticleButton}>
-          <Button title="Reset" onPress={resetButton}></Button>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={submitForm}>
+            <Text>Publish Article</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={resetButton}>
+            <Text>Reset Article</Text>
+          </TouchableOpacity>
         </View>
 
       </KeyboardAwareScrollView>
@@ -240,12 +242,25 @@ const styles = StyleSheet.create({
   },
 
   // Button
-  addArticleButton: {
-    width: "90%",
+  buttonContainer: {
     paddingTop: 45,
     marginLeft: 18,
-    marginTop: -25,
+    marginTop: -30,
+    flexDirection: "row", 
   },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: "white",
+    borderColor: "black",
+    borderWidth: 1,
+    fontSize: 45,
+    borderRadius: 10,
+    textAlign: "center",
+    alignItems: "center",
+    marginTop:5,
+    marginLeft: 50,
+  }
 });
 
 export default AddNews;
