@@ -12,6 +12,7 @@ const AccountPublicNavigator = () => (
     <Stack.Navigator
       screenOptions={{
         headerBackButtonMenuEnabled: true,
+        headerBackTitle: "Back",
         headerTitle: ""
       }}
     >
