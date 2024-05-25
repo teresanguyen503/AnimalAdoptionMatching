@@ -32,7 +32,7 @@ function NewsPage() {
     setLoading(true);
     fetchArticles(5, 0); // Fetch first 5 entries
     setLoading(false);
-  }, []);
+  });
 
    // Function to fetch articles from the backend
    const fetchArticles = async (limit, skip) => {
