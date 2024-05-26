@@ -13,6 +13,7 @@ import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
 import AuthConext from "../auth/context";
 import petProfile from '../api/petProfile';
+import getArticles from "../api/getArticles";
 
 import colors from "../config/colors";
 
