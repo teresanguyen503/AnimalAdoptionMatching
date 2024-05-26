@@ -22,7 +22,6 @@ const { width } = Dimensions.get("window");
 function HomeScreen() {
   const navigation = useNavigation();
   const { user } = useContext(AuthConext);
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [profiles, setProfiles] = useState([]);
