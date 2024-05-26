@@ -12,7 +12,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import axios from 'axios';
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
-import { AsyncStorage } from "@react-native-async-storage/async-storage";
 
 import colors from "../config/colors";
 
@@ -33,13 +32,6 @@ function NewsPage() {
 
    // Function to fetch articles from the backend
    const fetchArticles = async (limit, skip) => {
-    const cachedData = JSON.parse(AsyncStorage.getItem('articles'));
-
-    if (cachedData && isDataRecent(cachedData)) {
-      setData(cachedData);
-      return;
-    }
-
     try {
         // Make HTTP GET request to fetch profile data
          const response = await axios.get('http://192.168.1.12:3000/getArticles');
@@ -49,11 +41,6 @@ function NewsPage() {
     console.log(error);
     }
   };
-
-  function isDataRecent(data) {
-    const threshold = 30 * 1000; // 30 seconds
-    return Date.now() - data.timestamp < threshold;
-  }
 
   const handleLoadMore = () => {
     setLoading(true);

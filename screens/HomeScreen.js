@@ -39,7 +39,7 @@ function HomeScreen() {
     setLoading(true);
     fetchArticles(1, 0); // Fetch first entry
     setLoading(false);
-  }, []);
+  });
 
    // Function to fetch articles from the backend
    const fetchArticles = async (limit, skip) => {
@@ -56,12 +56,7 @@ function HomeScreen() {
   return (
     <SafeScreen>
       <ScrollView>
-        {/* <Topbar
-            title="Animal Adoption Matching"
-            rightButton={<Icon name="menu" />}
-        /> */}
         <View style={styles.container}>
-          {/* <TouchableOpacity onPress={onPressHandler}> */}
           <View style={styles.header}>
             <Text style={styles.heading}>Animal Adoption Matching App</Text>
             <TouchableOpacity>
