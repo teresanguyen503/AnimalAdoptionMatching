@@ -123,7 +123,7 @@ function HomeScreen() {
 
           {loading ? (
           <ActivityIndicator size="large" style={styles.loadingIndicator} />
-          ) (
+          ) : firstArticle ? (
             <View style={styles.articleContainer}>
               <View style={styles.imageContainer}>
                 <Image
