@@ -14,7 +14,17 @@ import userAccounts from '../api/userAccounts';
 
 const validationSchema = Yup.object().shape({
     accountType: Yup.string().notOneOf(['']).required("Please select an account type."),
-    email: Yup.string().required().email().label("Email"), 
+    email: Yup.string().test(
+        "hasPeriodAfterAt",
+        "Email must have a period after '@'",
+        (value) => value && value.indexOf(".") > value.indexOf("@")
+      )
+      .test(
+        "hasTextAfterPeriod",
+        "Email must have text after the period.",
+        (value) => value && value.split(".").pop().length > 2 // Check length after last "."
+      )
+      .required().email().label("Email"), 
     password: Yup.string().required().min(6).label("Password"), 
     securityQuestion: Yup.string().notOneOf(['']).required("Please choose a security question"), 
     securityAnswer: Yup.string().required("Please input an answer to a security question.")
