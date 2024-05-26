@@ -26,6 +26,7 @@ function HomeScreen() {
   const [loading, setLoading] = useState(false);
 
   const [profiles, setProfiles] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   const handleViewNavigation = (nav) => {
     if (user) {
@@ -50,11 +51,11 @@ function HomeScreen() {
     }, []
   );
 
-  const fetchArticles = async (limit, skip) => {
+    const fetchArticles = async (limit, skip) => {
     try {
         // Make HTTP GET request to fetch profile data
          const response = await getArticles.getArticlesApi()
-        setData(response.data);
+        setArticles(response.data);
     } catch (error) {
     console.error(error);
     console.log(error);
@@ -67,9 +68,10 @@ function HomeScreen() {
     setLoading(false);
   });
 
-  const firstArticle = data.length > 0 ? data[0] : {articleTitle: null, articleByline: null, articleText: null, articleImage: null};
+  const firstArticle = articles[0];
   const profileOne = profiles[0]; 
   const profileTwo = profiles[1]; 
+
   return (
     <SafeScreen>
       <ScrollView>
@@ -121,7 +123,7 @@ function HomeScreen() {
 
           {loading ? (
           <ActivityIndicator size="large" style={styles.loadingIndicator} />
-          ) : firstArticle ? (
+          ) (
             <View style={styles.articleContainer}>
               <View style={styles.imageContainer}>
                 <Image
@@ -334,6 +336,10 @@ const styles = StyleSheet.create({
   articleButtonText: {
     alignSelf: "center",
     paddingLeft: 5,
+  },
+  noneFound: {
+    fontStyle: "italic",
+    margin: 10,
   },
 
   // Pet Section

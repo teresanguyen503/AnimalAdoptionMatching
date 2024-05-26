@@ -139,6 +139,10 @@ const styles = StyleSheet.create({
   articleText: {
     fontSize: 14,
   },
+  noneFound: {
+    fontStyle: "italic",
+    margin: 10,
+  },
 });
 
 export default NewsPage;
