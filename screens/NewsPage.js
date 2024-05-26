@@ -11,6 +11,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SafeScreen from "../components/SafeScreen";
 import { useNavigation } from "@react-navigation/native";
+import getArticles from "../api/getArticles";
 
 import colors from "../config/colors";
 
@@ -31,7 +32,7 @@ function NewsPage() {
   const fetchArticles = async (limit, skip) => {
     try {
         // Make HTTP GET request to fetch profile data
-         const response = await axios.get('http://192.168.1.12:3000/getArticles');
+        const response = await getArticles.getArticlesApi()
         setData(response.data);
     } catch (error) {
     console.error(error);
