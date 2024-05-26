@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 import AuthConext from "../auth/context";
 import petProfile from '../api/petProfile';
 
-
 import colors from "../config/colors";
 
 const { width } = Dimensions.get("window");
@@ -22,6 +21,11 @@ const { width } = Dimensions.get("window");
 function HomeScreen() {
   const navigation = useNavigation();
   const { user } = useContext(AuthConext);
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const firstArticle = data.length > 0 ? data[0] : null;
 
   const [profiles, setProfiles] = useState([]);
 
@@ -47,6 +51,23 @@ function HomeScreen() {
     fetchProfiles();
     }, []
   );
+
+  useEffect(() => {
+    setLoading(true);
+    fetchArticles(1, 0); // Fetch first entry
+    setLoading(false);
+  });
+
+  const fetchArticles = async (limit, skip) => {
+    try {
+        // Make HTTP GET request to fetch profile data
+         const response = await getArticles.getArticlesApi()
+        setData(response.data);
+    } catch (error) {
+    console.error(error);
+    console.log(error);
+    }
+  };
 
   const profileOne = profiles[0]; 
   const profileTwo = profiles[1]; 
@@ -78,7 +99,7 @@ function HomeScreen() {
             )
           }
 
-          <View style={styles.newsContainer}>
+<View style={styles.newsContainer}>
             <View>
               <View style={styles.newsTitleContainer}>
                 <Text style={styles.titleText}>Recent News</Text>
@@ -99,31 +120,30 @@ function HomeScreen() {
               </View>
             </View>
 
+            {loading ? (
+          <ActivityIndicator size="large" style={styles.loadingIndicator} />
+        ) : firstArticle ? (
             <View style={styles.articleContainer}>
               <View style={styles.imageContainer}>
                 <Image
-                  source={require("../assets/thank-you-adoption.jpg")}
-                  style={{ width: 120, height: 120, resizeMode: "contain" }}
+                  source={{uri: firstArticle.articleImage}}
+                  style={{ width: 100, height: 100, resizeMode: "contain" }}
                 />
               </View>
               <View style={styles.articleTextContainer}>
-                <Text style={styles.articleTitle}>Sample Article</Text>
+                <Text style={styles.articleTitle}>{firstArticle.articleTitle}</Text>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                   <Text style={styles.articleText}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    {firstArticle.articleText}
                   </Text>
                 </ScrollView>
               </View>
             </View>
+              ) : (
+              <Text style = {styles.noneFound}>No articles found.</Text>
+            )}
           </View>
-
+          
           <View style={styles.petContainer}>
             <View style={styles.petTitleContainer}>
               <Text style={styles.petTitleText}>Available Pets</Text>
