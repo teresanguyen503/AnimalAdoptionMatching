@@ -67,9 +67,9 @@ function HomeScreen() {
     setLoading(false);
   });
 
-  const firstArticle = articles[0];
-  const profileOne = profiles[0]; 
-  const profileTwo = profiles[1]; 
+  const firstArticle = articles.length > 0 ? articles[0] : null;
+  const profileOne = profiles.length > 0 ? profiles[0] : null; 
+  const profileTwo = profiles.length > 0 ? profiles[1] : null; 
 
   return (
     <SafeScreen>
