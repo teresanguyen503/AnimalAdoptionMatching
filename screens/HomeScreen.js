@@ -99,30 +99,30 @@ function HomeScreen() {
             )
           }
 
-<View style={styles.newsContainer}>
-            <View>
-              <View style={styles.newsTitleContainer}>
-                <Text style={styles.titleText}>Recent News</Text>
-                <View style={styles.newsButtonContainer}>
-                  <TouchableOpacity
-                    style={styles.viewAllButton}
-                    onPress={() => handleViewNavigation("NewsPage")}
-                  >
-                    <Text style={styles.articleButtonText}>View All News</Text>
-                    <Icon
-                      style={styles.icon}
-                      name="keyboard-arrow-right"
-                      size={20}
-                      color="black"
-                    />
-                  </TouchableOpacity>
-                </View>
+        <View style={styles.newsContainer}>
+          <View>
+            <View style={styles.newsTitleContainer}>
+              <Text style={styles.titleText}>Recent News</Text>
+              <View style={styles.newsButtonContainer}>
+                <TouchableOpacity
+                  style={styles.viewAllButton}
+                  onPress={() => handleViewNavigation("NewsPage")}
+                >
+                  <Text style={styles.articleButtonText}>View All News</Text>
+                  <Icon
+                    style={styles.icon}
+                    name="keyboard-arrow-right"
+                    size={20}
+                    color="black"
+                  />
+                </TouchableOpacity>
               </View>
             </View>
+          </View>
 
-            {loading ? (
+          {loading ? (
           <ActivityIndicator size="large" style={styles.loadingIndicator} />
-        ) : firstArticle ? (
+          ) : firstArticle ? (
             <View style={styles.articleContainer}>
               <View style={styles.imageContainer}>
                 <Image
