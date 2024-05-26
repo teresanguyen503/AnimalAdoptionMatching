@@ -33,7 +33,7 @@ function NewsPage() {
     try {
         // Make HTTP GET request to fetch profile data
         const response = await getArticles.getArticlesApi()
-        setData(response.data);
+        setData(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
     console.error(error);
     console.log(error);

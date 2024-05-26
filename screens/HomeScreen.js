@@ -39,7 +39,7 @@ function HomeScreen() {
     try {
         // Make HTTP GET request to fetch profile data
         const response = await petProfile.petProfileApi()
-        setProfiles(response.data);
+        setProfiles(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
     console.error(error);
     }
@@ -54,7 +54,7 @@ function HomeScreen() {
     try {
         // Make HTTP GET request to fetch profile data
         const response = await getArticles.getArticlesApi()
-        setArticles(response.data);
+        setArticles(Array.isArray(response.data) ? response.data: []);
     } catch (error) {
     console.error(error);
     console.log(error);
