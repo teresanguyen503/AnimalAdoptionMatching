@@ -25,8 +25,6 @@ function HomeScreen() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const firstArticle = data.length > 0 ? data[0] : null;
-
   const [profiles, setProfiles] = useState([]);
 
   const handleViewNavigation = (nav) => {
@@ -69,6 +67,7 @@ function HomeScreen() {
     setLoading(false);
   });
 
+  const firstArticle = data.length > 0 ? data[0] : {articleTitle: null, articleByline: null, articleText: null, articleImage: null};
   const profileOne = profiles[0]; 
   const profileTwo = profiles[1]; 
   return (
