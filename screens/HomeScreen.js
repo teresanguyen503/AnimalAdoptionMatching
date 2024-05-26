@@ -54,7 +54,6 @@ function HomeScreen() {
     try {
         // Make HTTP GET request to fetch profile data
         const response = await getArticles.getArticlesApi()
-        console.log(response.data);
         setArticles(response.data);
     } catch (error) {
     console.error(error);
