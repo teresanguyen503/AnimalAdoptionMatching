@@ -2,10 +2,10 @@ import apiClient from "./client";
 
 const endpoint = "/getArticles";
 
-const getArticleApi = articles => {
+const getArticlesApi = articles => {
     return apiClient.get(endpoint, articles);
 }
 
 export default {
-    getArticleApi,
+    getArticlesApi,
 }
