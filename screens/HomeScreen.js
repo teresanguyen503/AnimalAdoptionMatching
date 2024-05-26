@@ -23,7 +23,6 @@ function HomeScreen() {
   const navigation = useNavigation();
   const { user } = useContext(AuthConext);
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   const firstArticle = data.length > 0 ? data[0] : null;
@@ -53,12 +52,6 @@ function HomeScreen() {
     }, []
   );
 
-  useEffect(() => {
-    setLoading(true);
-    fetchArticles(1, 0); // Fetch first entry
-    setLoading(false);
-  });
-
   const fetchArticles = async (limit, skip) => {
     try {
         // Make HTTP GET request to fetch profile data
@@ -69,6 +62,12 @@ function HomeScreen() {
     console.log(error);
     }
   };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchArticles(1, 0); // Fetch first entry
+    setLoading(false);
+  });
 
   const profileOne = profiles[0]; 
   const profileTwo = profiles[1]; 
