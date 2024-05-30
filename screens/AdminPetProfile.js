@@ -91,7 +91,7 @@ export default function AdminPetProfile() {
             )}
                 <Text style={styles.profileData}>Description: {profile.desc}</Text>
                 <Text style={styles.profileData}>Disposition:{profile.disposition}</Text>
-                <Text style={styles.profileData}>Specie: {profile.speciesName}</Text>
+                <Text style={styles.profileData}>Species: {profile.speciesName}</Text>
                 <Text style={styles.profileData}>Breed: {profile.selectedItem.label}</Text>
 
             </View>
