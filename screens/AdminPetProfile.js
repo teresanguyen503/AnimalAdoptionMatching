@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import petProfile from '../api/petProfile';
+import apiClient from '../api/client';
 
 
 export default function AdminPetProfile() {
