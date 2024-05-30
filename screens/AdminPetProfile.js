@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import petProfile from '../api/petProfile';
+import apiClient from '../api/client';
 
 
 export default function AdminPetProfile() {
@@ -90,7 +91,7 @@ export default function AdminPetProfile() {
             )}
                 <Text style={styles.profileData}>Description: {profile.desc}</Text>
                 <Text style={styles.profileData}>Disposition:{profile.disposition}</Text>
-                <Text style={styles.profileData}>Specie: {profile.speciesName}</Text>
+                <Text style={styles.profileData}>Species: {profile.speciesName}</Text>
                 <Text style={styles.profileData}>Breed: {profile.selectedItem.label}</Text>
 
             </View>
@@ -103,9 +104,8 @@ export default function AdminPetProfile() {
         try {
           const petId = searchedProfileIds[currentIndex]; // Get the ID of the pet at the current index
           // Send a request with the ID of the pet at the current index
-        //   console.log("status:",status)
-        //   console.log("petId:",petId)
-          const response = await axios.patch(`http://192.168.1.98:3000/${petId}`, { availability: status });
+          // const response = await axios.patch(`http://192.168.1.98:3000/${petId}`, { availability: status });
+          const response = await axios.patch(`${apiClient.getBaseURL()}/${petId}`, { availability: status });
           setAvailabilityStatus(status);
           // Handle the response from the backend
         } catch (error) {
@@ -127,7 +127,7 @@ export default function AdminPetProfile() {
             // Get the ID of the pet at the current index
             const petId = searchedProfileIds[currentIndex];
           // Send a DELETE request to the backend to delete the pet profile
-          await axios.delete(`http://192.168.1.12:3000/${petId}`);
+          await axios.delete(`${apiClient.getBaseURL()}/${petId}`);
           onDelete(petId);
           alert("Pet has been deleted")
         } catch (error) {
